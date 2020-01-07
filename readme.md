@@ -26,6 +26,7 @@
 - getPlayers(filter)
 - createBlip(name, blip, coords, options): Blip
 - getBlips(): Blip[]
+- getBlip(instance): ?Blip
 
 ###### Common:
 

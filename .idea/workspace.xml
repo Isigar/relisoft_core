@@ -1,0 +1,139 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="dd503cf1-1e5e-4c08-9d18-6363d0c62ed8" name="Default Changelist" comment="gitignore, better readme">
+      <change afterPath="$PROJECT_DIR$/.idea/.gitignore" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/misc.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/modules.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/relisoft_core.iml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/vcs.xml" afterDir="false" />
+      <change afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/core/esx.lua" beforeDir="false" afterPath="$PROJECT_DIR$/client/core/esx.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/main.lua" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+    </list>
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="ComposerSettings">
+    <execution>
+      <executable />
+    </execution>
+  </component>
+  <component name="Git.Settings">
+    <option name="RECENT_GIT_ROOT_PATH" value="$PROJECT_DIR$" />
+  </component>
+  <component name="IgnoredFileRootStore">
+    <option name="generatedRoots">
+      <set>
+        <option value="$PROJECT_DIR$/.idea" />
+      </set>
+    </option>
+  </component>
+  <component name="ProjectId" id="1W3zq1QvbLt69aK6l7u95O81zrE" />
+  <component name="ProjectLevelVcsManager" settingsEditedManually="true" />
+  <component name="ProjectViewState">
+    <option name="hideEmptyMiddlePackages" value="true" />
+    <option name="showExcludedFiles" value="true" />
+    <option name="showLibraryContents" value="true" />
+  </component>
+  <component name="PropertiesComponent">
+    <property name="RunOnceActivity.ShowReadmeOnStart" value="true" />
+    <property name="SHARE_PROJECT_CONFIGURATION_FILES" value="true" />
+    <property name="WebServerToolWindowFactoryState" value="true" />
+    <property name="settings.editor.selected.configurable" value="preferences.Lua" />
+  </component>
+  <component name="ServiceViewManager">
+    <option name="viewStates">
+      <list>
+        <serviceView>
+          <treeState>
+            <expand />
+            <select />
+          </treeState>
+        </serviceView>
+      </list>
+    </option>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="dd503cf1-1e5e-4c08-9d18-6363d0c62ed8" name="Default Changelist" comment="" />
+      <created>1578393253596</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1578393253596</updated>
+      <workItem from="1578393254724" duration="4346000" />
+    </task>
+    <task id="LOCAL-00001" summary="init commit">
+      <created>1578395928793</created>
+      <option name="number" value="00001" />
+      <option name="presentableId" value="LOCAL-00001" />
+      <option name="project" value="LOCAL" />
+      <updated>1578395928793</updated>
+    </task>
+    <task id="LOCAL-00002" summary="fix readme">
+      <created>1578395972337</created>
+      <option name="number" value="00002" />
+      <option name="presentableId" value="LOCAL-00002" />
+      <option name="project" value="LOCAL" />
+      <updated>1578395972337</updated>
+    </task>
+    <task id="LOCAL-00003" summary="update readme">
+      <created>1578396181645</created>
+      <option name="number" value="00003" />
+      <option name="presentableId" value="LOCAL-00003" />
+      <option name="project" value="LOCAL" />
+      <updated>1578396181645</updated>
+    </task>
+    <task id="LOCAL-00004" summary="fixed creating blip">
+      <created>1578396250023</created>
+      <option name="number" value="00004" />
+      <option name="presentableId" value="LOCAL-00004" />
+      <option name="project" value="LOCAL" />
+      <updated>1578396250023</updated>
+    </task>
+    <task id="LOCAL-00005" summary="gitignore, better readme">
+      <created>1578396397297</created>
+      <option name="number" value="00005" />
+      <option name="presentableId" value="LOCAL-00005" />
+      <option name="project" value="LOCAL" />
+      <updated>1578396397297</updated>
+    </task>
+    <option name="localTasksCounter" value="6" />
+    <servers />
+  </component>
+  <component name="TypeScriptGeneratedFilesManager">
+    <option name="version" value="1" />
+  </component>
+  <component name="VcsManagerConfiguration">
+    <MESSAGE value="init commit" />
+    <MESSAGE value="fix readme" />
+    <MESSAGE value="update readme" />
+    <MESSAGE value="fixed creating blip" />
+    <MESSAGE value="gitignore, better readme" />
+    <option name="LAST_COMMIT_MESSAGE" value="gitignore, better readme" />
+  </component>
+  <component name="WindowStateProjectService">
+    <state x="2475" y="201" width="800" height="684" key="#Inspections" timestamp="1578397268239">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2475" y="201" width="800" height="684" key="#Inspections/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578397268239" />
+    <state x="2445" y="120" width="860" height="814" key="CommitChangelistDialog2" timestamp="1578397455073">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2445" y="120" width="860" height="814" key="CommitChangelistDialog2/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578397455073" />
+    <state x="2369" y="175" width="1022" height="737" key="SettingsEditor" timestamp="1578397407850">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2369" y="175" width="1022" height="737" key="SettingsEditor/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578397407850" />
+    <state x="2475" y="276" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1578396398270">
+      <screen x="1920" y="0" width="1920" height="1080" />
+    </state>
+    <state x="2475" y="276" width="800" height="535" key="Vcs.Push.Dialog.v2/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578396398270" />
+  </component>
+</project>
