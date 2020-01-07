@@ -1,4 +1,4 @@
-##relisoft_core
+## relisoft_core
 ##### implemention of most common function in better way (using ESX)
 
 #### Dependency:
@@ -7,7 +7,7 @@
 - es_extended
 - esx_society
 
-####TODO:
+#### TODO:
 
 - main relisoft_core
 - exported functions
@@ -18,7 +18,7 @@
 - managing blips (location, remove, change color)
 
 
-####Functions:
+#### Functions:
 
 - getEsxInstance(): ESX
 - getPlayerPos(): vector3(x,y,z)
