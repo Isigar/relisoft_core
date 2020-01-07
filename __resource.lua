@@ -9,3 +9,21 @@ client_files {
     'client/core/esx.lua',
     'client/main.lua'
 }
+
+exports {
+    'getEsxInstance',
+    'getPlayerPos',
+    'sendChatMessage',
+    'getPlayers',
+    'createBlip',
+    'getBlips',
+    'getBlip',
+    'createMarker',
+    'createDistanceMarker',
+    'mergeTables',
+    'emptyTable',
+    'isTable',
+    'isFunction',
+    'tableLength',
+    'tableLastIterator'
+}

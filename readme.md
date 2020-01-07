@@ -94,3 +94,18 @@ Citizen.CreateThread(function()
     end
 end)
 ```
+
+
+#### Use at your scripts
+LUA
+```lua
+local blip = exports.relisoft_core:createBlip("Name", 53,vector3(x,y,z), {
+    type = 2,
+    color = 12
+})
+```
+
+C#
+```c
+Exports["myresource"].getBlips()
+```
