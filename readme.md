@@ -36,9 +36,8 @@
 
 #### Examples:
 
+Get players with filter
 ```lua
-Player filters:
-
 getPlayers(function(source)
     local ped = GetPlayerPed(source)
     local coords = GetEntityCoords(ped)
@@ -46,10 +45,23 @@ getPlayers(function(source)
         ESX.Game.Utils.DrawText3D(coords, GetPlayerName(v), 2)
     end
 end)
-
-Create blip:
-
-createBlip("Name", 53,vector3(x,y,z), {
-    type = 2
+```
+Normal using natives:
+```lua
+ourBlip = AddBlipForCoord(x, y, z)
+SetBlipSprite(ourBlip, 58)
+SetBlipDisplay(ourBlip, 4)
+SetBlipScale(ourBlip, 1.0)
+SetBlipColour(ourBlip, 53)
+SetBlipAsShortRange(ourBlip, true)
+BeginTextCommandSetBlipName("STRING")
+AddTextComponentString("Name")
+EndTextCommandSetBlipName(ourBlip)
+```
+Using relisoft_core
+```lua
+local blip = createBlip("Name", 53,vector3(x,y,z), {
+    type = 2,
+    color = 12
 })
 ```
