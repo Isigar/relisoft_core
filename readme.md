@@ -28,8 +28,8 @@
 - createBlip(name, blip, coords, options): Blip
 - getBlips(): Blip[]
 - getBlip(instance): ?Blip
-- createMarker(type, coords, options)
-- createDistanceMarker(type, coords, distance, options)
+- createMarker(type, coords, options): void
+- createDistanceMarker(type, coords, distance, options): void
 
 ###### Common:
 
@@ -37,6 +37,8 @@
 - emptyTable(table): bool
 - isTable(table): bool
 - isFunction(func): bool
+- tableLength(table): number
+- tableLastIterator(table): number
 
 #### Examples:
 ##### Getting players
