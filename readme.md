@@ -8,16 +8,11 @@
 
 #### TODO:
 
-- main relisoft_core
-- exported functions
 - fraction with society creation
 - easy storage system
 - storage user/fraction
-- creating blips
-- managing blips (location, remove, change color)
 - permission system
 - custom menu options by permissions
-- marker system
 
 #### Functions:
 
