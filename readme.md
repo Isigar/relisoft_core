@@ -28,6 +28,8 @@
 - createBlip(name, blip, coords, options): Blip
 - getBlips(): Blip[]
 - getBlip(instance): ?Blip
+- createMarker(type, coords, options)
+- createDistanceMarker(type, coords, distance, options)
 
 ###### Common:
 

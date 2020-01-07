@@ -2,16 +2,8 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="dd503cf1-1e5e-4c08-9d18-6363d0c62ed8" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/client/core/blip.lua" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/core/marker.lua" afterDir="false" />
-      <change afterPath="$PROJECT_DIR$/client/core/permissions.lua" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__resource.lua" beforeDir="false" afterPath="$PROJECT_DIR$/__resource.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/core/common.lua" beforeDir="false" afterPath="$PROJECT_DIR$/client/core/common.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/core/esx.lua" beforeDir="false" afterPath="$PROJECT_DIR$/client/core/esx.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/main.lua" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.lua" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/shared/config.lua" beforeDir="false" afterPath="$PROJECT_DIR$/shared/config.lua" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -68,7 +60,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1578393253596</updated>
-      <workItem from="1578393254724" duration="7855000" />
+      <workItem from="1578393254724" duration="7896000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1578395928793</created>
@@ -119,7 +111,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578398254053</updated>
     </task>
-    <option name="localTasksCounter" value="8" />
+    <task id="LOCAL-00008" summary="markers with example, blip separated">
+      <created>1578401491190</created>
+      <option name="number" value="00008" />
+      <option name="presentableId" value="LOCAL-00008" />
+      <option name="project" value="LOCAL" />
+      <updated>1578401491190</updated>
+    </task>
+    <option name="localTasksCounter" value="9" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -133,25 +132,26 @@
     <MESSAGE value="gitignore, better readme" />
     <MESSAGE value="docs in code, main, .idea" />
     <MESSAGE value="example with blip gps setting" />
-    <option name="LAST_COMMIT_MESSAGE" value="example with blip gps setting" />
+    <MESSAGE value="markers with example, blip separated" />
+    <option name="LAST_COMMIT_MESSAGE" value="markers with example, blip separated" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2475" y="201" width="800" height="684" key="#Inspections" timestamp="1578397268239">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2475" y="201" width="800" height="684" key="#Inspections/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578397268239" />
-    <state x="2445" y="120" width="860" height="814" key="CommitChangelistDialog2" timestamp="1578398254007">
+    <state x="2445" y="120" width="860" height="814" key="CommitChangelistDialog2" timestamp="1578401491127">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2445" y="120" width="860" height="814" key="CommitChangelistDialog2/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578398254007" />
+    <state x="2445" y="120" width="860" height="814" key="CommitChangelistDialog2/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578401491127" />
     <state x="2369" y="175" width="1022" height="737" key="SettingsEditor" timestamp="1578397407850">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2369" y="175" width="1022" height="737" key="SettingsEditor/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578397407850" />
-    <state x="2475" y="276" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1578398255136">
+    <state x="2475" y="276" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1578401492244">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2475" y="276" width="800" height="535" key="Vcs.Push.Dialog.v2/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578398255136" />
+    <state x="2475" y="276" width="800" height="535" key="Vcs.Push.Dialog.v2/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578401492244" />
     <state x="2543" y="239" width="672" height="678" key="search.everywhere.popup" timestamp="1578400990926">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
