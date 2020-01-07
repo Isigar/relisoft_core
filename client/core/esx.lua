@@ -35,13 +35,12 @@ function createBlip(name, blip, coords, options)
         options = Config.DefaultBlipOptions
     end
 
-    local ourBlip
-    ourBlip = AddBlipForCoord(x, y, z)
+    local ourBlip = AddBlipForCoord(x,y,z)
     SetBlipSprite(ourBlip, blip)
-    SetBlipDisplay(ourBlip, v.type)
-    SetBlipScale(ourBlip, v.scale)
-    SetBlipColour(ourBlip, v.color)
-    SetBlipAsShortRange(ourBlip, true)
+    SetBlipDisplay(ourBlip, options.type)
+    SetBlipScale(ourBlip, options.scale)
+    SetBlipColour(ourBlip, options.color)
+    SetBlipAsShortRange(ourBlip, options.shortRange)
     BeginTextCommandSetBlipName("STRING")
     AddTextComponentString(name)
     EndTextCommandSetBlipName(ourBlip)
