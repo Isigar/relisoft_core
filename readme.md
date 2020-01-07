@@ -75,3 +75,22 @@ local blip = createBlip("Name", 53,vector3(x,y,z), {
     color = 12
 })
 ```
+
+##### Creating markers
+
+All create methods must be in thread and run with Citizen.Wait(0), distance marker checking current ped with position of marker and distance, other properties is set at config and can be rewritten by options table
+```lua
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(0)
+        createMarker(1,vector3(x,y,z),{
+            color = {
+                r = 50,
+                g = 150,
+                b = 60
+            },
+            rotate = true
+        })
+    end
+end)
+```
