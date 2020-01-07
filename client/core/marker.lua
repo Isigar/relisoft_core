@@ -46,12 +46,19 @@ function createMarker(type, coords, options, onEnter, onLeave)
     local dist = GetDistanceBetweenCoords(pos.x,pos.y,pos.z,coords.x,coords.y,coords.z)
     if dist < options.scale.x then
         if not enter then
-            onEnter()
+            if isFunction(options.onEnter) then
+                options.onEnter()
+            end
+        end
+        if isFunction(options.onEnterTick) then
+            options.onEnterTick()
         end
         enter = true
     else
         if enter then
-            onLeave()
+            if isFunction(options.onLeave) then
+                options.onLeave()
+            end
         end
         enter = false
     end
@@ -63,7 +70,7 @@ end
 ---@param options table
 ---@param onEnter function|nil
 ---@param onLeave function|nil
-function createDistanceMarker(type, coords, distance, options,onEnter, onLeave)
+function createDistanceMarker(type, coords, distance, options)
 
     if isTable(options) then
         options = mergeTables(options, Config.DefaultMarkerOptions)
@@ -103,12 +110,19 @@ function createDistanceMarker(type, coords, distance, options,onEnter, onLeave)
     local enter = false
     if dist < options.scale.x then
         if not enter then
-            onEnter()
+            if isFunction(options.onEnter) then
+                options.onEnter()
+            end
+        end
+        if isFunction(options.onEnterTick) then
+            options.onEnterTick()
         end
         enter = true
     else
         if enter then
-            onLeave()
+            if isFunction(options.onLeave) then
+                options.onLeave()
+            end
         end
         enter = false
     end

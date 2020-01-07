@@ -90,12 +90,17 @@ Citizen.CreateThread(function()
 end)
 ```
 Distance marker with onEnter, onLeave callbacks, these callbacks are call only once
+but callback onEnterTick is called every tick when ped is in marker
 ```lua
-createDistanceMarker(1,vector3(x,y,z),100.0,{},function ()
+createDistanceMarker(1,vector3(x,y,z),100.0,{onEnter = function ()
     sendChatMessage('Super!','Press E to kill your self!')
-end, function()
+end, onLeave = function()
     sendChatMessage('Ouuuch?','Where are you leaving?! I will find you!')
-end)
+end, onEnterTick = function ()
+    if IsControlJustReleased(1, Keys['E']) then
+        --Do some action
+    end
+end})
 ```
 
 

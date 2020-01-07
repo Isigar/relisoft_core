@@ -1,11 +1,13 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <project version="4">
   <component name="ChangeListManager">
-    <list default="true" id="dd503cf1-1e5e-4c08-9d18-6363d0c62ed8" name="Default Changelist" comment="">
+    <list default="true" id="dd503cf1-1e5e-4c08-9d18-6363d0c62ed8" name="Default Changelist" comment="distance marker, marker fixed options, new docs">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/core/common.lua" beforeDir="false" afterPath="$PROJECT_DIR$/client/core/common.lua" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/core/marker.lua" beforeDir="false" afterPath="$PROJECT_DIR$/client/core/marker.lua" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/client/main.lua" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.lua" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/shared/config.lua" beforeDir="false" afterPath="$PROJECT_DIR$/shared/config.lua" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -62,7 +64,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1578393253596</updated>
-      <workItem from="1578393254724" duration="9700000" />
+      <workItem from="1578393254724" duration="10914000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1578395928793</created>
@@ -155,7 +157,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578402802234</updated>
     </task>
-    <option name="localTasksCounter" value="14" />
+    <task id="LOCAL-00014" summary="distance marker, marker fixed options, new docs">
+      <created>1578403333438</created>
+      <option name="number" value="00014" />
+      <option name="presentableId" value="LOCAL-00014" />
+      <option name="project" value="LOCAL" />
+      <updated>1578403333438</updated>
+    </task>
+    <option name="localTasksCounter" value="15" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -175,32 +184,33 @@
     <MESSAGE value="markers documentation" />
     <MESSAGE value="export to use in another scripts" />
     <MESSAGE value="todo removed" />
-    <option name="LAST_COMMIT_MESSAGE" value="todo removed" />
+    <MESSAGE value="distance marker, marker fixed options, new docs" />
+    <option name="LAST_COMMIT_MESSAGE" value="distance marker, marker fixed options, new docs" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2475" y="201" width="800" height="684" key="#Inspections" timestamp="1578397268239">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2475" y="201" width="800" height="684" key="#Inspections/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578397268239" />
-    <state x="2445" y="120" width="860" height="814" key="CommitChangelistDialog2" timestamp="1578402802177">
+    <state x="2445" y="120" width="860" height="814" key="CommitChangelistDialog2" timestamp="1578404518004">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2445" y="120" width="860" height="814" key="CommitChangelistDialog2/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578402802177" />
+    <state x="2445" y="120" width="860" height="814" key="CommitChangelistDialog2/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578404518004" />
     <state x="2369" y="175" width="1022" height="737" key="SettingsEditor" timestamp="1578397407850">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2369" y="175" width="1022" height="737" key="SettingsEditor/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578397407850" />
-    <state x="2475" y="276" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1578402803474">
+    <state x="2475" y="276" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1578403334465">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2475" y="276" width="800" height="535" key="Vcs.Push.Dialog.v2/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578402803474" />
+    <state x="2475" y="276" width="800" height="535" key="Vcs.Push.Dialog.v2/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578403334465" />
     <state x="204" y="27" width="1406" height="724" maximized="true" key="dock-window-1" timestamp="1578402112870">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>
     <state x="204" y="27" width="1406" height="724" maximized="true" key="dock-window-1/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578402112870" />
-    <state x="2543" y="239" width="672" height="678" key="search.everywhere.popup" timestamp="1578400990926">
+    <state x="2543" y="239" width="672" height="678" key="search.everywhere.popup" timestamp="1578404119589">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2543" y="239" width="672" height="678" key="search.everywhere.popup/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578400990926" />
+    <state x="2543" y="239" width="672" height="678" key="search.everywhere.popup/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578404119589" />
   </component>
 </project>

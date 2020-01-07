@@ -29,10 +29,14 @@ Citizen.CreateThread(function()
             rotate = true
         })
 
-        createDistanceMarker(1,vector3(x,y,z),100.0,{},function ()
+        createDistanceMarker(1,vector3(x,y,z),100.0,{onEnter = function ()
             sendChatMessage('Super!','Press E to kill your self!')
-        end, function()
+        end, onLeave = function()
             sendChatMessage('Ouuuch?','Where are you leaving?! I will find you!')
-        end)
+        end, onEnterTick = function ()
+            if IsControlJustReleased(1, Keys['E']) then
+                --Do some action
+            end
+        end})
     end
 end)

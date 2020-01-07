@@ -35,5 +35,8 @@ Config.DefaultMarkerOptions = {
     rotate = false,
     textureDict = nil,
     textureName = nil,
-    drawOnEnts = nil
+    drawOnEnts = nil,
+    onEnter = nil,
+    onLeave = nil,
+    onEnterTick = nil
 }
