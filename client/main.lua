@@ -3,9 +3,15 @@ Citizen.CreateThread(function()
     getEsxInstance()
 end)
 
--- Creating blips
+-- Creating blips example
 Citizen.CreateThread(function ()
-    createBlip("Testing name",53,vector3(0.0,0.0,0.0),{
+    local blip = createBlip("Testing name",53,vector3(0.0,0.0,0.0),{
         color = 12
     })
+
+    while true do
+        Citizen.Wait(100)
+        local coords = getPlayerPos()
+        SetBlipCoords(blip,coords.x,coords.y,coords.z)
+    end
 end)
