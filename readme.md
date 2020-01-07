@@ -35,8 +35,8 @@
 - isFunction(func): bool
 
 #### Examples:
-
-Get players with filter
+##### Getting players
+Get players with filter, using ESX.Game.GetPlayers()
 ```lua
 getPlayers(function(source)
     local ped = GetPlayerPed(source)
@@ -46,6 +46,10 @@ getPlayers(function(source)
     end
 end)
 ```
+
+##### Creating blips
+Default options for blips can be found at config
+
 Normal using natives:
 ```lua
 ourBlip = AddBlipForCoord(x, y, z)
