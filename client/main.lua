@@ -15,3 +15,18 @@ Citizen.CreateThread(function ()
         SetBlipCoords(blip,coords.x,coords.y,coords.z)
     end
 end)
+
+-- Creating distance marker for user
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(0)
+        createMarker(1,vector3(x,y,z),{
+            color = {
+                r = 50,
+                g = 150,
+                b = 60
+            },
+            rotate = true
+        })
+    end
+end)

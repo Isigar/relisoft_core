@@ -10,7 +10,9 @@ local Keys = {
     ["NENTER"] = 201, ["N4"] = 108, ["N5"] = 60, ["N6"] = 107, ["N+"] = 96, ["N-"] = 97, ["N7"] = 117, ["N8"] = 61, ["N9"] = 118
 }
 
--- Merge two tables
+---@param sourceTable table
+---@param targetTable table
+---@return table
 function mergeTables(sourceTable, targetTable)
     for i, v in pairs(sourceTable) do
         targetTable[i] = v
@@ -18,7 +20,8 @@ function mergeTables(sourceTable, targetTable)
     return targetTable
 end
 
---Returns true if table is empty
+---@param table table
+---@return boolean
 function emptyTable(table)
     if next(table) == nil then
         return true
@@ -27,6 +30,8 @@ function emptyTable(table)
     end
 end
 
+---@param table table
+---@return boolean
 function isTable(table)
     if table ~= nil then
         if type(table) == "table" then
@@ -38,6 +43,8 @@ function isTable(table)
     end
 end
 
+---@param func function
+---@return boolean
 function isFunction(func)
     if table ~= nil then
         if type(table) == "function" then
@@ -47,4 +54,30 @@ function isFunction(func)
     else
         return false
     end
+end
+
+---@param table table
+---@return number
+function tableLength(table)
+    local count = 0
+    for _ in pairs(table) do
+        count = count + 1
+    end
+    return count
+end
+
+---@param table table
+---@return number
+function tableLastIterator(table)
+    local last = 0
+    for i, v in pairs(table) do
+        last = i
+    end
+    return last+1
+end
+
+---@return vector3
+function getPlayerPos()
+    local ped = PlayerPedId()
+    return GetEntityCoords(ped)
 end

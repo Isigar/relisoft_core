@@ -5,7 +5,6 @@
 
 - essentialmode
 - es_extended
-- esx_society
 
 #### TODO:
 
@@ -16,7 +15,9 @@
 - storage user/fraction
 - creating blips
 - managing blips (location, remove, change color)
-
+- permission system
+- custom menu options by permissions
+- marker system
 
 #### Functions:
 
