@@ -28,5 +28,11 @@ Citizen.CreateThread(function()
             },
             rotate = true
         })
+
+        createDistanceMarker(1,vector3(x,y,z),100.0,{},function ()
+            sendChatMessage('Super!','Press E to kill your self!')
+        end, function()
+            sendChatMessage('Ouuuch?','Where are you leaving?! I will find you!')
+        end)
     end
 end)

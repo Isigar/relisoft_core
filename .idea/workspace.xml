@@ -3,6 +3,8 @@
   <component name="ChangeListManager">
     <list default="true" id="dd503cf1-1e5e-4c08-9d18-6363d0c62ed8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/core/marker.lua" beforeDir="false" afterPath="$PROJECT_DIR$/client/core/marker.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/client/main.lua" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.lua" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
@@ -60,7 +62,7 @@
       <option name="number" value="Default" />
       <option name="presentableId" value="Default" />
       <updated>1578393253596</updated>
-      <workItem from="1578393254724" duration="9168000" />
+      <workItem from="1578393254724" duration="9700000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1578395928793</created>
@@ -146,7 +148,14 @@
       <option name="project" value="LOCAL" />
       <updated>1578402297595</updated>
     </task>
-    <option name="localTasksCounter" value="13" />
+    <task id="LOCAL-00013" summary="todo removed">
+      <created>1578402802234</created>
+      <option name="number" value="00013" />
+      <option name="presentableId" value="LOCAL-00013" />
+      <option name="project" value="LOCAL" />
+      <updated>1578402802234</updated>
+    </task>
+    <option name="localTasksCounter" value="14" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -165,25 +174,26 @@
     <MESSAGE value="table update" />
     <MESSAGE value="markers documentation" />
     <MESSAGE value="export to use in another scripts" />
-    <option name="LAST_COMMIT_MESSAGE" value="export to use in another scripts" />
+    <MESSAGE value="todo removed" />
+    <option name="LAST_COMMIT_MESSAGE" value="todo removed" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2475" y="201" width="800" height="684" key="#Inspections" timestamp="1578397268239">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2475" y="201" width="800" height="684" key="#Inspections/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578397268239" />
-    <state x="2445" y="120" width="860" height="814" key="CommitChangelistDialog2" timestamp="1578402297519">
+    <state x="2445" y="120" width="860" height="814" key="CommitChangelistDialog2" timestamp="1578402802177">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2445" y="120" width="860" height="814" key="CommitChangelistDialog2/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578402297519" />
+    <state x="2445" y="120" width="860" height="814" key="CommitChangelistDialog2/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578402802177" />
     <state x="2369" y="175" width="1022" height="737" key="SettingsEditor" timestamp="1578397407850">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2369" y="175" width="1022" height="737" key="SettingsEditor/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578397407850" />
-    <state x="2475" y="276" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1578402298598">
+    <state x="2475" y="276" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1578402803474">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2475" y="276" width="800" height="535" key="Vcs.Push.Dialog.v2/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578402298598" />
+    <state x="2475" y="276" width="800" height="535" key="Vcs.Push.Dialog.v2/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578402803474" />
     <state x="204" y="27" width="1406" height="724" maximized="true" key="dock-window-1" timestamp="1578402112870">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>

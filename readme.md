@@ -89,6 +89,14 @@ Citizen.CreateThread(function()
     end
 end)
 ```
+Distance marker with onEnter, onLeave callbacks, these callbacks are call only once
+```lua
+createDistanceMarker(1,vector3(x,y,z),100.0,{},function ()
+    sendChatMessage('Super!','Press E to kill your self!')
+end, function()
+    sendChatMessage('Ouuuch?','Where are you leaving?! I will find you!')
+end)
+```
 
 
 #### Use at your scripts

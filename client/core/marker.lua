@@ -1,39 +1,69 @@
-Marker = {}
+Markers = {}
 
-function createMarker(type, coords, options)
+---@param type number
+---@param coords vector3
+---@param options table
+---@param onEnter function|nil
+---@param onLeave function|nil
+function createMarker(type, coords, options, onEnter, onLeave)
     if isTable(options) then
         options = mergeTables(options, Config.DefaultMarkerOptions)
     else
         options = Config.DefaultMarkerOptions
     end
 
+    onEnter = onEnter or function() end
+    onLeave = onLeave or function() end
+
     DrawMarker(type,
             coords.x,
             coords.y,
             coords.z,
-            Config.DefaultMarkerOptions.dir.x,
-            Config.DefaultMarkerOptions.dir.y,
-            Config.DefaultMarkerOptions.dir.z,
-            Config.DefaultMarkerOptions.rot.x,
-            Config.DefaultMarkerOptions.rot.y,
-            Config.DefaultMarkerOptions.rot.x,
-            Config.DefaultMarkerOptions.scale.x,
-            Config.DefaultMarkerOptions.scale.y,
-            Config.DefaultMarkerOptions.scale.z,
-            Config.DefaultMarkerOptions.color.r,
-            Config.DefaultMarkerOptions.color.g,
-            Config.DefaultMarkerOptions.color.b,
-            Config.DefaultMarkerOptions.color.a,
-            Config.DefaultMarkerOptions.bobUpAndDown,
-            Config.DefaultMarkerOptions.faceCamera,
-            Config.DefaultMarkerOptions.p19,
-            Config.DefaultMarkerOptions.rotate,
-            Config.DefaultMarkerOptions.textureDict,
-            Config.DefaultMarkerOptions.textureName,
-            Config.DefaultMarkerOptions.drawOnEnts)
+            options.dir.x,
+            options.dir.y,
+            options.dir.z,
+            options.rot.x,
+            options.rot.y,
+            options.rot.x,
+            options.scale.x,
+            options.scale.y,
+            options.scale.z,
+            options.color.r,
+            options.color.g,
+            options.color.b,
+            options.color.a,
+            options.bobUpAndDown,
+            options.faceCamera,
+            options.p19,
+            options.rotate,
+            options.textureDict,
+            options.textureName,
+            options.drawOnEnts)
+
+    local enter = false
+
+    local pos = getPlayerPos()
+    local dist = GetDistanceBetweenCoords(pos.x,pos.y,pos.z,coords.x,coords.y,coords.z)
+    if dist < options.scale.x then
+        if not enter then
+            onEnter()
+        end
+        enter = true
+    else
+        if enter then
+            onLeave()
+        end
+        enter = false
+    end
 end
 
-function createDistanceMarker(type, coords, distance, options)
+---@param type number
+---@param coords vector3
+---@param distance number
+---@param options table
+---@param onEnter function|nil
+---@param onLeave function|nil
+function createDistanceMarker(type, coords, distance, options,onEnter, onLeave)
 
     if isTable(options) then
         options = mergeTables(options, Config.DefaultMarkerOptions)
@@ -48,26 +78,38 @@ function createDistanceMarker(type, coords, distance, options)
                 coords.x,
                 coords.y,
                 coords.z,
-                Config.DefaultMarkerOptions.dir.x,
-                Config.DefaultMarkerOptions.dir.y,
-                Config.DefaultMarkerOptions.dir.z,
-                Config.DefaultMarkerOptions.rot.x,
-                Config.DefaultMarkerOptions.rot.y,
-                Config.DefaultMarkerOptions.rot.x,
-                Config.DefaultMarkerOptions.scale.x,
-                Config.DefaultMarkerOptions.scale.y,
-                Config.DefaultMarkerOptions.scale.z,
-                Config.DefaultMarkerOptions.color.r,
-                Config.DefaultMarkerOptions.color.g,
-                Config.DefaultMarkerOptions.color.b,
-                Config.DefaultMarkerOptions.color.a,
-                Config.DefaultMarkerOptions.bobUpAndDown,
-                Config.DefaultMarkerOptions.faceCamera,
-                Config.DefaultMarkerOptions.p19,
-                Config.DefaultMarkerOptions.rotate,
-                Config.DefaultMarkerOptions.textureDict,
-                Config.DefaultMarkerOptions.textureName,
-                Config.DefaultMarkerOptions.drawOnEnts)
+                options.dir.x,
+                options.dir.y,
+                options.dir.z,
+                options.rot.x,
+                options.rot.y,
+                options.rot.x,
+                options.scale.x,
+                options.scale.y,
+                options.scale.z,
+                options.color.r,
+                options.color.g,
+                options.color.b,
+                options.color.a,
+                options.bobUpAndDown,
+                options.faceCamera,
+                options.p19,
+                options.rotate,
+                options.textureDict,
+                options.textureName,
+                options.drawOnEnts)
+    end
+
+    local enter = false
+    if dist < options.scale.x then
+        if not enter then
+            onEnter()
+        end
+        enter = true
+    else
+        if enter then
+            onLeave()
+        end
+        enter = false
     end
 end
-
