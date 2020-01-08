@@ -26,8 +26,8 @@ end
 
 ---@param message string
 function debug(message)
-    Citizen.Trace(message)
-    print(message)
+    Citizen.Trace('[relisoft_core] '..message)
+    print('[relisoft_core] '..message)
 end
 
 ---@param filter nil|function

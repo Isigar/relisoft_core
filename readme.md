@@ -14,6 +14,7 @@
 - permission system
 - custom menu options by permissions
 
+### CLIENT:
 #### Functions:
 
 - getEsxInstance(): ESX
@@ -25,6 +26,14 @@
 - getBlip(instance): ?Blip
 - createMarker(type, coords, options): void
 - createDistanceMarker(type, coords, distance, options): void
+
+### SERVER:
+#### Functions:
+
+- addAdminCmd(cmd, level, cb, help): void
+- addCmd(cmd, cb, help): void
+- registerSociety(society, name, type): boolean|nil
+- registerNumber(number, text): void
 
 ###### Common:
 
@@ -103,6 +112,21 @@ end, onEnterTick = function ()
 end})
 ```
 
+### Server
+##### Register number & society
+```lua
+--Register number & society
+registerNumber('bazar','Autobazar')
+registerSociety('bazar','Autobazar')
+```
+
+##### Add help command
+```lua
+-- Creating command
+addCmd('help', function(source, args, user)
+    -- Send message or something to client with source
+end, '/help - show help informations')
+```
 
 #### Use at your scripts
 LUA
