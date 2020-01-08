@@ -13,6 +13,7 @@
 - storage user/fraction
 - permission system
 - custom menu options by permissions
+- extended items usage
 
 ### CLIENT:
 #### Functions:
@@ -34,6 +35,8 @@
 - addCmd(cmd, cb, help): void
 - registerSociety(society, name, type): boolean|nil
 - registerNumber(number, text): void
+- sendChatMessageFromServer(source,title,message,color): void
+- sendNotificationFromServer(source, message): void
 
 ###### Common:
 

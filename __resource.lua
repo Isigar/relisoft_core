@@ -27,3 +27,12 @@ exports {
     'tableLength',
     'tableLastIterator'
 }
+
+server_exports {
+    'addCmd',
+    'addAdminCmd',
+    'sendNotificationFromServer',
+    'sendChatMessageFromServer',
+    'registerNumber',
+    'registerSociety'
+}
