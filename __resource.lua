@@ -41,5 +41,8 @@ server_exports {
     'sendNotificationFromServer',
     'sendChatMessageFromServer',
     'registerNumber',
-    'registerSociety'
+    'registerSociety',
+    'getPlayerDatastore',
+    'getDatastore',
+    'createDatastore'
 }
