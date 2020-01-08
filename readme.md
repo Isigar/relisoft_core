@@ -37,6 +37,10 @@
 - registerNumber(number, text): void
 - sendChatMessageFromServer(source,title,message,color): void
 - sendNotificationFromServer(source, message): void
+- getDatastore(name,cb)
+- getPlayerDatastore(identifier, name,cb)
+- createDatastore(name, shared,cb)
+- isDatastoreExists(name)
 
 ###### Common:
 
@@ -129,6 +133,29 @@ registerSociety('bazar','Autobazar')
 addCmd('help', function(source, args, user)
     -- Send message or something to client with source
 end, '/help - show help informations')
+```
+
+##### Register datastore and get / set data
+```lua
+-- Create shared datastore
+createDatastore('bazar',true)
+
+-- Get shared datstore and get data and set data example
+getDatastore('bazar', function(store)
+    store.set('name',{
+        some = data
+    })
+
+    local val = store.get('value')
+    if val == nil then
+        store.set('val',true)
+    end
+end)
+
+-- Get player weapons from property datastore
+getPlayerDatastore('steam:123456789','property',function (store)
+    local weapons = store.get('weapons')
+end)
 ```
 
 #### Use at your scripts

@@ -1,5 +1,12 @@
 server_files {
-
+    '@async/async.lua',
+    '@mysql-async/lib/MySQL.lua',
+    'shared/config.lua',
+    'server/core/common.lua',
+    'server/core/datastore.lua',
+    'server/core/esx.lua',
+    'server/core/society.lua',
+    'server/main.lua',
 }
 
 client_files {
