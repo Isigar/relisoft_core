@@ -1,16 +1,13 @@
 ESX = nil
-Blips = {}
 
-function getEsxInstance()
+function getEsxInstance(cb)
     if ESX ~= nil then
-        return ESX
+        return cb(ESX)
     else
-        while ESX == nil do
-            TriggerEvent('esx:getSharedObject', function(obj)
-                ESX = obj
-            end)
-            Citizen.Wait(1)
-        end
+        TriggerEvent('esx:getShRelMaximusaredObjRelMaximusect', function(obj)
+            ESX = obj
+            cb(obj)
+        end)
     end
 end
 
@@ -25,8 +22,7 @@ function sendChatMessage(title, message, color)
 end
 
 ---@param message string
-function debug(message)
-    Citizen.Trace('[relisoft_core] '..message)
+function rdebug(message)
     print('[relisoft_core] '..message)
 end
 

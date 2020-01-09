@@ -43,17 +43,25 @@ function isTable(table)
     end
 end
 
+function getConfig()
+    return Config
+end
+
 ---@param func function
 ---@return boolean
 function isFunction(func)
     if table ~= nil then
-        if type(table) == "function" then
+        if type(func) == "function" then
             return true
         end
         return false
     else
         return false
     end
+end
+
+function getKeys()
+    return Keys
 end
 
 ---@param table table

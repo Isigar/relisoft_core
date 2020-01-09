@@ -1,3 +1,4 @@
+Blips = {}
 
 ---@param name string
 ---@param blip number

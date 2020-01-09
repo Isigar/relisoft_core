@@ -1,19 +1,14 @@
-Markers = {}
-
 ---@param type number
 ---@param coords vector3
 ---@param options table
 ---@param onEnter function|nil
 ---@param onLeave function|nil
-function createMarker(type, coords, options, onEnter, onLeave)
+function createMarker(type, coords, options)
     if isTable(options) then
         options = mergeTables(options, Config.DefaultMarkerOptions)
     else
         options = Config.DefaultMarkerOptions
     end
-
-    onEnter = onEnter or function() end
-    onLeave = onLeave or function() end
 
     DrawMarker(type,
             coords.x,
@@ -46,17 +41,17 @@ function createMarker(type, coords, options, onEnter, onLeave)
     local dist = GetDistanceBetweenCoords(pos.x,pos.y,pos.z,coords.x,coords.y,coords.z)
     if dist < options.scale.x then
         if not enter then
-            if isFunction(options.onEnter) then
+            if options.onEnter ~= nil then
                 options.onEnter()
             end
         end
-        if isFunction(options.onEnterTick) then
+        if options.onEnterTick ~= nil then
             options.onEnterTick()
         end
         enter = true
     else
         if enter then
-            if isFunction(options.onLeave) then
+            if options.onLeave ~= nil then
                 options.onLeave()
             end
         end
@@ -68,8 +63,6 @@ end
 ---@param coords vector3
 ---@param distance number
 ---@param options table
----@param onEnter function|nil
----@param onLeave function|nil
 function createDistanceMarker(type, coords, distance, options)
 
     if isTable(options) then
@@ -108,19 +101,19 @@ function createDistanceMarker(type, coords, distance, options)
     end
 
     local enter = false
-    if dist < options.scale.x then
+    if dist <= options.scale.x then
         if not enter then
-            if isFunction(options.onEnter) then
+            if options.onEnter ~= nil then
                 options.onEnter()
             end
         end
-        if isFunction(options.onEnterTick) then
+        if options.onEnterTick ~= nil then
             options.onEnterTick()
         end
         enter = true
     else
         if enter then
-            if isFunction(options.onLeave) then
+            if options.onLeave ~= nil then
                 options.onLeave()
             end
         end

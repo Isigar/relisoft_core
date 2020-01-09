@@ -1,7 +1,10 @@
-server_files {
+fx_version 'adamant'
+games { 'gta5' }
+
+server_scripts {
     '@async/async.lua',
     '@mysql-async/lib/MySQL.lua',
-    'shared/config.lua',
+    'config.lua',
     'server/core/common.lua',
     'server/core/datastore.lua',
     'server/core/esx.lua',
@@ -9,7 +12,8 @@ server_files {
     'server/main.lua',
 }
 
-client_files {
+client_scripts {
+    'config.lua',
     'client/core/common.lua',
     'client/core/marker.lua',
     'client/core/blip.lua',
@@ -23,10 +27,11 @@ exports {
     'sendChatMessage',
     'getPlayers',
     'createBlip',
-    'getBlips',
-    'getBlip',
     'createMarker',
     'createDistanceMarker',
+    'getKeys',
+    'getBlips',
+    'getBlip',
     'mergeTables',
     'emptyTable',
     'isTable',
