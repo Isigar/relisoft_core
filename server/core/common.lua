@@ -7,3 +7,7 @@ function sendChatMessageFromServer(source,title,message,color)
     TriggerClientEvent('chat:addMessage', source, { args = { title, message }, color = color })
 end
 
+---@param message string
+function rdebug(message)
+    print('[relisoft_core] '..message)
+end

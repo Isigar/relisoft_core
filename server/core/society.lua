@@ -11,11 +11,6 @@ end
 ---@return boolean|nil
 function registerSociety(society, name, type)
     type = type or "public"
-    if not type(society) == "string" or not type(name) == "string" then
-        rdebug('Register of society failed! For register society parameters society, name must be string!')
-        return nil
-    else
-        TriggerEvent('esx_society:registerSociety', society, name, 'society_'..society, 'society_'..society, 'society_'..society, {type = type})
-        return true
-    end
+    TriggerEvent('esx_society:registerSociety', society, name, 'society_'..society, 'society_'..society, 'society_'..society, {type = type})
+    return true
 end

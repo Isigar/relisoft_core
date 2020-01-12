@@ -21,11 +21,6 @@ function sendChatMessage(title, message, color)
     TriggerEvent('chat:addMessage', { args = { title, message }, color = color })
 end
 
----@param message string
-function rdebug(message)
-    print('[relisoft_core] '..message)
-end
-
 ---@param filter nil|function
 ---@return table
 function getPlayers(filter)

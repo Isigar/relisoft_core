@@ -18,7 +18,7 @@ client_scripts {
     'client/core/marker.lua',
     'client/core/blip.lua',
     'client/core/esx.lua',
-    'client/main.lua'
+    'client/main.lua',
 }
 
 exports {
@@ -37,7 +37,7 @@ exports {
     'isTable',
     'isFunction',
     'tableLength',
-    'tableLastIterator'
+    'tableLastIterator',
 }
 
 server_exports {
@@ -47,7 +47,7 @@ server_exports {
     'sendChatMessageFromServer',
     'registerNumber',
     'registerSociety',
+    'createDatastore',
     'getPlayerDatastore',
     'getDatastore',
-    'createDatastore'
 }

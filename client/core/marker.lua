@@ -35,27 +35,16 @@ function createMarker(type, coords, options)
             options.textureName,
             options.drawOnEnts)
 
-    local enter = false
-
     local pos = getPlayerPos()
     local dist = GetDistanceBetweenCoords(pos.x,pos.y,pos.z,coords.x,coords.y,coords.z)
     if dist < options.scale.x then
-        if not enter then
-            if options.onEnter ~= nil then
-                options.onEnter()
-            end
+        if options.onEnter ~= nil then
+            options.onEnter()
         end
-        if options.onEnterTick ~= nil then
-            options.onEnterTick()
-        end
-        enter = true
     else
-        if enter then
-            if options.onLeave ~= nil then
-                options.onLeave()
-            end
+        if options.onLeave ~= nil then
+            options.onLeave()
         end
-        enter = false
     end
 end
 
@@ -100,23 +89,13 @@ function createDistanceMarker(type, coords, distance, options)
                 options.drawOnEnts)
     end
 
-    local enter = false
     if dist <= options.scale.x then
-        if not enter then
-            if options.onEnter ~= nil then
-                options.onEnter()
-            end
+        if options.onEnter ~= nil then
+            options.onEnter()
         end
-        if options.onEnterTick ~= nil then
-            options.onEnterTick()
-        end
-        enter = true
     else
-        if enter then
-            if options.onLeave ~= nil then
-                options.onLeave()
-            end
+        if options.onLeave ~= nil then
+            options.onLeave()
         end
-        enter = false
     end
 end

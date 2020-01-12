@@ -74,6 +74,11 @@ function tableLength(table)
     return count
 end
 
+---@param message string
+function rdebug(message)
+    print('[relisoft_core] '..message)
+end
+
 ---@param table table
 ---@return number
 function tableLastIterator(table)
