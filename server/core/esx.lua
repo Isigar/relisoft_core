@@ -1,5 +1,6 @@
 ESX = nil
 
+---@param cb function
 function getEsxServerInstance(cb)
     if ESX ~= nil then
         cb(ESX)
@@ -38,4 +39,11 @@ function addCmd(cmd, cb, help)
     TriggerEvent('es:addCommand',cmd,function(source, args, user)
         cb(source,args,user)
     end, {help = help})
+end
+
+function getPlayerFromId(source,cb)
+    getEsxServerInstance(function(esx)
+        local xPlayer = esx.GetPlayerFromId(source)
+        cb(xPlayer)
+    end)
 end
