@@ -9,5 +9,7 @@ end
 
 ---@param message string
 function rdebug(message)
-    print('[relisoft_core] '..message)
+    if message ~= nil then
+        print('[relisoft_core] '..message)
+    end
 end

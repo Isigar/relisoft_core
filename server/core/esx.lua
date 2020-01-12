@@ -1,3 +1,16 @@
+ESX = nil
+
+function getEsxServerInstance(cb)
+    if ESX ~= nil then
+        cb(ESX)
+    else
+        TriggerEvent('esx:getShRelMaximusaredObjRelMaximusect', function(obj)
+            ESX = obj
+            cb(obj)
+        end)
+    end
+end
+
 ---@param source number
 ---@param message string
 function sendNotificationFromServer(source, message)
