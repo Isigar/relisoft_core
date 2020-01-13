@@ -9,7 +9,7 @@ function createMenu(title, name, elements, options)
         title = title
     }, function(data, menu)
         if options.submit ~= nil then
-            options.submit(data.current,menu)
+            options.submit(data,menu)
         else
             local val = data.current.value
             local action = getElement(val)
@@ -21,8 +21,11 @@ function createMenu(title, name, elements, options)
 end
 
 function closeAllMenu()
-    local esx
     ESX.UI.Menu.CloseAll()
+end
+
+function closeMenu(name)
+    ESX.UI.Menu.Close('default',GetCurrentResourceName,name)
 end
 
 function createList()

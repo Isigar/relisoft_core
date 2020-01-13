@@ -5,10 +5,9 @@ server_scripts {
     '@async/async.lua',
     '@mysql-async/lib/MySQL.lua',
     'config.lua',
+    'server/core/esx.lua',
     'server/core/common.lua',
     'server/core/datastore.lua',
-    'server/core/permissions.lua',
-    'server/core/esx.lua',
     'server/core/society.lua',
     'server/main.lua',
 }
@@ -20,6 +19,7 @@ client_scripts {
     'client/core/menu.lua',
     'client/core/blip.lua',
     'client/core/esx.lua',
+    'client/core/permissions.lua',
     'client/main.lua',
 }
 
@@ -44,7 +44,9 @@ exports {
     'addElement',
     'removeElement',
     'getElement',
-    'isAtJob'
+    'isAtJob',
+    'closeMenu',
+    'closeAllMenu'
 }
 
 server_exports {
