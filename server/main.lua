@@ -27,3 +27,7 @@
 --        local weapons = store.get('weapons')
 --    end)
 --end)
+
+RegisterNetEvent('rcore:sendChatMessage',function(target, title,message)
+    sendChatMessageFromServer(target,title,message)
+end)

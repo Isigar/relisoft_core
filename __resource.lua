@@ -7,6 +7,7 @@ server_scripts {
     'config.lua',
     'server/core/common.lua',
     'server/core/datastore.lua',
+    'server/core/permissions.lua',
     'server/core/esx.lua',
     'server/core/society.lua',
     'server/main.lua',
@@ -43,6 +44,7 @@ exports {
     'addElement',
     'removeElement',
     'getElement',
+    'isAtJob'
 }
 
 server_exports {

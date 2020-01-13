@@ -13,7 +13,7 @@ function createMenu(title, name, elements, options)
         else
             local val = data.current.value
             local action = getElement(val)
-            action()
+            action(menu)
         end
     end, function(data, menu)
         menu.close()
