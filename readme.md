@@ -27,6 +27,12 @@
 - getBlip(instance): ?Blip
 - createMarker(type, coords, options): void
 - createDistanceMarker(type, coords, distance, options): void
+- createMenu(title, name, elements, options): void
+- closeAllMenu()
+- closeMenu(name)
+- addElement(name, action)
+- getElement(name)
+- removeElement(name)
 
 ### SERVER:
 #### Functions:

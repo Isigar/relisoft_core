@@ -45,6 +45,7 @@ exports {
     'removeElement',
     'getElement',
     'isAtJob',
+    'isAtJobGrade',
     'closeMenu',
     'closeAllMenu'
 }
