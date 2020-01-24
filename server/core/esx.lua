@@ -1,13 +1,13 @@
 ESX = nil
 
 ---@param cb function
-function getEsxServerInstance(cb)
+function getEsxServerInstance()
     if ESX ~= nil then
-        cb(ESX)
+        return ESX
     else
         TriggerEvent('esx:getShRelMaximusaredObjRelMaximusect', function(obj)
             ESX = obj
-            cb(obj)
+            return obj
         end)
     end
 end
@@ -41,9 +41,7 @@ function addCmd(cmd, cb, help)
     end, {help = help})
 end
 
-function getPlayerFromId(source,cb)
-    getEsxServerInstance(function(esx)
-        local xPlayer = esx.GetPlayerFromId(source)
-        cb(xPlayer)
-    end)
+function getPlayerFromId(source)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    return xPlayer
 end
