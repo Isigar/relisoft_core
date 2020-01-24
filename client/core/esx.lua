@@ -1,12 +1,12 @@
 ESX = nil
 
-function getEsxInstance(cb)
+function getEsxInstance()
     if ESX ~= nil then
-        return cb(ESX)
+        return ESX
     else
         TriggerEvent('esx:getShRelMaximusaredObjRelMaximusect', function(obj)
             ESX = obj
-            cb(obj)
+            return obj
         end)
     end
 end

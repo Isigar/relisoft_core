@@ -1,5 +1,6 @@
 Permissions = {}
 PlayerData = {}
+ESX = getEsxInstance()
 
 function addPermission()
 
@@ -16,21 +17,19 @@ end
 ---@param job string
 ---@param cb function
 ---@param force bool
-function isAtJob(job,cb, force)
+function isAtJob(job, cb, force)
     force = force or false
     if force then
-        getEsxInstance(function(esx)
-            while not esx.IsPlayerLoaded() do
-                Citizen.Wait(500)
-            end
-            local xPlayer = esx.GetPlayerData()
-            if xPlayer.job.name == job then
-                PlayerData = xPlayer
-                cb(true)
-            else
-                cb(false)
-            end
-        end)
+        while not ESX.IsPlayerLoaded() do
+            Citizen.Wait(500)
+        end
+        local xPlayer = ESX.GetPlayerData()
+        PlayerData = xPlayer
+        if xPlayer.job.name == job then
+            cb(true)
+        else
+            cb(false)
+        end
     else
         if PlayerData.job ~= nil then
             if PlayerData.job.name == job then
@@ -39,9 +38,7 @@ function isAtJob(job,cb, force)
                 cb(false)
             end
         else
-            isAtJob(job,function(is)
-                cb(is)
-            end,true)
+            return isAtJob(job,true)
         end
     end
 end
@@ -49,41 +46,37 @@ end
 ---@param job string
 ---@param cb function
 ---@param force bool
-function isAtJobGrade(job,grade,cb, force)
+function isAtJobGrade(job,grade, force)
     force = force or false
     if force then
-        getEsxInstance(function(esx)
-            while not esx.IsPlayerLoaded() do
-                Citizen.Wait(500)
-            end
+        while not ESX.IsPlayerLoaded() do
+            Citizen.Wait(500)
+        end
 
-            local xPlayer = esx.GetPlayerData()
-            if xPlayer.job.name == job then
-                if xPlayer.job.grade_name == grade then
-                    PlayerData = xPlayer
-                    cb(true)
-                else
-                    cb(true)
-                end
+        local xPlayer = ESX.GetPlayerData()
+        PlayerData = xPlayer
+        if xPlayer.job.name == job then
+            if xPlayer.job.grade_name == grade then
+                return true
             else
-                cb(false)
+                return false
             end
-        end)
+        else
+            return false
+        end
     else
         if PlayerData.job ~= nil then
             if PlayerData.job.name == job then
                 if PlayerData.job.grade_name == grade then
-                    cb(true)
+                    return true
                 else
-                    cb(false)
+                    return false
                 end
             else
-                cb(false)
+                return false
             end
         else
-            isAtJobGrade(job,grade,function(is)
-                cb(is)
-            end,true)
+            return isAtJobGrade(job,grade,true)
         end
     end
 end
