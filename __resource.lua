@@ -9,6 +9,7 @@ server_scripts {
     'server/core/common.lua',
     'server/core/datastore.lua',
     'server/core/society.lua',
+    'server/core/weapon.lua',
     'server/main.lua',
 }
 
@@ -47,7 +48,11 @@ exports {
     'isAtJob',
     'isAtJobGrade',
     'closeMenu',
-    'closeAllMenu'
+    'closeAllMenu',
+    'showNotification',
+    'showHelpNotification',
+    'draw3DText',
+    'deleteVehicle'
 }
 
 server_exports {
@@ -63,4 +68,7 @@ server_exports {
     'getDatastore',
     'getPlayerFromId',
     'addPlayerToJob',
+    'addWeapon',
+    'setAmmo',
+    'addAmmo'
 }

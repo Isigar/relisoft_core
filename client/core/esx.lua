@@ -38,3 +38,11 @@ function getPlayers(filter)
         return players
     end
 end
+
+function showNotification(message)
+    ESX.ShowNotification(message)
+end
+
+function showHelpNotification(message)
+    ESX.ShowHelpNotification(message)
+end

@@ -25,6 +25,7 @@ function isAtJob(job,cb, force)
             end
             local xPlayer = esx.GetPlayerData()
             if xPlayer.job.name == job then
+                PlayerData = xPlayer
                 cb(true)
             else
                 cb(false)
@@ -55,9 +56,11 @@ function isAtJobGrade(job,grade,cb, force)
             while not esx.IsPlayerLoaded() do
                 Citizen.Wait(500)
             end
+
             local xPlayer = esx.GetPlayerData()
             if xPlayer.job.name == job then
                 if xPlayer.job.grade_name == grade then
+                    PlayerData = xPlayer
                     cb(true)
                 else
                     cb(true)
@@ -69,7 +72,7 @@ function isAtJobGrade(job,grade,cb, force)
     else
         if PlayerData.job ~= nil then
             if PlayerData.job.name == job then
-                if xPlayer.job.grade_name == grade then
+                if PlayerData.job.grade_name == grade then
                     cb(true)
                 else
                     cb(false)
