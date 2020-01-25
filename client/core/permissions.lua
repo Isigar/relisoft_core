@@ -1,21 +1,10 @@
 Permissions = {}
 PlayerData = {}
+ESX = nil
 
 Citizen.CreateThread(function()
     ESX = getEsxInstance()
 end)
-
-function addPermission()
-
-end
-
-function addPlayerPermission(identifier, permission)
-
-end
-
-function removePlayerPermission(identifier, permission)
-
-end
 
 ---@param job string
 ---@param cb function
@@ -45,6 +34,8 @@ function isAtJob(job, cb, force)
         end
     end
 end
+
+exports('isAtJob',isAtJob)
 
 ---@param job string
 ---@param cb function
@@ -83,6 +74,8 @@ function isAtJobGrade(job,grade, force)
         end
     end
 end
+
+exports('isAtJobGrade',isAtJobGrade)
 
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded',function(xPlayer)
