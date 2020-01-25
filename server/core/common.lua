@@ -11,7 +11,7 @@ exports('sendChatMessageFromServer',sendChatMessageFromServer)
 
 ---@param message string
 function rdebug(message)
-    if message ~= nil then
+    if message ~= nil and Config.Debug == true then
         print('[relisoft_core] '..message)
     end
 end

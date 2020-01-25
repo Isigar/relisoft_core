@@ -12,6 +12,8 @@ function getEsxInstance()
     end
 end
 
+exports('getEsxInstance',getEsxInstance)
+
 ---@param title string
 ---@param message string
 ---@param color nil|table
@@ -21,6 +23,8 @@ function sendChatMessage(title, message, color)
     end
     TriggerEvent('chat:addMessage', { args = { title, message }, color = color })
 end
+
+exports('sendChatMessage',sendChatMessage)
 
 ---@param filter nil|function
 ---@return table
@@ -40,10 +44,16 @@ function getPlayers(filter)
     end
 end
 
+exports('getPlayers',getPlayers)
+
 function showNotification(message)
     ESX.ShowNotification(message)
 end
 
+exports('showNotification',showNotification)
+
 function showHelpNotification(message)
     ESX.ShowHelpNotification(message)
 end
+
+exports('showHelpNotification',showHelpNotification)

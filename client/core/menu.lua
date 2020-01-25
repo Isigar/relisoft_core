@@ -20,31 +20,35 @@ function createMenu(title, name, elements, options)
     end)
 end
 
+exports('createMenu',createMenu)
+
 function closeAllMenu()
     ESX.UI.Menu.CloseAll()
 end
+
+exports('closeAllMenu',closeAllMenu)
 
 function closeMenu(name)
     ESX.UI.Menu.Close('default',GetCurrentResourceName,name)
 end
 
-function createList()
-
-end
-
-function createTable()
-
-end
+exports('closeMenu',closeMenu)
 
 function addElement(name, action)
     Elements[name] = action
 end
 
+exports('addElement',addElement)
+
 function getElement(name)
     return Elements[name]
 end
 
+exports('getElement',getElement)
+
 function removeElement(name)
     Elements[name] = nil
 end
+
+exports('removeElement',removeElement)
 

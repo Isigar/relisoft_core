@@ -1,4 +1,5 @@
 Config = {}
+Config.Debug = true
 Config.DefaultChatColor = {255,255,255}
 Config.DefaultBlipOptions = {
     scale = 1.0,
