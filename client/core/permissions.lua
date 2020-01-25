@@ -1,6 +1,9 @@
 Permissions = {}
 PlayerData = {}
-ESX = getEsxInstance()
+
+Citizen.CreateThread(function()
+    ESX = getEsxInstance()
+end)
 
 function addPermission()
 

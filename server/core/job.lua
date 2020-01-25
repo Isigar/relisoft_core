@@ -1,10 +1,13 @@
+ESX = getEsxServerInstance()
+
 ---@param player number
 ---@param job string
 ---@param grade number
-function addPlayerToJob(player, job, grade)
-    getEsxServerInstance(function(esx)
-        getPlayerFromId(player,function(xPlayer)
-            xPlayer.setJob(job,grade)
-        end)
-    end)
+function setPlayerJob(player, job, grade)
+    local xPlayer = getPlayerFromId(player)
+    if xPlayer ~= nil then
+        xPlayer.setJob(job,grade)
+    end
 end
+
+exports('setPlayerJob',setPlayerJob)

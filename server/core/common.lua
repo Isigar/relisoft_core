@@ -7,9 +7,13 @@ function sendChatMessageFromServer(source,title,message,color)
     TriggerClientEvent('chat:addMessage', source, { args = { title, message }, color = color })
 end
 
+exports('sendChatMessageFromServer',sendChatMessageFromServer)
+
 ---@param message string
 function rdebug(message)
     if message ~= nil then
         print('[relisoft_core] '..message)
     end
 end
+
+exports('rdebug',rdebug)

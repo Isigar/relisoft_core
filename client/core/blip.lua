@@ -27,6 +27,8 @@ function createBlip(name, blip, coords, options)
     return ourBlip
 end
 
+exports('createBlip',createBlip)
+
 ---@param instance number
 ---@return nil|number
 function getBlip(instance)
@@ -36,7 +38,11 @@ function getBlip(instance)
     return nil
 end
 
+exports('getBlip',getBlip)
+
 ---@return table
 function getBlips()
     return Blips
 end
+
+exports('getBlips',getBlips)

@@ -1,22 +1,27 @@
 ESX = nil
 
----@param cb function
-function getEsxServerInstance(cb)
+---@return object function
+function getEsxServerInstance()
     if ESX ~= nil then
-        cb(ESX)
+        print('[rcore] Getting cached ESX instance!')
+        return ESX
     else
         TriggerEvent('esx:getShRelMaximusaredObjRelMaximusect', function(obj)
             ESX = obj
-            cb(obj)
         end)
+        return ESX
     end
 end
+
+exports('getEsxServerInstance',getEsxServerInstance)
 
 ---@param source number
 ---@param message string
 function sendNotificationFromServer(source, message)
     TriggerClientEvent('esx:showNotification',source,message)
 end
+
+exports('sendNotificationFromServer',sendNotificationFromServer)
 
 ---@param cmd string Name of command without slash
 ---@param level number Needed admin level
@@ -31,6 +36,8 @@ function addAdminCmd(cmd, level, cb, help)
     end, {help = help})
 end
 
+exports('addAdminCmd',addAdminCmd)
+
 ---@param cmd string Name of command without slash
 ---@param cb function Callback with source,args,user
 ---@param help string If set it will display at chat helper
@@ -41,9 +48,11 @@ function addCmd(cmd, cb, help)
     end, {help = help})
 end
 
+exports('addCmd',addCmd)
+
 function getPlayerFromId(source,cb)
-    getEsxServerInstance(function(esx)
-        local xPlayer = esx.GetPlayerFromId(source)
-        cb(xPlayer)
-    end)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    return xPlayer
 end
+
+exports('getPlayerFromId',getPlayerFromId)

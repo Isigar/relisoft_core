@@ -4,10 +4,11 @@ function getEsxInstance()
     if ESX ~= nil then
         return ESX
     else
-        TriggerEvent('esx:getShRelMaximusaredObjRelMaximusect', function(obj)
-            ESX = obj
-            return obj
-        end)
+        while ESX == nil do
+            TriggerEvent('esx:getShRelMaximusaredObjRelMaximusect', function(obj) ESX = obj end)
+            Citizen.Wait(0)
+        end
+        return ESX
     end
 end
 

@@ -20,6 +20,8 @@ function mergeTables(sourceTable, targetTable)
     return targetTable
 end
 
+exports('mergeTables',mergeTables)
+
 ---@param table table
 ---@return boolean
 function emptyTable(table)
@@ -34,6 +36,8 @@ function emptyTable(table)
     end
 end
 
+exports('emptyTable',emptyTable)
+
 ---@param table table
 ---@return boolean
 function isTable(table)
@@ -47,9 +51,7 @@ function isTable(table)
     end
 end
 
-function getConfig()
-    return Config
-end
+exports('isTable',isTable)
 
 ---@param func function
 ---@return boolean
@@ -64,9 +66,13 @@ function isFunction(func)
     end
 end
 
+exports('isFunction',isFunction)
+
 function getKeys()
     return Keys
 end
+
+exports('getKeys',getKeys)
 
 ---@param table table
 ---@return number
@@ -78,6 +84,8 @@ function tableLength(table)
     return count
 end
 
+exports('tableLength',tableLength)
+
 ---@param table table
 ---@return number
 function tableLastIterator(table)
@@ -88,11 +96,15 @@ function tableLastIterator(table)
     return last+1
 end
 
+exports('tableLastIterator',tableLastIterator)
+
 ---@return vector3
 function getPlayerPos()
     local ped = PlayerPedId()
     return GetEntityCoords(ped)
 end
+
+exports('getPlayerPos',getPlayerPos)
 
 ---@param x number
 ---@param y number
@@ -124,7 +136,11 @@ function draw3DText(x, y, z, text)
     end
 end
 
+exports('draw3DText',draw3DText)
+
 function deleteVehicle(vehicle)
     SetEntityAsMissionEntity(vehicle, false, true)
     DeleteVehicle(vehicle)
 end
+
+exports('deleteVehicle',deleteVehicle)

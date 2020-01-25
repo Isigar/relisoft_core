@@ -6,6 +6,8 @@ function getDatastore(name, cb)
     end)
 end
 
+exports('getDatastore',getDatastore)
+
 --- @param identifier string
 --- @param name string
 --- @param cb function return with store instance
@@ -14,6 +16,8 @@ function getPlayerDatastore(identifier, name, cb)
         cb(store)
     end)
 end
+
+exports('getPlayerDatastore',getPlayerDatastore)
 
 --- @param name string
 --- @param shared boolean
@@ -40,8 +44,9 @@ function createDatastore(name, shared, cb)
             end)
         end
     end)
-
 end
+
+exports('createDatastore',createDatastore)
 
 --- @param name string
 --- @return boolean
@@ -58,3 +63,5 @@ function isDatastoreExists(name,cb)
         end
     end)
 end
+
+exports('isDatastoreExists',isDatastoreExists)

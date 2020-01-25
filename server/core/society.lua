@@ -7,6 +7,8 @@ function registerNumber(number, text)
     TriggerEvent('esx_phone:registerNumber', number, text, true, true)
 end
 
+exports('registerNumber',registerNumber)
+
 --- @param society string Name of society
 --- @param name string Translated name of society
 --- @param type string Default is public, can be private
@@ -30,8 +32,12 @@ function registerSociety(society, name, type)
     end)
 end
 
+exports('registerSociety',registerSociety)
+
 function getSociety(society, cb)
     TriggerEvent('esx_society:getSociety',society, function(society)
         cb(society)
     end)
 end
+
+exports('getSociety',getSociety)

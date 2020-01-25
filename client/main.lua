@@ -4,7 +4,6 @@ Citizen.CreateThread(function()
     ESX = getEsxInstance()
 end)
 
-
 RegisterNetEvent('rcore:getWeaponAmmoClient')
 AddEventHandler('rcore:getWeaponAmmoClient',function(weapon,cb)
     local ammo = GetAmmoInPedWeapon(PlayerPedId(),weapon)
