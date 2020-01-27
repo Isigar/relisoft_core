@@ -48,14 +48,11 @@ function createMarker(type, coords, options)
     end
 end
 
-exports('createMarker',createMarker)
-
 ---@param type number
 ---@param coords vector3
 ---@param distance number
 ---@param options table
 function createDistanceMarker(type, coords, distance, options)
-
     if isTable(options) then
         options = mergeTables(options, Config.DefaultMarkerOptions)
     else

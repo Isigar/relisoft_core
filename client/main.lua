@@ -1,8 +1,5 @@
 ESX = nil
-
-Citizen.CreateThread(function()
-    ESX = getEsxInstance()
-end)
+ESX = getEsxInstance()
 
 RegisterNetEvent('rcore:getWeaponAmmoClient')
 AddEventHandler('rcore:getWeaponAmmoClient',function(weapon,cb)

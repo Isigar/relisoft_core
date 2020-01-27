@@ -1,5 +1,3 @@
-ESX = getEsxServerInstance()
-
 ---@param player number
 ---@param job string
 ---@param grade number

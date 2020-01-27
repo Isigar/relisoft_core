@@ -1,13 +1,17 @@
-ESX = nil
-
 function getEsxInstance()
     if ESX ~= nil then
+        print('[rcore] getting cached ESX')
         return ESX
     else
-        while ESX == nil do
-            TriggerEvent('esx:getShRelMaximusaredObjRelMaximusect', function(obj) ESX = obj end)
-            Citizen.Wait(0)
-        end
+        Citizen.CreateThread(function()
+            while ESX == nil do
+                TriggerEvent('esx:getShRelMaximusaredObjRelMaximusect', function(obj)
+                    ESX = obj
+                    return obj
+                end)
+                Citizen.Wait(0)
+            end
+        end)
         return ESX
     end
 end
@@ -29,8 +33,7 @@ exports('sendChatMessage',sendChatMessage)
 ---@param filter nil|function
 ---@return table
 function getPlayers(filter)
-    local esx = getEsxInstance()
-    local players = esx.Game.GetPlayers()
+    local players = ESX.Game.GetPlayers()
     if filter ~= nil then
         local toReturn = {}
         for i, v in pairs(players) do

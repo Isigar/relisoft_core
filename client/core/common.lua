@@ -13,11 +13,16 @@ Keys = {
 ---@param sourceTable table
 ---@param targetTable table
 ---@return table
-function mergeTables(sourceTable, targetTable)
-    for i, v in pairs(sourceTable) do
-        targetTable[i] = v
+---stolen: https://stackoverflow.com/questions/1283388/lua-merge-tables
+function mergeTables(t1, t2)
+    for k, v in pairs(t2) do
+        if (type(v) == "table") and (type(t1[k] or false) == "table") then
+            mergeTables(t1[k], t2[k])
+        else
+            t1[k] = v
+        end
     end
-    return targetTable
+    return t1
 end
 
 exports('mergeTables',mergeTables)

@@ -15,60 +15,11 @@ server_scripts {
 
 client_scripts {
     'config.lua',
+    'client/core/esx.lua',
     'client/core/common.lua',
     'client/core/marker.lua',
     'client/core/menu.lua',
     'client/core/blip.lua',
-    'client/core/esx.lua',
     'client/core/permissions.lua',
     'client/main.lua',
 }
---
---exports {
---    'getEsxInstance',
---    'getPlayerPos',
---    'sendChatMessage',
---    'getPlayers',
---    'createBlip',
---    'createMarker',
---    'createDistanceMarker',
---    'getKeys',
---    'getBlips',
---    'getBlip',
---    'mergeTables',
---    'emptyTable',
---    'isTable',
---    'isFunction',
---    'tableLength',
---    'tableLastIterator',
---    'createMenu',
---    'addElement',
---    'removeElement',
---    'getElement',
---    'isAtJob',
---    'isAtJobGrade',
---    'closeMenu',
---    'closeAllMenu',
---    'showNotification',
---    'showHelpNotification',
---    'draw3DText',
---    'deleteVehicle'
---}
---
---server_exports {
---    'getEsxServerInstance',
---    'addCmd',
---    'addAdminCmd',
---    'sendNotificationFromServer',
---    'sendChatMessageFromServer',
---    'registerNumber',
---    'registerSociety',
---    'createDatastore',
---    'getPlayerDatastore',
---    'getDatastore',
---    'getPlayerFromId',
---    'addPlayerToJob',
---    'addWeapon',
---    'setAmmo',
---    'addAmmo'
---}

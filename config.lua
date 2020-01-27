@@ -10,9 +10,9 @@ Config.DefaultBlipOptions = {
 
 Config.DefaultMarkerOptions = {
     scale = {
-        x = 1.0,
-        y = 1.0,
-        z = 1.0
+        x = 1.5,
+        y = 1.5,
+        z = 0.5
     },
     rot = {
         x = 0.0,
