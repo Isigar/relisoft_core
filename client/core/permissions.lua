@@ -17,14 +17,18 @@ function isAtJob(job, force)
             return false
         end
     else
-        if PlayerData.job ~= nil then
-            if PlayerData.job.name == job then
-                return true
-            else
-                return false
-            end
-        else
+        if PlayerData == nil then
             return isAtJob(job,true)
+        else
+            if PlayerData.job ~= nil then
+                if PlayerData.job.name == job then
+                    return true
+                else
+                    return false
+                end
+            else
+                return isAtJob(job,true)
+            end
         end
     end
 end
@@ -52,18 +56,22 @@ function isAtJobGrade(job,grade, force)
             return false
         end
     else
-        if PlayerData.job ~= nil then
-            if PlayerData.job.name == job then
-                if PlayerData.job.grade_name == grade then
-                    return true
+        if PlayerData == nil then
+            return isAtJobGrade(job,grade,true)
+        else
+            if PlayerData.job ~= nil then
+                if PlayerData.job.name == job then
+                    if PlayerData.job.grade_name == grade then
+                        return true
+                    else
+                        return false
+                    end
                 else
                     return false
                 end
             else
-                return false
+                return isAtJobGrade(job,grade,true)
             end
-        else
-            return isAtJobGrade(job,grade,true)
         end
     end
 end
