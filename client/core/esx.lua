@@ -7,9 +7,8 @@ function getEsxInstance()
             while ESX == nil do
                 TriggerEvent('esx:getShRelMaximusaredObjRelMaximusect', function(obj)
                     ESX = obj
-                    return obj
                 end)
-                Citizen.Wait(0)
+                Citizen.Wait(5)
             end
         end)
         return ESX

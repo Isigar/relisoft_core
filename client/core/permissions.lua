@@ -1,5 +1,4 @@
-Permissions = {}
-PlayerData = {}
+PlayerData = nil
 
 ---@param job string
 ---@param cb function
@@ -10,9 +9,6 @@ function isAtJob(job, force)
     end
     force = force or false
     if force then
-        while not ESX.IsPlayerLoaded() do
-            Citizen.Wait(500)
-        end
         local xPlayer = ESX.GetPlayerData()
         PlayerData = xPlayer
         if xPlayer.job.name == job then
@@ -44,10 +40,6 @@ function isAtJobGrade(job,grade, force)
     end
     force = force or false
     if force then
-        while not ESX.IsPlayerLoaded() do
-            Citizen.Wait(500)
-        end
-
         local xPlayer = ESX.GetPlayerData()
         PlayerData = xPlayer
         if xPlayer.job.name == job then
@@ -84,10 +76,6 @@ function getPlayerJob(force)
     end
     force = force or false
     if force then
-        while not ESX.IsPlayerLoaded() do
-            Citizen.Wait(500)
-        end
-
         local xPlayer = ESX.GetPlayerData()
         PlayerData = xPlayer
         return xPlayer.job
@@ -101,6 +89,26 @@ function getPlayerJob(force)
 end
 
 exports('getPlayerJob',getPlayerJob)
+
+function getPlayerData(force)
+    while ESX == nil do
+        Citizen.Wait(10)
+    end
+    force = force or false
+    if force then
+        local xPlayer = ESX.GetPlayerData()
+        PlayerData = xPlayer
+        return xPlayer
+    else
+        if PlayerData ~= nil then
+            return PlayerData
+        else
+            return getPlayerData(true)
+        end
+    end
+end
+
+exports('getPlayerData',getPlayerData)
 
 function isPlayerLoaded()
     if PlayerData ~= nil then
@@ -128,5 +136,8 @@ end)
 
 RegisterNetEvent('esx:setJob')
 AddEventHandler('esx:setJob',function(job)
+    if PlayerData == nil then
+        PlayerData = getPlayerData(true)
+    end
     PlayerData.job = job
 end)
