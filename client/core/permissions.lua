@@ -1,24 +1,26 @@
-PlayerData = nil
+local PlayerData
 
 ---@param job string
 ---@param cb function
 ---@param force bool
 function isAtJob(job, force)
     while ESX == nil do
-        Citizen.Wait(10)
+        Citizen.Wait(5)
     end
     force = force or false
     if force then
-        local xPlayer = ESX.GetPlayerData()
-        PlayerData = xPlayer
-        if xPlayer.job.name == job then
+        while not isPlayerLoaded() do
+            Citizen.Wait(150)
+        end
+        
+        if PlayerData.job.name == job then
             return true
         else
             return false
         end
     else
         if PlayerData == nil then
-            return isAtJob(job,true)
+            return false
         else
             if PlayerData.job ~= nil then
                 if PlayerData.job.name == job then
@@ -27,7 +29,7 @@ function isAtJob(job, force)
                     return false
                 end
             else
-                return isAtJob(job,true)
+                return false
             end
         end
     end
@@ -40,14 +42,15 @@ exports('isAtJob',isAtJob)
 ---@param force bool
 function isAtJobGrade(job,grade, force)
     while ESX == nil do
-        Citizen.Wait(10)
+        Citizen.Wait(5)
     end
     force = force or false
     if force then
-        local xPlayer = ESX.GetPlayerData()
-        PlayerData = xPlayer
-        if xPlayer.job.name == job then
-            if xPlayer.job.grade_name == grade then
+        while not isPlayerLoaded() do
+            Citizen.Wait(150)
+        end
+        if PlayerData.job.name == job then
+            if PlayerData.job.grade_name == grade then
                 return true
             else
                 return false
@@ -57,7 +60,7 @@ function isAtJobGrade(job,grade, force)
         end
     else
         if PlayerData == nil then
-            return isAtJobGrade(job,grade,true)
+            return false
         else
             if PlayerData.job ~= nil then
                 if PlayerData.job.name == job then
@@ -70,7 +73,7 @@ function isAtJobGrade(job,grade, force)
                     return false
                 end
             else
-                return isAtJobGrade(job,grade,true)
+                return false
             end
         end
     end
@@ -84,14 +87,19 @@ function getPlayerJob(force)
     end
     force = force or false
     if force then
-        local xPlayer = ESX.GetPlayerData()
-        PlayerData = xPlayer
-        return xPlayer.job
+        while not isPlayerLoaded() do
+            Citizen.Wait(150)
+        end
+        return PlayerData.job
     else
-        if PlayerData.job ~= nil then
-            return PlayerData.job
+        if PlayerData == nil then
+            return false
         else
-            return getPlayerJob(true)
+            if PlayerData.job ~= nil then
+                return PlayerData.job
+            else
+                return false
+            end
         end
     end
 end
@@ -104,6 +112,9 @@ function getPlayerData(force)
     end
     force = force or false
     if force then
+        while not isPlayerLoaded do
+            Citizen.Wait(150)
+        end
         local xPlayer = ESX.GetPlayerData()
         PlayerData = xPlayer
         return xPlayer
@@ -111,7 +122,7 @@ function getPlayerData(force)
         if PlayerData ~= nil then
             return PlayerData
         else
-            return getPlayerData(true)
+            return {}
         end
     end
 end

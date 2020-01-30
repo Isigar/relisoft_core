@@ -18,7 +18,7 @@
 ### CLIENT:
 #### Functions:
 
-- getEsxInstance(): ESX
+- getEsxInstance(cb): void
 - getPlayerPos(): vector3(x,y,z)
 - sendChatMessage(title, message, color): void
 - getPlayers(filter)
@@ -33,13 +33,11 @@
 - addElement(name, action)
 - getElement(name)
 - removeElement(name)
-- isAtJob(job): bool
-- isAtJobGrade(job,grade): bool
 
 ### SERVER:
 #### Functions:
 
-- getEsxServerInstance(): ESX
+- getEsxServerInstance(cb): void
 - addAdminCmd(cmd, level, cb, help): void
 - addCmd(cmd, cb, help): void
 - registerSociety(society, name, type): boolean|nil
@@ -50,7 +48,7 @@
 - getPlayerDatastore(identifier, name,cb)
 - createDatastore(name, shared,cb)
 - isDatastoreExists(name)
-- getPlayerFromId(source): xPlayer
+- getPlayerFromId(source,cb): void
 - addPlayerToJob(source, job, grade): void
 
 ###### Common:

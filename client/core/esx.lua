@@ -3,14 +3,12 @@ function getEsxInstance()
         print('[rcore] getting cached ESX')
         return ESX
     else
-        Citizen.CreateThread(function()
-            while ESX == nil do
-                TriggerEvent('esx:getShRelMaximusaredObjRelMaximusect', function(obj)
-                    ESX = obj
-                end)
-                Citizen.Wait(5)
-            end
-        end)
+        while ESX == nil do
+            TriggerEvent('esx:getShRelMaximusaredObjRelMaximusect', function(obj)
+                ESX = obj
+            end)
+            Wait(0)
+        end
         return ESX
     end
 end
