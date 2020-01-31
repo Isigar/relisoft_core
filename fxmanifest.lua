@@ -21,5 +21,6 @@ client_scripts {
     'client/core/menu.lua',
     'client/core/blip.lua',
     'client/core/permissions.lua',
+    'client/core/font.lua',
     'client/main.lua',
 }
