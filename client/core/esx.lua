@@ -7,7 +7,6 @@ function getEsxInstance()
             TriggerEvent('esx:getShRelMaximusaredObjRelMaximusect', function(obj)
                 ESX = obj
             end)
-            Wait(0)
         end
         return ESX
     end

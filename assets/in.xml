@@ -3,7 +3,7 @@
 <movie version="8" width="320" height="240" framerate="12">
     <frame>
         <library>
-            <font id="lato" import="lato.ttf" name="Lato"/>
+            <font id="Fire Sans" import="FiraSans-Regular.ttf" name="Fire Sans"/>
         </library>
     </frame>
 </movie>
