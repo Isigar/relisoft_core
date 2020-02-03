@@ -3,22 +3,7 @@
   <component name="ChangeListManager">
     <list default="true" id="dd503cf1-1e5e-4c08-9d18-6363d0c62ed8" name="Default Changelist" comment="">
       <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/__resource.lua" beforeDir="false" afterPath="$PROJECT_DIR$/__resource.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/core/blip.lua" beforeDir="false" afterPath="$PROJECT_DIR$/client/core/blip.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/core/common.lua" beforeDir="false" afterPath="$PROJECT_DIR$/client/core/common.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/core/esx.lua" beforeDir="false" afterPath="$PROJECT_DIR$/client/core/esx.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/core/marker.lua" beforeDir="false" afterPath="$PROJECT_DIR$/client/core/marker.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/core/menu.lua" beforeDir="false" afterPath="$PROJECT_DIR$/client/core/menu.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/core/permissions.lua" beforeDir="false" afterPath="$PROJECT_DIR$/client/core/permissions.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/client/main.lua" beforeDir="false" afterPath="$PROJECT_DIR$/client/main.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/config.lua" beforeDir="false" afterPath="$PROJECT_DIR$/config.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/core/common.lua" beforeDir="false" afterPath="$PROJECT_DIR$/server/core/common.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/core/datastore.lua" beforeDir="false" afterPath="$PROJECT_DIR$/server/core/datastore.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/core/esx.lua" beforeDir="false" afterPath="$PROJECT_DIR$/server/core/esx.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/core/job.lua" beforeDir="false" afterPath="$PROJECT_DIR$/server/core/job.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/core/society.lua" beforeDir="false" afterPath="$PROJECT_DIR$/server/core/society.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/core/weapon.lua" beforeDir="false" afterPath="$PROJECT_DIR$/server/core/weapon.lua" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/server/main.lua" beforeDir="false" afterPath="$PROJECT_DIR$/server/main.lua" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/readme.md" beforeDir="false" afterPath="$PROJECT_DIR$/readme.md" afterDir="false" />
     </list>
     <option name="SHOW_DIALOG" value="false" />
     <option name="HIGHLIGHT_CONFLICTS" value="true" />
@@ -84,7 +69,8 @@
       <workItem from="1579513545628" duration="199000" />
       <workItem from="1579855664482" duration="607000" />
       <workItem from="1579857526858" duration="140000" />
-      <workItem from="1579858084069" duration="34000" />
+      <workItem from="1579858084069" duration="412000" />
+      <workItem from="1580726092862" duration="525000" />
     </task>
     <task id="LOCAL-00001" summary="init commit">
       <created>1578395928793</created>
@@ -226,7 +212,14 @@
       <option name="project" value="LOCAL" />
       <updated>1579857657264</updated>
     </task>
-    <option name="localTasksCounter" value="21" />
+    <task id="LOCAL-00021" summary="optimalization">
+      <created>1579858172063</created>
+      <option name="number" value="00021" />
+      <option name="presentableId" value="LOCAL-00021" />
+      <option name="project" value="LOCAL" />
+      <updated>1579858172063</updated>
+    </task>
+    <option name="localTasksCounter" value="22" />
     <servers />
   </component>
   <component name="TypeScriptGeneratedFilesManager">
@@ -253,17 +246,18 @@
     <MESSAGE value="datastore manage" />
     <MESSAGE value="exports" />
     <MESSAGE value="documentation" />
-    <option name="LAST_COMMIT_MESSAGE" value="documentation" />
+    <MESSAGE value="optimalization" />
+    <option name="LAST_COMMIT_MESSAGE" value="optimalization" />
   </component>
   <component name="WindowStateProjectService">
     <state x="2475" y="201" width="800" height="684" key="#Inspections" timestamp="1578397268239">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2475" y="201" width="800" height="684" key="#Inspections/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578397268239" />
-    <state x="2971" y="249" width="860" height="750" key="CommitChangelistDialog2" timestamp="1579857657148">
+    <state x="2531" y="146" width="860" height="750" key="CommitChangelistDialog2" timestamp="1579858171807">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2971" y="249" width="860" height="750" key="CommitChangelistDialog2/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579857657148" />
+    <state x="2531" y="146" width="860" height="750" key="CommitChangelistDialog2/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579858171807" />
     <state x="2585" y="258" width="580" height="571" key="MultipleFileMergeDialog" timestamp="1579857535788">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
@@ -272,18 +266,19 @@
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2369" y="175" width="1022" height="737" key="SettingsEditor/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1578397407850" />
-    <state x="2475" y="276" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1579857658636">
+    <state x="2475" y="276" width="800" height="535" key="Vcs.Push.Dialog.v2" timestamp="1579858173460">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
-    <state x="2475" y="276" width="800" height="535" key="Vcs.Push.Dialog.v2/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579857658635" />
+    <state x="2475" y="276" width="800" height="535" key="Vcs.Push.Dialog.v2/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579858173460" />
     <state x="2536" y="367" key="com.intellij.ide.util.TipDialog" timestamp="1579858113111">
       <screen x="1920" y="0" width="1920" height="1080" />
     </state>
     <state x="2536" y="367" key="com.intellij.ide.util.TipDialog/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579858113111" />
-    <state x="2648" y="460" width="464" height="167" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1579857527970">
-      <screen x="1920" y="0" width="1920" height="1080" />
+    <state x="2648" y="511" width="464" height="167" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2" timestamp="1580726093640">
+      <screen x="1920" y="0" width="1920" height="1200" />
     </state>
     <state x="2648" y="460" width="464" height="167" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/70.27.1850.1053/1920.0.1920.1080@1920.0.1920.1080" timestamp="1579857527970" />
+    <state x="2648" y="511" key="com.intellij.openapi.vcs.update.UpdateOrStatusOptionsDialogupdate-v2/70.27.1850.1053/1920.0.1920.1200@1920.0.1920.1200" timestamp="1580726093640" />
     <state x="305" y="27" width="1396" height="1036" key="dock-window-1" timestamp="1578489588510">
       <screen x="70" y="27" width="1850" height="1053" />
     </state>

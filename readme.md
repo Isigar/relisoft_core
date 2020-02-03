@@ -33,6 +33,9 @@
 - addElement(name, action)
 - getElement(name)
 - removeElement(name)
+- getFontId(): number 
+- getMarkers(): Marker[]
+- draw3DText(x, y, z, text): void
 
 ### SERVER:
 #### Functions:
@@ -97,35 +100,45 @@ local blip = createBlip("Name", 53,vector3(x,y,z), {
 ```
 
 ##### Creating markers
+**== BIG UPDATE ==**
+ 
+In new version we create markers only once, rcore is creating every native that need to run every tick inside own client side script, which is used for better optimalization, you can use onEnter, onLeave like before, because this is called every tick.
 
-All create methods must be in thread and run with Citizen.Wait(0), distance marker checking current ped with position of marker and distance, other properties is set at config and can be rewritten by options table
+New update also containing options to show markers only to some jobs or grades in jobs
+You can use options `jobs = {}` and `grades = {}`
+So if you want to create marker only for job police you can do it like this
+
+`jobs = {'police'}`
+
+And if it be only for boss of police you can do this
+
+`jobs = {'police'}, grades = {'boss'}`
+
 ```lua
 Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(0)
-        createMarker(1,vector3(x,y,z),{
-            color = {
-                r = 50,
-                g = 150,
-                b = 60
-            },
-            rotate = true
-        })
-    end
+    
+    createMarker(1,vector3(x,y,z),{
+        color = {
+            r = 50,
+            g = 150,
+            b = 60
+        },
+        rotate = true
+    })
 end)
 ```
-Distance marker with onEnter, onLeave callbacks, these callbacks are call only once
-but callback onEnterTick is called every tick when ped is in marker
+
+Distance marker is used to create marker only be visible at some distance 3 parameter of this function
+is distance to see
 ```lua
-createDistanceMarker(1,vector3(x,y,z),100.0,{onEnter = function ()
-    sendChatMessage('Super!','Press E to kill your self!')
-end, onLeave = function()
-    sendChatMessage('Ouuuch?','Where are you leaving?! I will find you!')
-end, onEnterTick = function ()
-    if IsControlJustReleased(1, Keys['E']) then
-        --Do some action
-    end
-end})
+Citizen.CreateThread(function()
+    createDistanceMarker(1,vector3(x,y,z),100.0,{
+    onEnter = function ()
+        sendChatMessage('Super!','Press E to kill your self!')
+    end,onLeave = function()
+        sendChatMessage('Ouuuch?','Where are you leaving?! I will find you!')
+    end,jobs = {'police'}})
+end)
 ```
 
 ### Server
@@ -179,4 +192,12 @@ local blip = exports.relisoft_core:createBlip("Name", 53,vector3(x,y,z), {
 C#
 ```c
 Exports["myresource"].getBlips()
+```
+
+##### Tips
+Use export as global variable, its simple and you can use short version of calling rcore
+```lua
+rcore = exports.rcore
+
+ESX = rcore:getEsxInstance()
 ```
