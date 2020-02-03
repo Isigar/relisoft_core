@@ -30,6 +30,8 @@
 ###### Common section
 - getPlayerPos(): vector3(x,y,z)
 - sendChatMessage(title, message, color): void
+- sendHelpNotification(text): void
+- sendNotification(text): void
 - getPlayers(filter)
 - getPlayerData(force: boolean): PlayerData
 - isPlayerLoaded(): boolean
