@@ -126,7 +126,7 @@ function draw3DText(x, y, z, text)
 
     if onScreen then
         SetTextScale(0.0*scale, 0.55*scale)
-        SetTextFont(0)
+        SetTextFont(getFontId())
         SetTextProportional(1)
         -- SetTextScale(0.0, 0.55)
         SetTextColour(255, 255, 255, 255)

@@ -17,41 +17,60 @@
 
 ### CLIENT:
 #### Functions:
-
+###### ESX section
 - getEsxInstance(cb): void
-- getPlayerPos(): vector3(x,y,z)
-- sendChatMessage(title, message, color): void
-- getPlayers(filter)
+###### Blip section
 - createBlip(name, blip, coords, options): Blip
 - getBlips(): Blip[]
 - getBlip(instance): ?Blip
+###### Marker section
 - createMarker(type, coords, options): void
 - createDistanceMarker(type, coords, distance, options): void
+- getMarkers(): Marker[]
+###### Common section
+- getPlayerPos(): vector3(x,y,z)
+- sendChatMessage(title, message, color): void
+- getPlayers(filter)
+- getPlayerData(force: boolean): PlayerData
+- isPlayerLoaded(): boolean
+- getPlayer(): PlayerData
+###### Menu section
 - createMenu(title, name, elements, options): void
 - closeAllMenu()
 - closeMenu(name)
 - addElement(name, action)
 - getElement(name)
 - removeElement(name)
+###### Font section 
 - getFontId(): number 
-- getMarkers(): Marker[]
 - draw3DText(x, y, z, text): void
+###### Jobs section
+- isAtJob(job): boolean
+- isAtJobGrade(job,grade): boolean
+- getPlayerJob(force: boolean): Job
 
 ### SERVER:
 #### Functions:
-
+###### ESX section
 - getEsxServerInstance(cb): void
+###### Command section
 - addAdminCmd(cmd, level, cb, help): void
 - addCmd(cmd, cb, help): void
-- registerSociety(society, name, type): boolean|nil
+###### Phone section
 - registerNumber(number, text): void
-- sendChatMessageFromServer(source,title,message,color): void
-- sendNotificationFromServer(source, message): void
+###### Society section
+- registerSociety(society, name, type): boolean|nil
+###### Datastore section
 - getDatastore(name,cb)
 - getPlayerDatastore(identifier, name,cb)
 - createDatastore(name, shared,cb)
 - isDatastoreExists(name)
+###### Common section
+- sendChatMessageFromServer(source,title,message,color): void
+- sendNotificationFromServer(source, message): void
+###### Player section
 - getPlayerFromId(source,cb): void
+###### Job section
 - addPlayerToJob(source, job, grade): void
 
 ###### Common:
@@ -71,7 +90,7 @@ getPlayers(function(source)
     local ped = GetPlayerPed(source)
     local coords = GetEntityCoords(ped)
     if GetDistanceBetweenCoords(coords,Config.Coords) < 100 then
-        ESX.Game.Utils.DrawText3D(coords, GetPlayerName(v), 2)
+        draw3DText(coords.x,cords.y, coords.z, GetPlayerName(v))
     end
 end)
 ```
