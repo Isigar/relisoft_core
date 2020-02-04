@@ -8,7 +8,7 @@ local markers = {}
 --- @param onLeave function|nil
 function createMarker(type, coords, options)
     if isTable(options) and not emptyTable(options) then
-        options = mergeTables(v.options, Config.DefaultMarkerOptions)
+        options = mergeTables(options, Config.DefaultMarkerOptions)
     else
         options = Config.DefaultMarkerOptions
     end
@@ -26,7 +26,7 @@ end
 --- @param options table
 function createDistanceMarker(type, coords, distance, options)
     if isTable(options) and not emptyTable(options) then
-        options = mergeTables(v.options, Config.DefaultMarkerOptions)
+        options = mergeTables(options, Config.DefaultMarkerOptions)
     else
         options = Config.DefaultMarkerOptions
     end

@@ -14,13 +14,13 @@ end
 
 exports('getInventory',getInventory)
 
-function isInventoryExists(inventory)
+function isInventoryExists(inventory,cb)
     rdebug(string.format('Checking %s shared inventory if exists.', inventory))
     MySQL.ready(function()
-        local data = MySQL.Sync.fetchAll('SELECT name FROM addon_inventory WHERE name = @name', {
-            ['@name'] = name
+        local data = MySQL.Sync.fetchScalar('SELECT COUNT(id) FROM addon_inventory WHERE name = @name', {
+            ['@name'] = inventory
         })
-        if data[1] ~= nil then
+        if data > 0 then
             cb(true)
         else
             cb(false)
@@ -42,7 +42,9 @@ function createInventory(inventory,shared,cb)
                     ['@shared'] = shared
                 }, function(rowsChanges)
                     rdebug(string.format('Inventory %s created.', inventory))
-                    cb(rowsChanges)
+                    if cb then
+                        cb(rowsChanges)
+                    end
                 end)
             end)
         end

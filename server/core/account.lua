@@ -14,13 +14,13 @@ end
 
 exports('getAccount',getAccount)
 
-function isAccountExists(account)
+function isAccountExists(account,cb)
     rdebug(string.format('Checking %s shared account if exists.', account))
     MySQL.ready(function()
-        local data = MySQL.Sync.fetchAll('SELECT name FROM addon_account WHERE name = @name', {
-            ['@name'] = name
+        local data = MySQL.Sync.fetchScalar('SELECT COUNT(id) FROM addon_account WHERE name = @name', {
+            ['@name'] = account
         })
-        if data[1] ~= nil then
+        if data > 0 then
             cb(true)
         else
             cb(false)
@@ -42,7 +42,9 @@ function createAccount(account,shared,cb)
                     ['@shared'] = shared
                 }, function(rowsChanges)
                     rdebug(string.format('Account %s created.', account))
-                    cb(rowsChanges)
+                    if cb then
+                        cb(rowsChanges)
+                    end
                 end)
             end)
         end
