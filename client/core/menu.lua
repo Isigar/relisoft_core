@@ -22,6 +22,18 @@ end
 
 exports('createMenu',createMenu)
 
+function createDialog(title, name, onSubmit)
+    ESX.UI.Menu.Open('dialog', GetCurrentResourceName(), name, {
+        title = title
+    }, function(data, menu)
+        onSubmit(data,menu)
+    end, function(data, menu)
+        menu.close()
+    end)
+end
+
+exports('createDialog',createDialog)
+
 function closeAllMenu()
     ESX.UI.Menu.CloseAll()
 end

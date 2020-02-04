@@ -24,21 +24,19 @@ exports('getPlayerDatastore',getPlayerDatastore)
 --- @param cb function return with store instance
 function createDatastore(name, shared, cb)
     cb = cb or function() end
-
-    local societyName = 'society_'..name
     --Firstly check if datastore exists!
-    isDatastoreExists(societyName,function(res)
+    isDatastoreExists(name,function(res)
         if res then
-            rdebug(string.format('Datastore %s already exists! Skipping creation.', societyName))
+            rdebug(string.format('Datastore %s already exists! Skipping creation.', name))
             cb(true)
         else
-            rdebug(string.format('Datastore %s not found! Starting creation.', societyName))
+            rdebug(string.format('Datastore %s not found! Starting creation.', name))
             MySQL.ready(function()
                 MySQL.Async.execute('INSERT INTO datastore (name, label, shared) VALUES (@name, @name, @shared)', {
-                    ['@name'] = societyName,
+                    ['@name'] = name,
                     ['@shared'] = shared
                 }, function(rowsChanges)
-                    rdebug(string.format('Datastore %s created.', societyName))
+                    rdebug(string.format('Datastore %s created.', name))
                     cb(rowsChanges)
                 end)
             end)
@@ -53,7 +51,7 @@ exports('createDatastore',createDatastore)
 function isDatastoreExists(name,cb)
     rdebug(string.format('Checking %s datastore if exists.', name))
     MySQL.ready(function()
-        local data = MySQL.Sync.fetchAll('SELECT * FROM datastore WHERE name = @name', {
+        local data = MySQL.Sync.fetchAll('SELECT name FROM datastore WHERE name = @name', {
             ['@name'] = name
         })
         if data[1] ~= nil then

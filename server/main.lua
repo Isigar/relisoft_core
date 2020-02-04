@@ -130,10 +130,10 @@ ESX.RegisterServerCallback('rcore:getInventory',function(source,cb)
     cb(output)
 end)
 
-ESX.RegisterServerCallback('rcore:storeInventoryItem',function(source,cb,datastore,item)
+ESX.RegisterServerCallback('rcore:storeInventoryItem',function(source,cb,datastore,item,count)
     local xPlayer = ESX.GetPlayerFromId(source)
     local item = xPlayer.getInventoryItem(item)
-    if item ~= nil then
+    if item ~= nil and item.count > count then
         getDatastore(datastore,function(store)
             local items = store.get('items') or {}
             local found
@@ -145,16 +145,71 @@ ESX.RegisterServerCallback('rcore:storeInventoryItem',function(source,cb,datasto
             end
 
             if found then
-                found.count = found.count + v.count
+                found.count = found.count + count
             else
+                item.count = count
                 table.insert(items, item)
             end
 
-            xPlayer.removeInventoryItem(item.name, item.count)
+            xPlayer.removeInventoryItem(item.name, count)
         end)
     else
         cb(false)
     end
+end)
+
+ESX.RegisterServerCallback('rcore:getStoredInventoryItem',function(source,cb,datastore,item,count)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    local playerItem = xPlayer.getInventoryItem(item)
+    getDatastore(datastore,function(store)
+        local items = store.get('items') or {}
+        local found = false
+        for k, v in pairs(items) do
+            if v.name == item then
+                found = k
+                break
+            end
+        end
+
+        if found then
+            local foundItem = items[found]
+            if foundItem.count > count then
+                if playerItem.limit > (playerItem.count + count) then
+                    if foundItem.count == count then
+                        items[found] = nil
+                        store.set('items',items)
+                    else
+                        foundItem.count = foundItem.count - count
+                        items[found] = foundItem
+                        store.set('items',items)
+                    end
+                    xPlayer.addInventoryItem(item,count)
+                    cb(true)
+                else
+                    cb(false)
+                end
+            else
+                cb(false)
+            end
+        else
+            cb(false)
+        end
+    end)
+end)
+
+ESX.RegisterServerCallback('rcore:getStoredItems',function(source,cb,datastore)
+    getDatastore(datastore,function(store)
+        local items = store.get('items') or {}
+        local output = {}
+        for k, v in pairs(items) do
+            table.insert(output,{
+                label = string.format('%s - %sx',v.label, v.count),
+                value = k
+            })
+        end
+
+        cb(output)
+    end)
 end)
 
 ESX.RegisterServerCallback('rcore:setStorageState',function(source,cb,datastore,state)

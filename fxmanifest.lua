@@ -8,6 +8,8 @@ server_scripts {
     'server/core/esx.lua',
     'server/core/common.lua',
     'server/core/datastore.lua',
+    'server/core/inventory.lua',
+    'server/core/account.lua',
     'server/core/society.lua',
     'server/core/weapon.lua',
     'server/main.lua',

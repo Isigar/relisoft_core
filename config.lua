@@ -38,5 +38,7 @@ Config.DefaultMarkerOptions = {
     textureName = nil,
     drawOnEnts = nil,
     onEnter = nil,
-    onLeave = nil
+    onLeave = nil,
+    jobs = nil,
+    grades = nil
 }

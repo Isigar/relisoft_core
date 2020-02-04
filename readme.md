@@ -18,7 +18,7 @@
 ### CLIENT:
 #### Functions:
 ###### ESX section
-- getEsxInstance(cb): void
+- getEsxInstance(): ESX
 ###### Blip section
 - createBlip(name, blip, coords, options): Blip
 - getBlips(): Blip[]
@@ -54,7 +54,7 @@
 ### SERVER:
 #### Functions:
 ###### ESX section
-- getEsxServerInstance(cb): void
+- getEsxServerInstance(): ESX
 ###### Command section
 - addAdminCmd(cmd, level, cb, help): void
 - addCmd(cmd, cb, help): void
@@ -67,6 +67,19 @@
 - getPlayerDatastore(identifier, name,cb)
 - createDatastore(name, shared,cb)
 - isDatastoreExists(name)
+
+###### Addon account section
+- getAccount(owned,account,cb)
+- getSharedAccount(account,cb)
+- createAccount(account,shared,cb)
+- isAccountExists(name,cb)
+
+###### Addon inventory section
+- getInventory(owned,inventory,cb)
+- getSharedInventory(inventory,cb)
+- createInventory(inventory,shared,cb)
+- isInventoryExists(inventory,cb)
+
 ###### Common section
 - sendChatMessageFromServer(source,title,message,color): void
 - sendNotificationFromServer(source, message): void

@@ -7,6 +7,11 @@ local markers = {}
 --- @param onEnter function|nil
 --- @param onLeave function|nil
 function createMarker(type, coords, options)
+    if isTable(options) and not emptyTable(options) then
+        options = mergeTables(v.options, Config.DefaultMarkerOptions)
+    else
+        options = Config.DefaultMarkerOptions
+    end
     table.insert(markers,{
         type = type,
         coords = coords,
@@ -20,6 +25,11 @@ end
 --- @param distance number
 --- @param options table
 function createDistanceMarker(type, coords, distance, options)
+    if isTable(options) and not emptyTable(options) then
+        options = mergeTables(v.options, Config.DefaultMarkerOptions)
+    else
+        options = Config.DefaultMarkerOptions
+    end
     table.insert(distanceMarkers,{
         type = type,
         coords = coords,
