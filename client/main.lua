@@ -28,7 +28,7 @@ Citizen.CreateThread(function()
                     for _, j in pairs(v.options.jobs) do
                         for _, g in pairs(v.options.grades) do
                             isAtJobValue = isAtJobGrade(j,g)
-                            if isAtJob then
+                            if isAtJobValue then
                                 break
                             end
                         end
@@ -36,7 +36,7 @@ Citizen.CreateThread(function()
                 else
                     for _, j in pairs(v.options.jobs) do
                         isAtJobValue = isAtJob(j)
-                        if isAtJob then
+                        if isAtJobValue then
                             break
                         end
                     end

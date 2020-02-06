@@ -1,7 +1,7 @@
 ESX = nil
-IsStorageBusy = {}
-
 ESX = getEsxServerInstance()
+
+local IsStorageBusy = {}
 
 RegisterNetEvent('rcore:sendChatMessage',function(target, title,message)
     sendChatMessageFromServer(target,title,message)
@@ -132,8 +132,8 @@ end)
 
 ESX.RegisterServerCallback('rcore:storeInventoryItem',function(source,cb,datastore,item,count)
     local xPlayer = ESX.GetPlayerFromId(source)
-    local item = xPlayer.getInventoryItem(item)
-    if item ~= nil and item.count > count then
+    local playerItem = xPlayer.getInventoryItem(item)
+    if playerItem ~= nil and playerItem.count >= count then
         getDatastore(datastore,function(store)
             local items = store.get('items') or {}
             local found
@@ -147,11 +147,13 @@ ESX.RegisterServerCallback('rcore:storeInventoryItem',function(source,cb,datasto
             if found then
                 found.count = found.count + count
             else
-                item.count = count
-                table.insert(items, item)
+                playerItem.count = count
+                table.insert(items, playerItem)
             end
+            store.set('items',items)
+            xPlayer.removeInventoryItem(playerItem.name, count)
 
-            xPlayer.removeInventoryItem(item.name, count)
+            cb(true)
         end)
     else
         cb(false)
@@ -174,7 +176,7 @@ ESX.RegisterServerCallback('rcore:getStoredInventoryItem',function(source,cb,dat
         if found then
             local foundItem = items[found]
             if foundItem.count > count then
-                if playerItem.limit > (playerItem.count + count) then
+                if playerItem.limit >= (playerItem.count + count) then
                     if foundItem.count == count then
                         items[found] = nil
                         store.set('items',items)
@@ -186,7 +188,7 @@ ESX.RegisterServerCallback('rcore:getStoredInventoryItem',function(source,cb,dat
                     xPlayer.addInventoryItem(item,count)
                     cb(true)
                 else
-                    cb(false)
+                    cb(nil)
                 end
             else
                 cb(false)
@@ -204,7 +206,7 @@ ESX.RegisterServerCallback('rcore:getStoredItems',function(source,cb,datastore)
         for k, v in pairs(items) do
             table.insert(output,{
                 label = string.format('%s - %sx',v.label, v.count),
-                value = k
+                value = v.name
             })
         end
 

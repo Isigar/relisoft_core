@@ -45,8 +45,14 @@ end
 
 exports('getPlayers',getPlayers)
 
-function showNotification(message)
-    ESX.ShowNotification(message)
+function showNotification(message, color, flashing, brief)
+    flashing = flashing or false
+    brief = brief or true
+    color = color or 140
+    ThefeedNextPostBackgroundColor(color)
+    BeginTextCommandThefeedPost("STRING")
+    AddTextComponentSubstringPlayerName(message)
+    EndTextCommandThefeedPostTicker(flashing, brief)
 end
 
 exports('showNotification',showNotification)
