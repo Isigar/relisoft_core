@@ -22,7 +22,7 @@ end)
 -- Distance marker
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(1500)
+        Citizen.Wait(0)
         for _, v in pairs(getDistanceMarkers()) do
             local isAtJobValue = false
             if v.options.jobs ~= nil or not emptyTable(v.options.jobs) then
@@ -38,9 +38,7 @@ Citizen.CreateThread(function()
                 else
                     for _, j in pairs(v.options.jobs) do
                         isAtJobValue = isAtJob(j)
-                        print(ESX.DumpTable(isAtJob(j)))
                         if isAtJobValue then
-                            print(ESX.DumpTable(v.options.jobs))
                             break
                         end
                     end
