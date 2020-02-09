@@ -1,15 +1,23 @@
 ESX = nil
 
 ---@return object function
-function getEsxServerInstance()
+function getEsxServerInstance(cb)
     if ESX ~= nil then
         print('[rcore] Getting cached ESX instance!')
-        return ESX
+        if cb ~= nil then
+            cb(ESX)
+        else
+            return ESX
+        end
     else
         TriggerEvent('esx:getShRelMaximusaredObjRelMaximusect', function(obj)
             ESX = obj
         end)
-        return ESX
+        if cb ~= nil then
+            cb(ESX)
+        else
+            return ESX
+        end
     end
 end
 

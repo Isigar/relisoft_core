@@ -1,5 +1,7 @@
 ESX = nil
-ESX = getEsxInstance()
+getEsxInstance(function(obj)
+    ESX = obj
+end)
 
 RegisterNetEvent('rcore:getWeaponAmmoClient')
 AddEventHandler('rcore:getWeaponAmmoClient',function(weapon,cb)
@@ -20,7 +22,7 @@ end)
 -- Distance marker
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(0)
+        Citizen.Wait(1500)
         for _, v in pairs(getDistanceMarkers()) do
             local isAtJobValue = false
             if v.options.jobs ~= nil or not emptyTable(v.options.jobs) then
@@ -36,7 +38,9 @@ Citizen.CreateThread(function()
                 else
                     for _, j in pairs(v.options.jobs) do
                         isAtJobValue = isAtJob(j)
+                        print(ESX.DumpTable(isAtJob(j)))
                         if isAtJobValue then
+                            print(ESX.DumpTable(v.options.jobs))
                             break
                         end
                     end
@@ -44,7 +48,6 @@ Citizen.CreateThread(function()
             else
                 isAtJobValue = true
             end
-
             if isAtJobValue then
                 local pos = getPlayerPos()
                 local dist = GetDistanceBetweenCoords(pos.x, pos.y, pos.z, v.coords.x, v.coords.y, v.coords.z)

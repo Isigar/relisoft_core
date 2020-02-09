@@ -1,14 +1,27 @@
-function getEsxInstance()
+function getEsxInstance(cb)
     if ESX ~= nil then
         print('[rcore] getting cached ESX')
-        return ESX
-    else
-        while ESX == nil do
-            TriggerEvent('esx:getShRelMaximusaredObjRelMaximusect', function(obj)
-                ESX = obj
-            end)
+        if cb ~= nil then
+            cb(ESX)
+        else
+            return ESX
         end
-        return ESX
+    else
+        Citizen.CreateThread(function()
+            while ESX == nil do
+                TriggerEvent('esx:getShRelMaximusaredObjRelMaximusect', function(obj)
+                    print('[rcore] getting ESX instance and saving to cache')
+                    ESX = obj
+                end)
+                Citizen.Wait(0)
+            end
+
+            if cb == nil then
+                return ESX
+            else
+                cb(ESX)
+            end
+        end)
     end
 end
 

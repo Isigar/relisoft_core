@@ -26,3 +26,7 @@ client_scripts {
     'client/core/font.lua',
     'client/main.lua',
 }
+
+dependencies {
+    'es_extended'
+}
