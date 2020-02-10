@@ -98,7 +98,7 @@ function tableLastIterator(table)
     for i, v in pairs(table) do
         last = i
     end
-    return last+1
+    return last
 end
 
 exports('tableLastIterator',tableLastIterator)
