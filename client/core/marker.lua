@@ -18,7 +18,7 @@ function findMarkersWithSameCoords(coords)
 end
 
 function updateMarker(id, type, coords, options)
-    if isTable(options) and not emptyTable(options) then
+    if options ~= nil and isTable(options) and not emptyTable(options) then
         options = mergeTables(options,Config.DefaultMarkerOptions)
     else
         options = Config.DefaultMarkerOptions
@@ -39,13 +39,13 @@ exports('updateMarker', updateMarker)
 --- @param onEnter function|nil
 --- @param onLeave function|nil
 function createMarker(type, coords, options)
-    if isTable(options) and not emptyTable(options) then
+    if options ~= nil and isTable(options) and not emptyTable(options) then
         options = mergeTables(options,Config.DefaultMarkerOptions)
     else
         options = Config.DefaultMarkerOptions
     end
 
-    local findId = findDistanceMarkersWithSameCoords(coords)
+    local findId = findMarkersWithSameCoords(coords)
     if findId then
         print(string.format('[rcore] Find marker with same coords - updating, marker id: %s',findId))
         updateMarker(findId, type, coords, options)
@@ -65,7 +65,7 @@ end
 exports('createMarker', createMarker)
 
 function updateDistanceMarker(id, type, coords, distance, options)
-    if isTable(options) and not emptyTable(options) then
+    if options ~= nil and isTable(options) and not emptyTable(options) then
         options = mergeTables(options,Config.DefaultMarkerOptions)
     else
         options = Config.DefaultMarkerOptions
@@ -85,7 +85,7 @@ exports('updateDistanceMarker', updateDistanceMarker)
 --- @param distance number
 --- @param options table
 function createDistanceMarker(type, coords, distance, options)
-    if isTable(options) and not emptyTable(options) then
+    if options ~= nil and isTable(options) and not emptyTable(options) then
         options = mergeTables(options,Config.DefaultMarkerOptions)
     else
         options = Config.DefaultMarkerOptions

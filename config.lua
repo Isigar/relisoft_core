@@ -42,3 +42,16 @@ Config.DefaultMarkerOptions = {
     jobs = nil,
     grades = nil
 }
+
+Config.DefaultTextOptions = {
+    color = {
+        r = 255,
+        g = 255,
+        b = 255,
+        a = 255
+    },
+    scale = {
+        scale = 0.5,
+        size = 0.5
+    }
+}
