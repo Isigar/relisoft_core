@@ -181,7 +181,6 @@ Citizen.CreateThread(function()
                     callActionOnce(string.format('marker-%s-onLeave',id))
                     resetCall(string.format('marker-%s-onEnter',id))
                     resetCall(string.format('marker-%s-onEnterKey',id))
-                    lastKey[id] = nil
                 end
             end
         end

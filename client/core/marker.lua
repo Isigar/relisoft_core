@@ -38,7 +38,7 @@ exports('updateMarker', updateMarker)
 --- @param options table
 --- @param onEnter function|nil
 --- @param onLeave function|nil
-function createMarker(type, coords, options)
+function createMarker(type, coords, cb, options)
     if options ~= nil and isTable(options) and not emptyTable(options) then
         options = mergeTables(options,Config.DefaultMarkerOptions)
     else
@@ -52,16 +52,16 @@ function createMarker(type, coords, options)
         end
         updateMarker(findId, type, coords, options)
 
-        if options.onEnter ~= nil then
-            addAction(string.format('marker-%s-onEnter',findId),options.onEnter)
+        if cb.onEnter ~= nil then
+            addAction(string.format('marker-%s-onEnter',findId),cb.onEnter)
         end
 
-        if options.onEnterKey ~= nil then
-            addAction(string.format('marker-%s-onEnterKey',findId),options.onEnterKey)
+        if cb.onEnterKey ~= nil then
+            addAction(string.format('marker-%s-onEnterKey',findId),cb.onEnterKey)
         end
 
-        if options.onLeave ~= nil then
-            addAction(string.format('marker-%s-onLeave',findId),options.onLeave)
+        if cb.onLeave ~= nil then
+            addAction(string.format('marker-%s-onLeave',findId),cb.onLeave)
         end
 
         TriggerEvent('updateMarkers',findId)
@@ -76,16 +76,16 @@ function createMarker(type, coords, options)
 
         local currentId = tableLastIterator(distanceMarkers)
 
-        if options.onEnter ~= nil then
-            addAction(string.format('marker-%s-onEnter',currentId),options.onEnter)
+        if cb.onEnter ~= nil then
+            addAction(string.format('marker-%s-onEnter',currentId),cb.onEnter)
         end
 
-        if options.onLeave ~= nil then
-            addAction(string.format('marker-%s-onLeave',currentId),options.onLeave)
+        if cb.onLeave ~= nil then
+            addAction(string.format('marker-%s-onLeave',currentId),cb.onLeave)
         end
 
-        if options.onEnterKey ~= nil then
-            addAction(string.format('marker-%s-onEnterKey',currentId),options.onEnterKey)
+        if cb.onEnterKey ~= nil then
+            addAction(string.format('marker-%s-onEnterKey',currentId),cb.onEnterKey)
         end
 
         TriggerEvent('updateMarkers',currentId)
@@ -116,7 +116,7 @@ exports('updateDistanceMarker', updateDistanceMarker)
 --- @param coords vector3
 --- @param distance number
 --- @param options table
-function createDistanceMarker(type, coords, distance, options)
+function createDistanceMarker(type, coords, distance, cb, options)
     if options ~= nil and isTable(options) and not emptyTable(options) then
         options = mergeTables(options,Config.DefaultMarkerOptions)
     else
@@ -130,16 +130,16 @@ function createDistanceMarker(type, coords, distance, options)
         end
         updateDistanceMarker(findId, type, coords, distance, options)
 
-        if options.onEnter ~= nil then
-            addAction(string.format('marker-%s-onEnter',findId),options.onEnter)
+        if cb.onEnter ~= nil then
+            addAction(string.format('marker-%s-onEnter',findId),cb.onEnter)
         end
 
-        if options.onLeave ~= nil then
-            addAction(string.format('marker-%s-onLeave',findId),options.onLeave)
+        if cb.onLeave ~= nil then
+            addAction(string.format('marker-%s-onLeave',findId),cb.onLeave)
         end
 
-        if options.onEnterKey ~= nil then
-            addAction(string.format('marker-%s-onEnterKey',findId),options.onEnterKey)
+        if cb.onEnterKey ~= nil then
+            addAction(string.format('marker-%s-onEnterKey',findId),cb.onEnterKey)
         end
 
         TriggerEvent('updateDistanceMarkers',findId)
@@ -154,16 +154,16 @@ function createDistanceMarker(type, coords, distance, options)
         })
         local currentId = tableLastIterator(distanceMarkers)
 
-        if options.onEnter ~= nil then
-            addAction(string.format('marker-%s-onEnter',currentId),options.onEnter)
+        if cb.onEnter ~= nil then
+            addAction(string.format('marker-%s-onEnter',currentId),cb.onEnter)
         end
 
-        if options.onLeave ~= nil then
-            addAction(string.format('marker-%s-onLeave',currentId),options.onLeave)
+        if cb.onLeave ~= nil then
+            addAction(string.format('marker-%s-onLeave',currentId),cb.onLeave)
         end
 
-        if options.onEnterKey ~= nil then
-            addAction(string.format('marker-%s-onEnterKey',currentId),options.onEnterKey)
+        if cb.onEnterKey ~= nil then
+            addAction(string.format('marker-%s-onEnterKey',currentId),cb.onEnterKey)
         end
 
         TriggerEvent('updateDistanceMarkers',currentId)
