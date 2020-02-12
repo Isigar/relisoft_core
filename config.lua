@@ -39,6 +39,7 @@ Config.DefaultMarkerOptions = {
     drawOnEnts = nil,
     onEnter = nil,
     onLeave = nil,
+    onEnterKey = nil,
     jobs = nil,
     grades = nil
 }

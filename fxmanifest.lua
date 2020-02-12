@@ -19,6 +19,7 @@ client_scripts {
     'config.lua',
     'client/core/esx.lua',
     'client/core/common.lua',
+    'client/core/action.lua',
     'client/core/marker.lua',
     'client/core/text.lua',
     'client/core/menu.lua',

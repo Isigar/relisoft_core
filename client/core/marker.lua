@@ -47,19 +47,51 @@ function createMarker(type, coords, options)
 
     local findId = findMarkersWithSameCoords(coords)
     if findId then
-        print(string.format('[rcore] Find marker with same coords - updating, marker id: %s',findId))
+        if Config.Debug then
+            print(string.format('[rcore] Find marker with same coords - updating, marker id: %s',findId))
+        end
         updateMarker(findId, type, coords, options)
+
+        if options.onEnter ~= nil then
+            addAction(string.format('marker-%s-onEnter',findId),options.onEnter)
+        end
+
+        if options.onEnterKey ~= nil then
+            addAction(string.format('marker-%s-onEnterKey',findId),options.onEnterKey)
+        end
+
+        if options.onLeave ~= nil then
+            addAction(string.format('marker-%s-onLeave',findId),options.onLeave)
+        end
+
+        TriggerEvent('updateMarkers',findId)
+
+        return findId
     else
         table.insert(markers,{
             type = type,
             coords = coords,
             options = options
         })
+
+        local currentId = tableLastIterator(distanceMarkers)
+
+        if options.onEnter ~= nil then
+            addAction(string.format('marker-%s-onEnter',currentId),options.onEnter)
+        end
+
+        if options.onLeave ~= nil then
+            addAction(string.format('marker-%s-onLeave',currentId),options.onLeave)
+        end
+
+        if options.onEnterKey ~= nil then
+            addAction(string.format('marker-%s-onEnterKey',currentId),options.onEnterKey)
+        end
+
+        TriggerEvent('updateMarkers',currentId)
+
+        return currentId
     end
-
-    TriggerEvent('updateMarkers')
-
-    return tableLastIterator(markers)
 end
 
 exports('createMarker', createMarker)
@@ -93,8 +125,26 @@ function createDistanceMarker(type, coords, distance, options)
 
     local findId = findDistanceMarkersWithSameCoords(coords)
     if findId then
-        print(string.format('[rcore] Find marker with same coords - updating, marker id: %s',findId))
+        if Config.Debug then
+            print(string.format('[rcore] Find marker with same coords - updating, marker id: %s',findId))
+        end
         updateDistanceMarker(findId, type, coords, distance, options)
+
+        if options.onEnter ~= nil then
+            addAction(string.format('marker-%s-onEnter',findId),options.onEnter)
+        end
+
+        if options.onLeave ~= nil then
+            addAction(string.format('marker-%s-onLeave',findId),options.onLeave)
+        end
+
+        if options.onEnterKey ~= nil then
+            addAction(string.format('marker-%s-onEnterKey',findId),options.onEnterKey)
+        end
+
+        TriggerEvent('updateDistanceMarkers',findId)
+
+        return findId
     else
         table.insert(distanceMarkers,{
             type = type,
@@ -102,11 +152,24 @@ function createDistanceMarker(type, coords, distance, options)
             distance = distance,
             options = options
         })
+        local currentId = tableLastIterator(distanceMarkers)
+
+        if options.onEnter ~= nil then
+            addAction(string.format('marker-%s-onEnter',currentId),options.onEnter)
+        end
+
+        if options.onLeave ~= nil then
+            addAction(string.format('marker-%s-onLeave',currentId),options.onLeave)
+        end
+
+        if options.onEnterKey ~= nil then
+            addAction(string.format('marker-%s-onEnterKey',currentId),options.onEnterKey)
+        end
+
+        TriggerEvent('updateDistanceMarkers',currentId)
+
+        return currentId
     end
-
-    TriggerEvent('updateDistanceMarkers')
-
-    return tableLastIterator(distanceMarkers)
 end
 
 exports('createDistanceMarker', createDistanceMarker)
