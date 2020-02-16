@@ -60,7 +60,9 @@ function createText(text, coords, options)
 
     local findId = findTextWithSameCoords(coords)
     if findId then
-        print(string.format('[rcore] Find text with same coords - updating, text id: %s',findId))
+        if Config.Debug then
+            print(string.format('[rcore] Find text with same coords - updating, text id: %s',findId))
+        end
         updateMarker(findId, text, coords, options)
     else
         table.insert(texts,{
@@ -106,7 +108,9 @@ function createDistanceText(text, coords, distance, options)
 
     local findId = findDistanceTextWithSameCoords(coords)
     if findId then
-        print(string.format('[rcore] Find text with same coords - updating, text id: %s',findId))
+        if Config.Debug then
+            print(string.format('[rcore] Find text with same coords - updating, text id: %s',findId))
+        end
         updateDistanceText(findId, text, coords, distance, options)
     else
         table.insert(distanceTexts,{
