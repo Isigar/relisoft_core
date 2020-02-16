@@ -10,9 +10,7 @@
 
 - fraction with society creation
 - easy storage system
-- storage user/fraction
 - permission system
-- custom menu options by permissions
 - extended items usage
 
 ### CLIENT:
@@ -23,10 +21,15 @@
 - createBlip(name, blip, coords, options): Blip
 - getBlips(): Blip[]
 - getBlip(instance): ?Blip
+- removeBlip(instance): void
 ###### Marker section
-- createMarker(type, coords, options): void
-- createDistanceMarker(type, coords, distance, options): void
+- createMarker(type, coords, cb, options): void
+- createDistanceMarker(type, coords, distance,cb, options): void
 - getMarkers(): Marker[]
+- removeMarker(id): void
+- removeDistanceMarker(id): void
+- updateMarker(id, type, coords, options): void
+- updateDistanceMarker(id, type, coords, distance, options): void
 ###### Common section
 - getPlayerPos(): vector3(x,y,z)
 - sendChatMessage(title, message, color): void
@@ -113,24 +116,16 @@ end)
 ##### Creating blips
 Default options for blips can be found at config
 
-Normal using natives:
-```lua
-ourBlip = AddBlipForCoord(x, y, z)
-SetBlipSprite(ourBlip, 58)
-SetBlipDisplay(ourBlip, 4)
-SetBlipScale(ourBlip, 1.0)
-SetBlipColour(ourBlip, 53)
-SetBlipAsShortRange(ourBlip, true)
-BeginTextCommandSetBlipName("STRING")
-AddTextComponentString("Name")
-EndTextCommandSetBlipName(ourBlip)
-```
-Using relisoft_core
 ```lua
 local blip = createBlip("Name", 53,vector3(x,y,z), {
     type = 2,
     color = 12
 })
+```
+You can use blip variable or get blip by function with our function and use native function like category
+
+```lua
+SetBlipCategory(blip,7)
 ```
 
 ##### Creating markers
@@ -151,7 +146,7 @@ And if it be only for boss of police you can do this
 ```lua
 Citizen.CreateThread(function()
     
-    createMarker(1,vector3(x,y,z),{
+    createMarker(1,vector3(x,y,z),{},{
         color = {
             r = 50,
             g = 150,
@@ -167,11 +162,19 @@ is distance to see
 ```lua
 Citizen.CreateThread(function()
     createDistanceMarker(1,vector3(x,y,z),100.0,{
-    onEnter = function ()
-        sendChatMessage('Super!','Press E to kill your self!')
-    end,onLeave = function()
-        sendChatMessage('Ouuuch?','Where are you leaving?! I will find you!')
-    end,jobs = {'police'}})
+        onEnter = function ()
+            sendChatMessage('Super!','Press E to kill your self!')
+        end,
+        onEnterKey = function (key)
+            if key == getKeys()['E'] then
+                sendChatMessage('Super!','Jouu pressed E!')
+            end
+        end,
+        onLeave = function()
+            sendChatMessage('Ouuuch?','Where are you leaving?! I will find you!')
+        end},{
+            jobs = {'police'}
+    })
 end)
 ```
 

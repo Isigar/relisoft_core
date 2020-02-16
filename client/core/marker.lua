@@ -17,6 +17,20 @@ function findMarkersWithSameCoords(coords)
     end
 end
 
+function removeMarker(id)
+    markers[id] = nil
+    TriggerEvent('updateMarkers')
+end
+
+exports('removeMarker', removeMarker)
+
+function removeDistanceMarker(id)
+    distanceMarkers[id] = nil
+    TriggerEvent('updateDistanceMarkers')
+end
+
+exports('removeDistanceMarker', removeDistanceMarker)
+
 function updateMarker(id, type, coords, options)
     if options ~= nil and isTable(options) and not emptyTable(options) then
         options = mergeTables(options,Config.DefaultMarkerOptions)

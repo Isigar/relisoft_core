@@ -29,6 +29,14 @@ end
 
 exports('createBlip',createBlip)
 
+function removeBlip(id)
+    if DoesBlipExist(Blips[id]) then
+        RemoveBlip(Blips[id])
+    end
+end
+
+exports('removeBlip',removeBlip)
+
 ---@param instance number
 ---@return nil|number
 function getBlip(instance)
