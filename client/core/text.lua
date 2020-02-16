@@ -17,6 +17,20 @@ function findTextWithSameCoords(coords)
     end
 end
 
+function removeText(id)
+    texts[id] = nil
+    TriggerEvent('updateText')
+end
+
+exports('removeText', removeText)
+
+function removeDistanceText(id)
+    distanceTexts[id] = nil
+    TriggerEvent('updateDistanceTexts')
+end
+
+exports('removeDistanceText', removeDistanceText)
+
 function updateText(id, text, coords, options)
     if options ~= nil and isTable(options) and not emptyTable(options) then
         options = mergeTables(options,Config.DefaultTextOptions)

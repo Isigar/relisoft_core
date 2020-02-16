@@ -30,6 +30,13 @@
 - removeDistanceMarker(id): void
 - updateMarker(id, type, coords, options): void
 - updateDistanceMarker(id, type, coords, distance, options): void
+###### 3D texts section
+- createText(text, coords, options)
+- createDistanceText(text, coords, distance, options)
+- updateText(id, text, coords, options)
+- updateDistanceText(id, text, coords, distance, options)
+- getTexts()
+- getDistanceTexts()
 ###### Common section
 - getPlayerPos(): vector3(x,y,z)
 - sendChatMessage(title, message, color): void
