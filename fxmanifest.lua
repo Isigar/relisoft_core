@@ -21,12 +21,18 @@ client_scripts {
     'client/core/common.lua',
     'client/core/action.lua',
     'client/core/marker.lua',
+    'client/core/storage.lua',
     'client/core/text.lua',
     'client/core/menu.lua',
     'client/core/blip.lua',
     'client/core/permissions.lua',
     'client/core/font.lua',
     'client/main.lua',
+}
+
+shared_scripts {
+    'config.lua',
+    'shared/common.lua'
 }
 
 dependencies {

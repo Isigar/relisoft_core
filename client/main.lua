@@ -8,6 +8,7 @@ local markers = getMarkers()
 local distanceTexts = getDistanceTexts()
 local texts = getTexts()
 local lastKey = {}
+local storages = getStorages()
 
 RegisterNetEvent('rcore:getWeaponAmmoClient')
 AddEventHandler('rcore:getWeaponAmmoClient', function(weapon, cb)
@@ -216,5 +217,25 @@ Citizen.CreateThread(function()
         for _, v in pairs(texts) do
             draw3DText(v.coords, v.text, v.options)
         end
+    end
+end)
+
+AddEventHandler('updateStorages',function()
+    storages = getStorages()
+end)
+
+Citizen.CreateThread(function()
+    for id, storage in pairs(storages) do
+        createDistanceMarker(1, storage.coords, storage.distance, {
+            onEnter = function()
+                showHelpNotification('Zmackni ~INPUT_CONTEXT~ pro otevreni skladu')
+            end,
+            onEnterKey = function(key)
+                if key == getKeys()['E'] then
+                    openStorageMenu(storage.id,storage.title,storage.name, storage.datastore)
+                end
+            end
+        },
+        storage.options)
     end
 end)

@@ -64,17 +64,21 @@ function createText(text, coords, options)
             print(string.format('[rcore] Find text with same coords - updating, text id: %s',findId))
         end
         updateMarker(findId, text, coords, options)
+
+        TriggerEvent('updateText')
+
+        return findId
     else
         table.insert(texts,{
             text = text,
             coords = coords,
             options = options
         })
+
+        TriggerEvent('updateText')
+
+        return tableLastIterator(texts)
     end
-
-    TriggerEvent('updateText')
-
-    return tableLastIterator(texts)
 end
 
 exports('createText', createText)
@@ -112,6 +116,10 @@ function createDistanceText(text, coords, distance, options)
             print(string.format('[rcore] Find text with same coords - updating, text id: %s',findId))
         end
         updateDistanceText(findId, text, coords, distance, options)
+
+        TriggerEvent('updateDistanceTexts')
+
+        return findId
     else
         table.insert(distanceTexts,{
             text = text,
@@ -119,11 +127,11 @@ function createDistanceText(text, coords, distance, options)
             distance = distance,
             options = options
         })
+
+        TriggerEvent('updateDistanceTexts')
+
+        return tableLastIterator(distanceTexts)
     end
-
-    TriggerEvent('updateDistanceTexts')
-
-    return tableLastIterator(distanceTexts)
 end
 
 exports('createDistanceText', createDistanceText)
