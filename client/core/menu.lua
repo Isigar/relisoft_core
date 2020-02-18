@@ -41,10 +41,16 @@ end
 exports('closeAllMenu',closeAllMenu)
 
 function closeMenu(name)
-    ESX.UI.Menu.Close('default',GetCurrentResourceName,name)
+    ESX.UI.Menu.Close('default',GetCurrentResourceName(),name)
 end
 
 exports('closeMenu',closeMenu)
+
+function closeDialog(name)
+    ESX.UI.Menu.Close('dialog',GetCurrentResourceName(),name)
+end
+
+exports('closeDialog',closeDialog)
 
 function addElement(name, action)
     Elements[name] = action

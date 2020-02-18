@@ -19,7 +19,7 @@ end
 
 function removeText(id)
     texts[id] = nil
-    TriggerEvent('updateText')
+    TriggerEvent('rcore:updateText')
 end
 
 exports('removeText', removeText)
@@ -44,7 +44,7 @@ function updateText(id, text, coords, options)
     }
 end
 
-exports('updateMarker', updateMarker)
+exports('updateText', updateText)
 
 --- @param text string
 --- @param coords vector3
@@ -63,9 +63,9 @@ function createText(text, coords, options)
         if Config.Debug then
             print(string.format('[rcore] Find text with same coords - updating, text id: %s',findId))
         end
-        updateMarker(findId, text, coords, options)
+        updateText(findId, text, coords, options)
 
-        TriggerEvent('updateText')
+        TriggerEvent('rcore:rcore:updateText')
 
         return findId
     else
@@ -75,7 +75,7 @@ function createText(text, coords, options)
             options = options
         })
 
-        TriggerEvent('updateText')
+        TriggerEvent('rcore:updateText')
 
         return tableLastIterator(texts)
     end

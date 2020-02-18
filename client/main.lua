@@ -9,6 +9,7 @@ local distanceTexts = getDistanceTexts()
 local texts = getTexts()
 local lastKey = {}
 local storages = getStorages()
+local storageMarkers = {}
 
 RegisterNetEvent('rcore:getWeaponAmmoClient')
 AddEventHandler('rcore:getWeaponAmmoClient', function(weapon, cb)
@@ -26,7 +27,7 @@ AddEventHandler('rcore:addWeaponAmmo', function(weapon, ammo)
     AddAmmoToPed(PlayerPedId(), weapon, ammo)
 end)
 
-AddEventHandler('updateMarkers', function()
+AddEventHandler('rcore:updateMarkers', function()
     markers = getMarkers()
 end)
 
@@ -107,7 +108,7 @@ Citizen.CreateThread(function()
 end)
 
 -- Distance marker
-AddEventHandler('updateDistanceMarkers', function()
+AddEventHandler('rcore:updateDistanceMarkers', function()
     distanceMarkers = getDistanceMarkers()
 end)
 
@@ -189,7 +190,7 @@ Citizen.CreateThread(function()
 end)
 
 -- Distance text
-AddEventHandler('updateDistanceTexts', function()
+AddEventHandler('rcore:updateDistanceTexts', function()
     distanceTexts = getDistanceTexts()
 end)
 
@@ -207,7 +208,7 @@ Citizen.CreateThread(function()
 end)
 
 -- Text
-AddEventHandler('updateTexts', function()
+AddEventHandler('rcore:updateTexts', function()
     texts = getTexts()
 end)
 
@@ -220,22 +221,37 @@ Citizen.CreateThread(function()
     end
 end)
 
-AddEventHandler('updateStorages',function()
+AddEventHandler('rcore:updateStorages',function()
     storages = getStorages()
-end)
 
-Citizen.CreateThread(function()
-    for id, storage in pairs(storages) do
-        createDistanceMarker(1, storage.coords, storage.distance, {
-            onEnter = function()
-                showHelpNotification('Zmackni ~INPUT_CONTEXT~ pro otevreni skladu')
-            end,
-            onEnterKey = function(key)
-                if key == getKeys()['E'] then
-                    openStorageMenu(storage.id,storage.title,storage.name, storage.datastore)
+    Citizen.CreateThread(function()
+        for id, storage in pairs(storages) do
+            local marker = createDistanceMarker(1, storage.coords, storage.distance, {
+                onEnter = function()
+                    if isStorageBusy(storage.id) then
+                        showHelpNotification('V tomto skladu jiz nekdo radi, ty se tam uz fakt nevlezes!')
+                    else
+                        showHelpNotification('Zmackni ~INPUT_CONTEXT~ pro otevreni skladu')
+                    end
+                end,
+                onEnterKey = function(key)
+                    if key == getKeys()['E'] then
+                        if isStorageBusy(storage.id) then
+                            showNotification('V tomto skladu jiz nekdo radi, ty se tam ~r~nevlezes~w~, pockej!')
+                        else
+                            setStorageBusy(storage.id, true)
+                            openStorageMenu(storage.id,storage.title,storage.name, storage.datastore)
+                        end
+                    end
+                end,
+                onLeave = function()
+                    closeStorageMenu(storage.id)
+                    setStorageBusy(storage.id, false)
                 end
-            end
-        },
-        storage.options)
-    end
+            },
+                storage.options)
+            table.insert(storageMarkers,marker)
+        end
+    end)
+
 end)

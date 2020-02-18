@@ -19,14 +19,14 @@ end
 
 function removeMarker(id)
     markers[id] = nil
-    TriggerEvent('updateMarkers')
+    TriggerEvent('rcore:updateMarkers')
 end
 
 exports('removeMarker', removeMarker)
 
 function removeDistanceMarker(id)
     distanceMarkers[id] = nil
-    TriggerEvent('updateDistanceMarkers')
+    TriggerEvent('rcore:updateDistanceMarkers')
 end
 
 exports('removeDistanceMarker', removeDistanceMarker)
@@ -78,7 +78,7 @@ function createMarker(type, coords, cb, options)
             addAction(string.format('marker-%s-onLeave',findId),cb.onLeave)
         end
 
-        TriggerEvent('updateMarkers',findId)
+        TriggerEvent('rcore:updateMarkers',findId)
 
         return findId
     else
@@ -102,7 +102,7 @@ function createMarker(type, coords, cb, options)
             addAction(string.format('marker-%s-onEnterKey',currentId),cb.onEnterKey)
         end
 
-        TriggerEvent('updateMarkers',currentId)
+        TriggerEvent('rcore:updateMarkers',currentId)
 
         return currentId
     end
@@ -156,7 +156,7 @@ function createDistanceMarker(type, coords, distance, cb, options)
             addAction(string.format('marker-%s-onEnterKey',findId),cb.onEnterKey)
         end
 
-        TriggerEvent('updateDistanceMarkers',findId)
+        TriggerEvent('rcore:updateDistanceMarkers',findId)
 
         return findId
     else
@@ -180,7 +180,7 @@ function createDistanceMarker(type, coords, distance, cb, options)
             addAction(string.format('marker-%s-onEnterKey',currentId),cb.onEnterKey)
         end
 
-        TriggerEvent('updateDistanceMarkers',currentId)
+        TriggerEvent('rcore:updateDistanceMarkers',currentId)
 
         return currentId
     end

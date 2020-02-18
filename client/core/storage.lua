@@ -1,8 +1,38 @@
 local storages = {}
+local storageBusy = {}
 
-function addStorage(title, name, datastore, coords, options)
-    local id = tableLastIterator(storages)+1
-    table.insert(storages,{
+function findStorageWithSameCoords(coords)
+    for k, v in pairs(storages) do
+        if v.coords == coords then
+            return k
+        end
+    end
+end
+
+function removeStorage(id)
+    storages[id] = nil
+    TriggerEvent('rcore:updateStorages')
+end
+
+exports('removeStorage',removeStorage)
+
+function setStorageBusy(id,state)
+    if Config.Debug then
+        print(string.format('[rcore] Setting storage with id %s to busy state %s',id,state))
+    end
+    TriggerServerEvent('rcore:setStorageBusy',id,state)
+end
+
+exports('setStorageBusy',setStorageBusy)
+
+function isStorageBusy(id)
+    return storageBusy[id] or false
+end
+
+exports('isStorageBusy',isStorageBusy)
+
+function updateStorage(id,title,name,datastore,coords,options)
+    storages[id] = {
         id = id,
         title = title,
         name = name,
@@ -10,11 +40,63 @@ function addStorage(title, name, datastore, coords, options)
         coords = coords,
         options = options,
         distance = options.distance or 100
-    })
+    }
+    if Config.Debug then
+        print('[rcore] Updating storage with id %s',id)
+    end
+
+    TriggerEvent('rcore:updateStorages')
     return id
 end
 
+exports('updateStorage',updateStorage)
+
+function addStorage(title, name, datastore, coords, options)
+
+    local findId = findStorageWithSameCoords(coords)
+    if findId then
+        updateStorage(findId,title,name,datastore,coords,options)
+        TriggerEvent('updateStorages')
+        return findId
+    else
+        local id = tableLastIterator(storages)+1
+        table.insert(storages,{
+            id = id,
+            title = title,
+            name = name,
+            datastore = datastore,
+            coords = coords,
+            options = options,
+            distance = options.distance or 100
+        })
+        if Config.Debug then
+            print('[rcore] Creating storage with id %s',id)
+        end
+
+        TriggerEvent('rcore:updateStorages')
+        return id
+    end
+end
+
 exports('addStorage',addStorage)
+
+function closeStorageMenu(id)
+    local storage = storages[id]
+    if storage ~= nil then
+        local idName = string.format('storage-%s-%s-',id,storage.name)
+        closeMenu(idName)
+        closeMenu(idName..'store_weapon')
+        closeMenu(idName..'get_weapon')
+        closeMenu(idName..'store_item')
+        closeMenu(idName..'get_item')
+        closeMenu(idName..'store_money')
+        closeMenu(idName..'get_money')
+        closeDialog(idName..'get_money_count')
+        closeDialog(idName..'store_money_count')
+        closeDialog(idName..'store_item_count')
+        closeDialog(idName..'get_item_count')
+    end
+end
 
 function openStorageMenu(id, title, name, datastore)
     local idName = string.format('storage-%s-%s-',id,name)
@@ -133,7 +215,7 @@ function openStorageMenu(id, title, name, datastore)
                     end
                 })
             elseif value == "get_money" then
-                ESX.TriggerServerCallback('getStoredMoney',function(options)
+                ESX.TriggerServerCallback('rcore:getStoredMoney',function(options)
                     createMenu(title,  idName..'get_money', options, {
                         submit = function(data, menu2)
                             createDialog('Pocet k ulozeni?', idName..'get_money_count',function(data2,menu3)
@@ -169,3 +251,8 @@ function getStorages()
 end
 
 exports('getStorages',getStorages)
+
+RegisterNetEvent('rcore:updateStorageBusy')
+AddEventHandler('rcore:updateStorageBusy',function(storages)
+    storageBusy = storages
+end)
