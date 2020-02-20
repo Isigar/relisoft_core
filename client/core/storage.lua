@@ -45,7 +45,6 @@ function updateStorage(id,title,name,datastore,coords,options)
         print('[rcore] Updating storage with id %s',id)
     end
 
-    TriggerEvent('rcore:updateStorages')
     return id
 end
 
@@ -56,7 +55,7 @@ function addStorage(title, name, datastore, coords, options)
     local findId = findStorageWithSameCoords(coords)
     if findId then
         updateStorage(findId,title,name,datastore,coords,options)
-        TriggerEvent('updateStorages')
+        TriggerEvent('rcore:updateStorages')
         return findId
     else
         local id = tableLastIterator(storages)+1
