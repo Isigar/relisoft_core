@@ -1,5 +1,6 @@
 Config = {}
 Config.Debug = true
+Config.ESXCallback = "getSharedObject"
 Config.DefaultChatColor = { 255, 255, 255 }
 Config.DefaultBlipOptions = {
     scale = 1.0,

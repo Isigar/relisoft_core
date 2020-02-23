@@ -1,6 +1,7 @@
 ESX = nil
 ESX = getEsxServerInstance()
 
+
 local IsStorageBusy = {}
 
 RegisterNetEvent('rcore:sendChatMessage', function(target, title, message)
