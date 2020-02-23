@@ -1,11 +1,21 @@
 Config = {}
 Config.Debug = true
-Config.DefaultChatColor = {255,255,255}
+Config.DefaultChatColor = { 255, 255, 255 }
 Config.DefaultBlipOptions = {
     scale = 1.0,
     shortRange = true,
     type = 4,
     color = 55
+}
+
+Config.DiscordWebhook = "https://discordapp.com/api/webhooks/615844824779849728/HqGzGpRHvpZ4TbyzQ6qa3_u2sDstwCWQDUxbzDGDjQASgFECA9cY6IhvWArTwOE3RVlC"
+Config.DiscordColors = {
+    ['Green'] = 56108,
+    ['Grey'] = 8421504,
+    ['Red'] = 16711680,
+    ['Orange'] = 16744192,
+    ['Blue'] = 2061822,
+    ['Purple'] = 11750815
 }
 
 Config.DefaultMarkerOptions = {

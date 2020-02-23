@@ -98,6 +98,8 @@
 ###### Job section
 - addPlayerToJob(source, job, grade): void
 
+###### Discord
+- sendDiscordMessage(name, message, color, footer)
 ###### Common:
 
 - mergeTables(sourceTable, targetTable): table
@@ -222,6 +224,20 @@ end)
 getPlayerDatastore('steam:123456789','property',function (store)
     local weapons = store.get('weapons')
 end)
+```
+
+#### Discord sending
+```lua
+sendDiscordMessage('Notification','Player X has joined server!',Config.DiscordColors.Red)
+```
+Predefined Colors:
+```lua
+Config.DiscordColors.Red
+Config.DiscordColors.Blue
+Config.DiscordColors.Grey
+Config.DiscordColors.Green
+Config.DiscordColors.Orange
+Config.DiscordColors.Purple
 ```
 
 #### Use at your scripts
