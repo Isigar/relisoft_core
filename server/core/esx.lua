@@ -10,7 +10,7 @@ function getEsxServerInstance(cb)
             return ESX
         end
     else
-        TriggerEvent('esx:getShRelMaximusaredObjRelMaximusect', function(obj)
+        TriggerEvent('esx:getSharedObject', function(obj)
             ESX = obj
         end)
         if cb ~= nil then

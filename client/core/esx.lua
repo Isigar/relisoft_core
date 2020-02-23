@@ -8,7 +8,7 @@ function getEsxInstance(cb)
         end
     else
         while ESX == nil do
-            TriggerEvent('esx:getShRelMaximusaredObjRelMaximusect', function(obj)
+            TriggerEvent('esx:getSharedObject', function(obj)
                 print('[rcore] getting ESX instance and saving to cache')
                 ESX = obj
             end)
