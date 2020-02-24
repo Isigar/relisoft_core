@@ -8,7 +8,7 @@ function generateKey()
     math.randomseed(os.time())
 
     b = {}
-    for c in chars:gmatch"." do
+    for c in chars:gmatch "." do
         table.insert(b, c)
     end
 
@@ -20,14 +20,14 @@ function generateKey()
 end
 
 RegisterNetEvent('rcore:retrieveKey')
-AddEventHandler('rcore:retrieveKey',function()
+AddEventHandler('rcore:retrieveKey', function()
     if Config.Debug then
         print('[rcore] Retrieving key event')
     end
 
     local newKey = generateKey()
     lastKey = newKey
-    TriggerClientEvent('rcore:updateKey',-1,newKey)
+    TriggerClientEvent('rcore:updateKey', -1, newKey)
 end)
 
 function getServerKey()
@@ -42,4 +42,4 @@ function isProtected(key)
     end
 end
 
-exports('isProtected',isProtected)
+exports('isProtected', isProtected)

@@ -7,6 +7,8 @@ server_scripts {
     'config.lua',
     'server/core/protection.lua',
     'server/core/esx.lua',
+    'server/core/discord.lua',
+    'server/core/log.lua',
     'server/core/common.lua',
     'server/core/datastore.lua',
     'server/core/inventory.lua',
