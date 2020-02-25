@@ -19,7 +19,6 @@ function generateKey()
     return a
 end
 
-RegisterNetEvent('rcore:retrieveKey')
 AddEventHandler('rcore:retrieveKey', function()
     if Config.Debug then
         print('[rcore] Retrieving key event')
@@ -35,6 +34,10 @@ function getServerKey()
 end
 
 function isProtected(key)
+    if key == nil then
+        return false
+    end
+
     if key == lastKey then
         return true
     else
