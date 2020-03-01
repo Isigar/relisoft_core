@@ -19,14 +19,23 @@ function generateKey()
     return a
 end
 
+RegisterNetEvent('rcore:retrieveKey')
 AddEventHandler('rcore:retrieveKey', function()
     if Config.Debug then
         print('[rcore] Retrieving key event')
     end
 
-    local newKey = generateKey()
-    lastKey = newKey
-    TriggerClientEvent('rcore:updateKey', -1, newKey)
+    if GetCurrentResourceName() == "rcore" then
+        if lastKey == nil then
+            lastKey = generateKey()
+            if Config.Debug then
+                print(string.format('[rcore] generating key %s',lastKey))
+            end
+        end
+        TriggerClientEvent('rcore:updateKey', source, lastKey)
+    else
+        TriggerEvent('rcore:logCheater',nil,'rcore:updateKey')
+    end
 end)
 
 function getServerKey()
@@ -34,6 +43,9 @@ function getServerKey()
 end
 
 function isProtected(key)
+    if Config.Debug then
+        print(string.format('[rcore] checking keys %s:%s',lastKey,key))
+    end
     if key == nil then
         return false
     end

@@ -1,9 +1,9 @@
 local storages = {}
 local storageBusy = {}
 
-function findStorageWithSameCoords(coords)
+function findStorageWithSameName(name)
     for k, v in pairs(storages) do
-        if v.coords == coords then
+        if v.name == name then
             return k
         end
     end
@@ -39,10 +39,11 @@ function updateStorage(id,title,name,datastore,coords,options)
         datastore = datastore,
         coords = coords,
         options = options,
-        distance = options.distance or 100
+        distance = options.distance or 100,
+        updated = true
     }
     if Config.Debug then
-        print('[rcore] Updating storage with id %s',id)
+        print(string.format('[rcore] Updating storage with id %s',id))
     end
 
     return id
@@ -51,8 +52,7 @@ end
 exports('updateStorage',updateStorage)
 
 function addStorage(title, name, datastore, coords, options)
-
-    local findId = findStorageWithSameCoords(coords)
+    local findId = findStorageWithSameName(name)
     if findId then
         updateStorage(findId,title,name,datastore,coords,options)
         TriggerEvent('rcore:updateStorages')
@@ -69,7 +69,7 @@ function addStorage(title, name, datastore, coords, options)
             distance = options.distance or 100
         })
         if Config.Debug then
-            print('[rcore] Creating storage with id %s',id)
+            print(string.format('[rcore] Creating storage with id %s',id))
         end
 
         TriggerEvent('rcore:updateStorages')
@@ -131,7 +131,7 @@ function openStorageMenu(id, title, name, datastore)
                                 else
                                     showNotification('~r~Tak tuto zbran tu opravdu nemame!')
                                 end
-                            end, datastore, data.current.value)
+                            end,getClientKey(), datastore, data.current.value)
                         end
                     })
                 end,getClientKey(), datastore)

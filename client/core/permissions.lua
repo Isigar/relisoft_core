@@ -148,6 +148,10 @@ end
 
 exports('getPlayer',getPlayer)
 
+function loadPlayer()
+    PlayerData = getPlayer()
+end
+
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded',function(xPlayer)
     PlayerData = xPlayer

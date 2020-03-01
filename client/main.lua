@@ -17,6 +17,11 @@ AddEventHandler('rcore:getWeaponAmmoClient', function(weapon, cb)
     cb(ammo)
 end)
 
+RegisterNetEvent('rcore:showNotification')
+AddEventHandler('rcore:showNotification',function(message)
+    showNotification(message)
+end)
+
 RegisterNetEvent('rcore:setWeaponAmmo')
 AddEventHandler('rcore:setWeaponAmmo', function(weapon, ammo)
     SetPedAmmo(PlayerPedId(), weapon, ammo)
@@ -224,8 +229,19 @@ end)
 AddEventHandler('rcore:updateStorages',function()
     storages = getStorages()
 
+
     Citizen.CreateThread(function()
+        Citizen.Wait(500)
         for id, storage in pairs(storages) do
+            if storageMarkers[id] == nil then
+                storageMarkers[id] = {}
+            end
+
+            if storage.updated then
+                for _, m in pairs(storageMarkers[id]) do
+                    removeDistanceMarker(m)
+                end
+            end
             local marker = createDistanceMarker(1, storage.coords, storage.distance, {
                 onEnter = function()
                     if isStorageBusy(storage.id) then
@@ -250,8 +266,20 @@ AddEventHandler('rcore:updateStorages',function()
                 end
             },
                 storage.options)
-            table.insert(storageMarkers,marker)
+
+            table.insert(storageMarkers[id],marker)
         end
     end)
+end)
 
+AddEventHandler('onClientResourceStart',function(name)
+    if GetCurrentResourceName() == name then
+        Citizen.CreateThread(function()
+            Citizen.Wait(1500)
+            if Config.Debug then
+                print(string.format('[rcore] restarting rcore - getting player data'))
+            end
+            loadPlayer()
+        end)
+    end
 end)

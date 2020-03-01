@@ -26,7 +26,7 @@ exports('getEsxServerInstance',getEsxServerInstance)
 ---@param source number
 ---@param message string
 function sendNotificationFromServer(source, message)
-    TriggerClientEvent('esx:showNotification',source,message)
+    TriggerClientEvent('rcore:showNotification',source,message)
 end
 
 exports('sendNotificationFromServer',sendNotificationFromServer)
