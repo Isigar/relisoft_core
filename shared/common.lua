@@ -25,3 +25,9 @@ function urlencode(str)
 end
 
 exports('urlencode',urlencode)
+
+function getConfig()
+    return Config
+end
+
+exports('getConfig',getConfig)
