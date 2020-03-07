@@ -194,8 +194,20 @@ end
 
 exports('getMarkers', getMarkers)
 
+function getMarker(id)
+    return markers[id]
+end
+
+exports('getMarker', getMarker)
+
 function getDistanceMarkers()
     return distanceMarkers
 end
 
 exports('getDistanceMarkers', getDistanceMarkers)
+
+function getDistanceMarker(id)
+    return distanceMarkers[id]
+end
+
+exports('getDistanceMarker', getDistanceMarker)
