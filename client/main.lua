@@ -244,19 +244,23 @@ AddEventHandler('rcore:updateStorages',function()
             end
             local marker = createDistanceMarker(1, storage.coords, storage.distance, {
                 onEnter = function()
-                    if isStorageBusy(storage.id) then
-                        showHelpNotification('V tomto skladu jiz nekdo radi, ty se tam uz fakt nevlezes!')
-                    else
-                        showHelpNotification('Zmackni ~INPUT_CONTEXT~ pro otevreni skladu')
+                    if not isInVehicle() then
+                        if isStorageBusy(storage.id) then
+                            showHelpNotification('V tomto skladu jiz nekdo radi, ty se tam uz fakt nevlezes!')
+                        else
+                            showHelpNotification('Zmackni ~INPUT_CONTEXT~ pro otevreni skladu')
+                        end
                     end
                 end,
                 onEnterKey = function(key)
-                    if key == getKeys()['E'] then
-                        if isStorageBusy(storage.id) then
-                            showNotification('V tomto skladu jiz nekdo radi, ty se tam ~r~nevlezes~w~, pockej!')
-                        else
-                            setStorageBusy(storage.id, true)
-                            openStorageMenu(storage.id,storage.title,storage.name, storage.datastore)
+                    if not isInVehicle() then
+                        if key == getKeys()['E'] then
+                            if isStorageBusy(storage.id) then
+                                showNotification('V tomto skladu jiz nekdo radi, ty se tam ~r~nevlezes~w~, pockej!')
+                            else
+                                setStorageBusy(storage.id, true)
+                                openStorageMenu(storage.id,storage.title,storage.name, storage.datastore)
+                            end
                         end
                     end
                 end,

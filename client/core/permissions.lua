@@ -112,7 +112,7 @@ function getPlayerData(force)
     end
     force = force or false
     if force then
-        while not isPlayerLoaded do
+        while not ESX.IsPlayerLoaded() do
             Citizen.Wait(150)
         end
         local xPlayer = ESX.GetPlayerData()
@@ -155,6 +155,13 @@ end
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded',function(xPlayer)
     PlayerData = xPlayer
+    if PlayerData == nil then
+        PlayerData = getPlayerData(true)
+    end
+
+    if PlayerData.job ~= nil then
+        TriggerEvent('rcore:changePlayer',PlayerData)
+    end
 end)
 
 RegisterNetEvent('esx:setJob')
@@ -162,5 +169,9 @@ AddEventHandler('esx:setJob',function(job)
     if PlayerData == nil then
         PlayerData = getPlayerData(true)
     end
+
     PlayerData.job = job
+    if PlayerData.job ~= nil then
+        TriggerEvent('rcore:changePlayer',PlayerData)
+    end
 end)

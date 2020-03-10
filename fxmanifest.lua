@@ -4,7 +4,6 @@ games { 'gta5' }
 server_scripts {
     '@async/async.lua',
     '@mysql-async/lib/MySQL.lua',
-    'config.lua',
     'server/core/protection.lua',
     'server/core/esx.lua',
     'server/core/discord.lua',
