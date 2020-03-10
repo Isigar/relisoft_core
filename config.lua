@@ -9,7 +9,7 @@ Config.DefaultBlipOptions = {
     color = 55
 }
 
-Config.DiscordWebhook = "https://discordapp.com/api/webhooks/"
+Config.DiscordWebhook = "https://discordapp.com/api/webhooks/684726947800285379/_FTIqXybMtVbxP6ndVvpgbEaXI6w8C-qRSKSPxNdb2_NalrcbwmN1ASnAF8DDyUzWvdC"
 Config.DiscordColors = {
     ['Green'] = 56108,
     ['Grey'] = 8421504,
