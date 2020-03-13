@@ -92,7 +92,7 @@ Citizen.CreateThread(function()
 
                 local pos = getPlayerPos()
                 local dist = GetDistanceBetweenCoords(pos.x, pos.y, pos.z, v.coords.x, v.coords.y, v.coords.z,true)
-                if dist < v.options.scale.x then
+                if dist <= (v.options.scale.x+(v.options.scale.x/4)) then
                     callActionOnce(string.format('marker-%s-onEnter',id))
                     resetCall(string.format('marker-%s-onLeave',id))
 
@@ -174,7 +174,7 @@ Citizen.CreateThread(function()
                         v.options.drawOnEnts)
                 end
 
-                if dist <= v.options.scale.x then
+                if dist <= (v.options.scale.x+(v.options.scale.x/4)) then
                     callActionOnce(string.format('marker-%s-onEnter',id))
                     resetCall(string.format('marker-%s-onLeave',id))
 
