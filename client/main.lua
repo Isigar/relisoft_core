@@ -11,6 +11,8 @@ local lastKey = {}
 local storages = getStorages()
 local storageMarkers = {}
 local playerPos = vector3(0,0,0)
+local isAtJobCache = false
+local isAtJobValue = false
 
 RegisterNetEvent('rcore:getWeaponAmmoClient')
 AddEventHandler('rcore:getWeaponAmmoClient', function(weapon, cb)
@@ -45,30 +47,40 @@ Citizen.CreateThread(function()
     end
 end)
 
+RegisterNetEvent('rcore:changePlayer')
+AddEventHandler('rcore:changePlayer',function(xPlayer)
+    isAtJobCache = false
+    print('[rcore] player changed removing job cache')
+end)
+
 function isAtJobFunc(v)
-    local isAtJobValue = false
-    if v.options.jobs ~= nil or not emptyTable(v.options.jobs) then
-        if v.options.grades ~= nil or not emptyTable(v.options.grades) then
-            for _, j in pairs(v.options.jobs) do
-                for _, g in pairs(v.options.grades) do
-                    isAtJobValue = isAtJobGrade(j, g)
+    if isAtJobCache then
+        return isAtJobValue
+    else
+        if v.options.jobs ~= nil or not emptyTable(v.options.jobs) then
+            if v.options.grades ~= nil or not emptyTable(v.options.grades) then
+                for _, j in pairs(v.options.jobs) do
+                    for _, g in pairs(v.options.grades) do
+                        isAtJobValue = isAtJobGrade(j, g)
+                        if isAtJobValue then
+                            break
+                        end
+                    end
+                end
+            else
+                for _, j in pairs(v.options.jobs) do
+                    isAtJobValue = isAtJob(j)
                     if isAtJobValue then
                         break
                     end
                 end
             end
         else
-            for _, j in pairs(v.options.jobs) do
-                isAtJobValue = isAtJob(j)
-                if isAtJobValue then
-                    break
-                end
-            end
+            isAtJobValue = true
         end
-    else
-        isAtJobValue = true
+        isAtJobCache = true
+        return isAtJobValue
     end
-    return isAtJobValue
 end
 
 -- Classic marker
