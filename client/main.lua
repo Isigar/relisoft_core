@@ -11,8 +11,7 @@ local lastKey = {}
 local storages = getStorages()
 local storageMarkers = {}
 local playerPos = vector3(0,0,0)
-local isAtJobCache = false
-local isAtJobValue = false
+local isAtJobCache = {}
 
 RegisterNetEvent('rcore:getWeaponAmmoClient')
 AddEventHandler('rcore:getWeaponAmmoClient', function(weapon, cb)
@@ -40,8 +39,8 @@ AddEventHandler('rcore:updateMarkers', function()
 end)
 
 Citizen.CreateThread(function()
-    local ped = PlayerPedId()
     while true do
+        local ped = PlayerPedId()
         playerPos = GetEntityCoords(ped)
         Citizen.Wait(Config.CheckPlayerPosition)
     end
@@ -49,14 +48,15 @@ end)
 
 RegisterNetEvent('rcore:changePlayer')
 AddEventHandler('rcore:changePlayer',function(xPlayer)
-    isAtJobCache = false
+    isAtJobCache = {}
     print('[rcore] player changed removing job cache')
 end)
 
-function isAtJobFunc(v)
-    if isAtJobCache then
-        return isAtJobValue
+function isAtJobFunc(id,v)
+    if isAtJobCache[id] ~= nil then
+        return isAtJobCache[id]
     else
+        local isAtJobValue = false
         if v.options.jobs ~= nil or not emptyTable(v.options.jobs) then
             if v.options.grades ~= nil or not emptyTable(v.options.grades) then
                 for _, j in pairs(v.options.jobs) do
@@ -78,7 +78,7 @@ function isAtJobFunc(v)
         else
             isAtJobValue = true
         end
-        isAtJobCache = true
+        isAtJobCache[id] = isAtJobValue
         return isAtJobValue
     end
 end
@@ -88,9 +88,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
         for id, v in pairs(markers) do
-            local isAtJobValue = isAtJobFunc(v)
-
-            if isAtJobValue then
+            if isAtJobFunc(id,v) then
                 DrawMarker(v.type,
                     v.coords.x,
                     v.coords.y,
@@ -146,9 +144,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(1)
         for id, v in pairs(distanceMarkers) do
-            local isAtJobValue = isAtJobFunc(v)
-
-            if isAtJobValue then
+            if isAtJobFunc(id,v) then
                 local dist = #(playerPos-vector3(v.coords.x, v.coords.y, v.coords.z))
                 if dist < v.distance then
                     DrawMarker(v.type,
