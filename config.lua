@@ -2,6 +2,7 @@ Config = {}
 Config.Debug = true
 Config.ESXCallback = "esx:getSharedObject"
 Config.DefaultChatColor = { 255, 255, 255 }
+Config.CheckPlayerPosition = 500 --in ms
 Config.DefaultBlipOptions = {
     scale = 1.0,
     shortRange = true,

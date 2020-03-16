@@ -106,33 +106,25 @@ function draw3DText(pos, text, options)
     local color = options.color or {r = 255, g = 255, b = 255, a = 255}
     local scaleOption = options.scale or {scale = 0.5, size = 0.5}
 
-    local onScreen, _x, _y = World3dToScreen2d(pos.x, pos.y, pos.z)
-    local px, py, pz = table.unpack(GetGameplayCamCoords())
-    local dist = GetDistanceBetweenCoords(px, py, pz, pos.x, pos.y, pos.z, 1)
-
-    local scale = (1 / dist) * 2
-    local fov = (1 / GetGameplayCamFov()) * 100
+    local camCoords      = GetGameplayCamCoords()
+    local dist           = GetDistanceBetweenCoords(camCoords.x, camCoords.y, camCoords.z, pos.x, pos.y, pos.z, 1)
+    local scale = (scaleOption.size / dist) * 2
+    local fov   = (1 / GetGameplayCamFov()) * 100
     local scale = scale * fov
-
-    if onScreen then
-        SetTextScale(0.0 * scale, 0.55 * scale)
-        SetTextFont(getFontId())
-        if not emptyTable(scaleOption) then
-            SetTextScale(scaleOption.scale, scaleOption.size)
-            SetTextProportional(1)
-        else
-            SetTextProportional(1)
-        end
-        SetTextColour(color.r, color.g, color.b, color.a)
-        SetTextDropshadow(0, 0, 0, 0, 255)
-        SetTextEdge(2, 0, 0, 0, 150)
-        SetTextDropShadow()
-        SetTextOutline()
-        SetTextEntry("STRING")
-        SetTextCentre(1)
-        AddTextComponentString(text)
-        DrawText(_x, _y)
-    end
+    SetDrawOrigin(pos.x, pos.y, pos.z, 0);
+    SetTextFont(0)
+    SetTextProportional(0)
+    SetTextScale(0.0 * scale, 0.55 * scale)
+    SetTextColour(color)
+    SetTextDropshadow(0, 0, 0, 0, 255)
+    SetTextEdge(2, 0, 0, 0, 150)
+    SetTextDropShadow()
+    SetTextOutline()
+    SetTextEntry("STRING")
+    SetTextCentre(1)
+    AddTextComponentString(text)
+    DrawText(0.0, 0.0)
+    ClearDrawOrigin()
 end
 
 exports('draw3DText', draw3DText)

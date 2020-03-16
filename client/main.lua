@@ -10,6 +10,7 @@ local texts = getTexts()
 local lastKey = {}
 local storages = getStorages()
 local storageMarkers = {}
+local playerPos = vector3(0,0,0)
 
 RegisterNetEvent('rcore:getWeaponAmmoClient')
 AddEventHandler('rcore:getWeaponAmmoClient', function(weapon, cb)
@@ -36,33 +37,46 @@ AddEventHandler('rcore:updateMarkers', function()
     markers = getMarkers()
 end)
 
+Citizen.CreateThread(function()
+    local ped = PlayerPedId()
+    while true do
+        playerPos = GetEntityCoords(ped)
+        Citizen.Wait(Config.CheckPlayerPosition)
+    end
+end)
+
+function isAtJobFunc(v)
+    local isAtJobValue = false
+    if v.options.jobs ~= nil or not emptyTable(v.options.jobs) then
+        if v.options.grades ~= nil or not emptyTable(v.options.grades) then
+            for _, j in pairs(v.options.jobs) do
+                for _, g in pairs(v.options.grades) do
+                    isAtJobValue = isAtJobGrade(j, g)
+                    if isAtJobValue then
+                        break
+                    end
+                end
+            end
+        else
+            for _, j in pairs(v.options.jobs) do
+                isAtJobValue = isAtJob(j)
+                if isAtJobValue then
+                    break
+                end
+            end
+        end
+    else
+        isAtJobValue = true
+    end
+    return isAtJobValue
+end
+
 -- Classic marker
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
         for id, v in pairs(markers) do
-            local isAtJobValue = false
-            if v.options.jobs ~= nil or not emptyTable(v.options.jobs) then
-                if v.options.grades ~= nil or not emptyTable(v.options.grades) then
-                    for _, j in pairs(v.options.jobs) do
-                        for _, g in pairs(v.options.grades) do
-                            isAtJobValue = isAtJobGrade(j, g)
-                            if isAtJobValue then
-                                break
-                            end
-                        end
-                    end
-                else
-                    for _, j in pairs(v.options.jobs) do
-                        isAtJobValue = isAtJob(j)
-                        if isAtJobValue then
-                            break
-                        end
-                    end
-                end
-            else
-                isAtJobValue = true
-            end
+            local isAtJobValue = isAtJobFunc(v)
 
             if isAtJobValue then
                 DrawMarker(v.type,
@@ -90,8 +104,7 @@ Citizen.CreateThread(function()
                     v.options.textureName,
                     v.options.drawOnEnts)
 
-                local pos = getPlayerPos()
-                local dist = GetDistanceBetweenCoords(pos.x, pos.y, pos.z, v.coords.x, v.coords.y, v.coords.z,true)
+                local dist = #(playerPos-vector3(v.coords.x, v.coords.y, v.coords.z))
                 if dist <= (v.options.scale.x+(v.options.scale.x/4)) then
                     callActionOnce(string.format('marker-%s-onEnter',id))
                     resetCall(string.format('marker-%s-onLeave',id))
@@ -121,32 +134,10 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(1)
         for id, v in pairs(distanceMarkers) do
-            local isAtJobValue = false
-            if v.options.jobs ~= nil or not emptyTable(v.options.jobs) then
-                if v.options.grades ~= nil or not emptyTable(v.options.grades) then
-                    for _, j in pairs(v.options.jobs) do
-                        for _, g in pairs(v.options.grades) do
-                            isAtJobValue = isAtJobGrade(j, g)
-                            if isAtJobValue then
-                                break
-                            end
-                        end
-                    end
-                else
-                    for _, j in pairs(v.options.jobs) do
-                        isAtJobValue = isAtJob(j)
-                        if isAtJobValue then
-                            break
-                        end
-                    end
-                end
-            else
-                isAtJobValue = true
-            end
+            local isAtJobValue = isAtJobFunc(v)
 
             if isAtJobValue then
-                local pos = getPlayerPos()
-                local dist = GetDistanceBetweenCoords(pos.x, pos.y, pos.z, v.coords.x, v.coords.y, v.coords.z,true)
+                local dist = #(playerPos-vector3(v.coords.x, v.coords.y, v.coords.z))
                 if dist < v.distance then
                     DrawMarker(v.type,
                         v.coords.x,
@@ -203,8 +194,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
         for _, v in pairs(distanceTexts) do
-            local pos = getPlayerPos()
-            local dist = GetDistanceBetweenCoords(pos.x, pos.y, pos.z, v.coords.x, v.coords.y, v.coords.z)
+            local dist = #(playerPos-vector3(v.coords.x, v.coords.y, v.coords.z))
             if dist < v.distance then
                 draw3DText(v.coords, v.text, v.options)
             end
