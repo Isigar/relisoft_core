@@ -112,7 +112,7 @@ function draw3DText(pos, text, options)
     local fov   = (1 / GetGameplayCamFov()) * 100
     local scale = scale * fov
     SetDrawOrigin(pos.x, pos.y, pos.z, 0);
-    SetTextFont(0)
+    SetTextFont(getFontId())
     SetTextProportional(0)
     SetTextScale(0.0 * scale, 0.55 * scale)
     SetTextColour(color.r,color.g,color.b,color.a)
