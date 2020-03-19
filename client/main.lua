@@ -12,6 +12,7 @@ local storages = getStorages()
 local storageMarkers = {}
 local playerPos = vector3(0,0,0)
 local isAtJobCache = {}
+local isAtMarker = false
 
 RegisterNetEvent('rcore:getWeaponAmmoClient')
 AddEventHandler('rcore:getWeaponAmmoClient', function(weapon, cb)
@@ -142,6 +143,17 @@ end)
 
 Citizen.CreateThread(function()
     while true do
+        Citizen.Wait(0)
+        for _, key in pairs(getKeys()) do
+            if IsControlJustReleased(0,key) then
+                TriggerEvent('rcore:onKey',key)
+            end
+        end
+    end
+end)
+
+Citizen.CreateThread(function()
+    while true do
         Citizen.Wait(1)
         for id, v in pairs(distanceMarkers) do
             if isAtJobFunc(id,v) then
@@ -172,21 +184,35 @@ Citizen.CreateThread(function()
                         v.options.textureName,
                         v.options.drawOnEnts)
                 end
+            end
+        end
+    end
+end)
+
+AddEventHandler('rcore:onKey',function(key)
+    if isAtMarker ~= false then
+        callActionOnce(string.format('marker-%s-onEnterKey',isAtMarker),key)
+    end
+    resetCall(string.format('marker-%s-onEnterKey',isAtMarker))
+end)
+
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(50)
+        for id, v in pairs(distanceMarkers) do
+            if isAtJobFunc(id,v) then
+                local dist = #(playerPos-vector3(v.coords.x, v.coords.y, v.coords.z))
 
                 if dist <= (v.options.scale.x+(v.options.scale.x/4)) then
+                    isAtMarker = id
                     callActionOnce(string.format('marker-%s-onEnter',id))
                     resetCall(string.format('marker-%s-onLeave',id))
-
-                    for _, key in pairs(getKeys()) do
-                        if IsControlJustReleased(0,key) then
-                            callActionOnce(string.format('marker-%s-onEnterKey',id),key)
-                        end
-                        resetCall(string.format('marker-%s-onEnterKey',id))
-                    end
                 else
-                    callActionOnce(string.format('marker-%s-onLeave',id))
-                    resetCall(string.format('marker-%s-onEnter',id))
-                    resetCall(string.format('marker-%s-onEnterKey',id))
+                    if isCalled(string.format('marker-%s-onEnter',id)) then
+                        isAtMarker = false
+                        callActionOnce(string.format('marker-%s-onLeave',id))
+                        resetCall(string.format('marker-%s-onEnter',id))
+                    end
                 end
             end
         end

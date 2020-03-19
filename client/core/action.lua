@@ -21,6 +21,14 @@ function callAction(actionName,params)
     end
 end
 
+function isCalled(actionName)
+    if callRegister[actionName] == true then
+        return true
+    else
+        return false
+    end
+end
+
 function callActionOnce(actionName,params)
     if callRegister[actionName] == nil then
         if actions[actionName] ~= nil then
