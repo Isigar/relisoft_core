@@ -97,6 +97,10 @@
 - getPlayerFromId(source,cb): void
 ###### Job section
 - addPlayerToJob(source, job, grade): void
+- isJobExists(job,cb): void
+- createJob(name,label,whitelisted): void
+- isJobGradeExists(name,job_name,cb): void
+- createJobGrade(job_name,grade,name,label,salary): void
 
 ###### Discord
 - sendDiscordMessage(name, message, color, footer)
