@@ -12,6 +12,8 @@ local storages = getStorages()
 local storageMarkers = {}
 local playerPos = vector3(0,0,0)
 local isAtJobCache = {}
+local nearDistanceMarkers = {}
+local nearDistanceMarkerDistance = Config.NearObjectDistance
 local isAtMarker = false
 
 RegisterNetEvent('rcore:getWeaponAmmoClient')
@@ -43,6 +45,13 @@ Citizen.CreateThread(function()
     while true do
         local ped = PlayerPedId()
         playerPos = GetEntityCoords(ped)
+        for k, v in pairs(distanceMarkers) do
+            local dist = #(playerPos - vector3(v.coords.x, v.coords.y, v.coords.z))
+            if dist <= nearDistanceMarkerDistance then
+                nearDistanceMarkers[k] = v
+            end
+        end
+
         Citizen.Wait(Config.CheckPlayerPosition)
     end
 end)
@@ -155,7 +164,7 @@ end)
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(1)
-        for id, v in pairs(distanceMarkers) do
+        for id, v in pairs(nearDistanceMarkers) do
             if isAtJobFunc(id,v) then
                 local dist = #(playerPos-vector3(v.coords.x, v.coords.y, v.coords.z))
                 if dist < v.distance then
