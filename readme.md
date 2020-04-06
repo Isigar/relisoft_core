@@ -46,6 +46,7 @@
 - getPlayerData(force: boolean): PlayerData
 - isPlayerLoaded(): boolean
 - getPlayer(): PlayerData
+- callCallback(name,cb,...)
 ###### Menu section
 - createMenu(title, name, elements, options): void
 - closeAllMenu()
@@ -91,6 +92,7 @@
 - isInventoryExists(inventory,cb)
 
 ###### Common section
+- registerCallback(cbName, callback): void
 - sendChatMessageFromServer(source,title,message,color): void
 - sendNotificationFromServer(source, message): void
 ###### Player section

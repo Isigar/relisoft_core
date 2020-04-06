@@ -5,6 +5,7 @@ server_scripts {
     '@async/async.lua',
     '@mysql-async/lib/MySQL.lua',
     'server/core/protection.lua',
+    'server/core/callback.lua',
     'server/core/esx.lua',
     'server/core/discord.lua',
     'server/core/log.lua',
@@ -21,6 +22,7 @@ server_scripts {
 client_scripts {
     'config.lua',
     'client/core/protection.lua',
+    'client/core/callback.lua',
     'client/core/esx.lua',
     'client/core/common.lua',
     'client/core/action.lua',
