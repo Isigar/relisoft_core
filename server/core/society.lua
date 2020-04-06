@@ -24,11 +24,9 @@ function registerSociety(society, name, type)
     getSociety(society, function(soc)
         if soc ~= nil then
             rdebug(string.format('Society %s is already registered!',society))
-        else
-            type = type or "public"
-            TriggerEvent('esx_society:registerSociety', society, name, 'society_' .. society, 'society_' .. society, 'society_' .. society, { type = type })
-            return true
         end
+        type = type or "public"
+        TriggerEvent('esx_society:registerSociety', society, name, 'society_' .. society, 'society_' .. society, 'society_' .. society, { type = type })
     end)
 end
 
