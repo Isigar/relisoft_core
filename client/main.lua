@@ -45,6 +45,7 @@ Citizen.CreateThread(function()
     while true do
         local ped = PlayerPedId()
         playerPos = GetEntityCoords(ped)
+        nearDistanceMarkers = {}
         for k, v in pairs(distanceMarkers) do
             local dist = #(playerPos - vector3(v.coords.x, v.coords.y, v.coords.z))
             if dist <= nearDistanceMarkerDistance then
@@ -59,7 +60,9 @@ end)
 RegisterNetEvent('rcore:changePlayer')
 AddEventHandler('rcore:changePlayer',function(xPlayer)
     isAtJobCache = {}
-    print('[rcore] player changed removing job cache')
+    if Config.Debug then
+        print('[rcore] player changed removing job cache')
+    end
 end)
 
 function isAtJobFunc(id,v)
