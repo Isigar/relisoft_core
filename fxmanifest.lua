@@ -16,6 +16,7 @@ server_scripts {
     'server/core/society.lua',
     'server/core/weapon.lua',
     'server/core/storage.lua',
+    'server/core/player.lua',
     'server/main.lua',
 }
 
