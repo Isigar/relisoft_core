@@ -42,5 +42,9 @@ shared_scripts {
 }
 
 dependencies {
-    'es_extended'
+    'es_extended',
+    'esx_society',
+    'esx_addoninventory',
+    'esx_addonaccount',
+    'esx_datastore',
 }
