@@ -1,16 +1,16 @@
-local callbacks = {}
+local clientCallbacks = {}
 
 function callCallback(name,cb,...)
-    callbacks[name] = cb
-    TriggerServerEvent('rcore:callCallback',name,getClientKey(),GetPlayerServerId(PlayerId()),cb,...)
+    clientCallbacks[name] = cb
+    TriggerServerEvent('rcore:callCallback',name,GetPlayerServerId(PlayerId()),...)
 end
 
 exports('callCallback',callCallback)
 
 RegisterNetEvent('rcore:callback')
 AddEventHandler('rcore:callback',function(cbName,...)
-    if callbacks[cbName] == nil then
+    if clientCallbacks[cbName] == nil then
         return
     end
-    callbacks[cbName](...)
+    clientCallbacks[cbName](...)
 end)

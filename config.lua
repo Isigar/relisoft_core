@@ -10,8 +10,8 @@ Config.DefaultBlipOptions = {
     type = 4,
     color = 55
 }
+Config.InsideShop = vector3(228.5, -993.5, -99.0)
 
-Config.DiscordWebhook = "https://discordapp.com/api/webhooks/684726947800285379/_FTIqXybMtVbxP6ndVvpgbEaXI6w8C-qRSKSPxNdb2_NalrcbwmN1ASnAF8DDyUzWvdC"
 Config.DiscordColors = {
     ['Green'] = 56108,
     ['Grey'] = 8421504,

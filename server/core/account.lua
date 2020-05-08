@@ -17,13 +17,17 @@ exports('getAccount',getAccount)
 function isAccountExists(account,cb)
     rdebug(string.format('Checking %s shared account if exists.', account))
     MySQL.ready(function()
-        local data = MySQL.Sync.fetchScalar('SELECT COUNT(id) FROM addon_account WHERE name = @name', {
+        local data = MySQL.Sync.fetchScalar('SELECT COUNT(name) FROM addon_account WHERE name = @name', {
             ['@name'] = account
         })
-        if data > 0 then
-            cb(true)
-        else
+        if data == nil then
             cb(false)
+        else
+            if data > 0 then
+                cb(true)
+            else
+                cb(false)
+            end
         end
     end)
 end

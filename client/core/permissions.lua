@@ -154,14 +154,15 @@ end
 
 RegisterNetEvent('esx:playerLoaded')
 AddEventHandler('esx:playerLoaded',function(xPlayer)
-    PlayerData = xPlayer
-    if PlayerData == nil then
+    if xPlayer == nil or xPlayer.job == nil then
         PlayerData = getPlayerData(true)
+    else
+        PlayerData = xPlayer
     end
 
     if PlayerData.job ~= nil then
         TriggerEvent('rcore:changePlayer',PlayerData)
-        TriggerServerEvent('rcore:changePlayer',PlayerData)
+        TriggerServerEvent('rcore:changePlayer',GetPlayerServerId(PlayerId()))
     else
         print('[rcore] playerLoaded event empty job return!')
     end
@@ -176,7 +177,7 @@ AddEventHandler('esx:setJob',function(job)
     PlayerData.job = job
     if PlayerData.job ~= nil then
         TriggerEvent('rcore:changePlayer',PlayerData)
-        TriggerEvent('rcore:changePlayer',PlayerData)
+        TriggerServerEvent('rcore:changePlayer',GetPlayerServerId(PlayerId()))
     else
         print('[rcore] setJob event empty job return!')
     end

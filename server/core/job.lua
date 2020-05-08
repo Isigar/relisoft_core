@@ -37,9 +37,9 @@ function createJob(name,label,whitelisted)
                 ['@whitelisted'] = whitelisted
             },function(changes)
                 if changes then
-                    rdebug(string.format('Job %s successfully created!'))
+                    rdebug(string.format('Job %s successfully created!',name))
                 else
-                    rdebug(string.format('Error occured! Job %s cannot be created!'))
+                    rdebug(string.format('Error occured! Job %s cannot be created!',name))
                 end
             end)
         end
@@ -51,12 +51,12 @@ exports('createJob',createJob)
 function isJobGradeExists(name,job_name,cb)
     rdebug(string.format('Checking job grade %s for job %s if exists.', name,job_name))
     MySQL.ready(function()
-        local data = MySQL.Sync.fetchAll('SELECT id,job_name,grade,name,label,salary FROM job_grades WHERE name = @name AND job_name=@job', {
+        local data = MySQL.Sync.fetchAll('SELECT id,job_name,grade,name,label,salary FROM job_grades WHERE name=@name AND job_name=@job', {
             ['@name'] = name,
             ['@job'] = job_name
         })
-        if data ~= nil then
-            cb(data)
+        if data[1] ~= nil then
+            cb(data[1])
         else
             cb(false)
         end
@@ -67,22 +67,23 @@ exports('isJobGradeExists',isJobGradeExists)
 
 function createJobGrade(job_name,grade,name,label,salary)
     isJobGradeExists(name,job_name,function(is)
-        if is then
+        if is ~= false then
             if is.label ~= label or is.salary ~= salary or is.grade ~= grade then
-                MySQL.Async.execute('UPDATE `job_grades` SET salary=@salary, label=@label, grade=@grade WHERE id=@id',{
+                MySQL.Async.execute('UPDATE `job_grades` SET salary=@salary, label=@label, grade=@grade, salary=@salary WHERE id=@id',{
                     ['@id'] = is.id,
                     ['@label'] = label,
                     ['@grade'] = grade,
+                    ['@salary'] = salary,
                 },function(changes)
                     if changes then
-                        rdebug(string.format('Job %s successfully updated!'))
+                        rdebug(string.format('Job grade %s successfully updated!',name))
                     else
-                        rdebug(string.format('Error occured! Job %s cannot be updated!'))
+                        rdebug(string.format('Error occured! Job grade %s cannot be updated!',name))
                     end
                 end)
-                rdebug(string.format('Updating job %s - changes found!',name))
+                rdebug(string.format('Updating job grade %s - changes found!',name))
             else
-                rdebug(string.format('Job %s already created, skipping creation',name))
+                rdebug(string.format('Job grade %s already created, skipping creation',name))
             end
         else
             MySQL.Async.execute('INSERT INTO `job_grades` (`job_name`, `grade`, `name`, `label`, `salary`, `skin_male`, `skin_female`) VALUES (@job_name, @grade, @name, @label, @salary, @skin, @skin)',{
@@ -90,12 +91,13 @@ function createJobGrade(job_name,grade,name,label,salary)
                 ['@label'] = label,
                 ['@job_name'] = job_name,
                 ['@grade'] = grade,
+                ['@salary'] = salary,
                 ['@skin'] = json.encode({})
             },function(changes)
                 if changes then
-                    rdebug(string.format('Job %s successfully created!'))
+                    rdebug(string.format('Job grade %s successfully created!',name))
                 else
-                    rdebug(string.format('Error occured! Job %s cannot be created!'))
+                    rdebug(string.format('Error occured! Job grade %s cannot be created!',name))
                 end
             end)
         end

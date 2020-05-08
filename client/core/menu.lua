@@ -16,7 +16,11 @@ function createMenu(title, name, elements, options)
             action(menu)
         end
     end, function(data, menu)
-        menu.close()
+        if options.close ~= nil then
+            options.close(data,menu)
+        else
+            menu.close()
+        end
     end)
 end
 

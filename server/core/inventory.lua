@@ -17,13 +17,17 @@ exports('getInventory',getInventory)
 function isInventoryExists(inventory,cb)
     rdebug(string.format('Checking %s shared inventory if exists.', inventory))
     MySQL.ready(function()
-        local data = MySQL.Sync.fetchScalar('SELECT COUNT(id) FROM addon_inventory WHERE name = @name', {
+        local data = MySQL.Sync.fetchScalar('SELECT COUNT(name) FROM addon_inventory WHERE name = @name', {
             ['@name'] = inventory
         })
-        if data > 0 then
-            cb(true)
-        else
+        if data == nil then
             cb(false)
+        else
+            if data > 0 then
+                cb(true)
+            else
+                cb(false)
+            end
         end
     end)
 end
