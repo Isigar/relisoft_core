@@ -1,4 +1,5 @@
 local lastKey
+local clientResourceCount
 
 --Thanks nit34byte <3
 function generateKey()

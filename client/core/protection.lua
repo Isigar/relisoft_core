@@ -1,4 +1,7 @@
 local protectionKey
+local count
+
+TriggerServerEvent('rcore:updateCount',GetNumResources())
 
 TriggerServerEvent('rcore:retrieveKey')
 
@@ -12,7 +15,10 @@ AddEventHandler('rcore:updateKey', function(key)
     end
 end)
 
-function getClientKey()
+function getClientKey(resource)
+    if resource == nil then
+        TriggerServerEvent('rcore:logCheater',nil,'rcore:getClientKey')
+    end
     print(string.format('[rcore] getting key from export %s',protectionKey))
     return protectionKey
 end

@@ -3,15 +3,16 @@ Config.Debug = true
 Config.ESXCallback = "esx:getSharedObject"
 Config.DefaultChatColor = { 255, 255, 255 }
 Config.CheckPlayerPosition = 500 --in ms
-Config.NearObjectDistance = 200.0
+Config.NearObjectDistance = 100.0
 Config.DefaultBlipOptions = {
     scale = 1.0,
     shortRange = true,
     type = 4,
-    color = 55
+    color = 55,
+    blip = -1
 }
+Config.InsideShop = vector3(228.5, -993.5, -99.0)
 
-Config.DiscordWebhook = "https://discordapp.com/api/webhooks/684726947800285379/_FTIqXybMtVbxP6ndVvpgbEaXI6w8C-qRSKSPxNdb2_NalrcbwmN1ASnAF8DDyUzWvdC"
 Config.DiscordColors = {
     ['Green'] = 56108,
     ['Grey'] = 8421504,

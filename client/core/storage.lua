@@ -97,16 +97,36 @@ function closeStorageMenu(id)
     end
 end
 
-function openStorageMenu(id, title, name, datastore)
+function openStorageMenu(id, title, name, datastore, menuContext)
+    local menuOptions = {}
+    if menuContext == nil then
+        menuOptions = {
+            { label = 'Uschovat zbran', value = 'store_weapon' },
+            { label = 'Vybrat zbran', value = 'get_weapon' },
+            { label = 'Uschovat predmet', value = 'store_item' },
+            { label = 'Vybrat predmet', value = 'get_item' },
+            { label = 'Uschovat penize', value = 'store_money' },
+            { label = 'Vybrat penize', value = 'get_money' },
+        }
+    else
+        for k, v in pairs(menuContext) do
+            if v == "store_weapon" then
+                table.insert(menuOptions,{ label = 'Uschovat zbran', value = 'store_weapon' })
+            elseif v == "get_weapon" then
+                table.insert(menuOptions,{ label = 'Vybrat zbran', value = 'get_weapon' })
+            elseif v == "store_item" then
+                table.insert(menuOptions,{ label = 'Uschovat predmet', value = 'store_item' })
+            elseif v == "get_item" then
+                table.insert(menuOptions,{ label = 'Vybrat predmet', value = 'get_item' })
+            elseif v == "store_money" then
+                table.insert(menuOptions,{ label = 'Uschovat penize', value = 'store_money' })
+            elseif v == "get_money" then
+                table.insert(menuOptions,{ label = 'Vybrat penize', value = 'get_money' })
+            end
+        end
+    end
     local idName = string.format('storage-%s-%s-',id,name)
-    createMenu(title, idName, {
-        { label = 'Uschovat zbran', value = 'store_weapon' },
-        { label = 'Vybrat zbran', value = 'get_weapon' },
-        { label = 'Uschovat predmet', value = 'store_item' },
-        { label = 'Vybrat predmet', value = 'get_item' },
-        { label = 'Uschovat penize', value = 'store_money' },
-        { label = 'Vybrat penize', value = 'get_money' },
-    }, {
+    createMenu(title, idName, menuOptions, {
         submit = function(data, menu)
             local value = data.current.value
             if value == "store_weapon" then
@@ -116,7 +136,7 @@ function openStorageMenu(id, title, name, datastore)
                             menu2.close()
                             ESX.TriggerServerCallback('rcore:storeWeapon', function(stored)
                                 showNotification('~g~Uspesne jste ulozili zbran do trezoru!')
-                            end,getClientKey(), data.current.value, datastore)
+                            end,getClientKey(GetCurrentResourceName()), data.current.value, datastore)
                         end
                     })
                 end)
@@ -131,10 +151,10 @@ function openStorageMenu(id, title, name, datastore)
                                 else
                                     showNotification('~r~Tak tuto zbran tu opravdu nemame!')
                                 end
-                            end,getClientKey(), datastore, data.current.value)
+                            end,getClientKey(GetCurrentResourceName()), datastore, data.current.value)
                         end
                     })
-                end,getClientKey(), datastore)
+                end,getClientKey(GetCurrentResourceName()), datastore)
             elseif value == "store_item" then
                 ESX.TriggerServerCallback('rcore:getInventory', function(inv)
                     createMenu(title, idName..'store_item', inv, {
@@ -150,7 +170,7 @@ function openStorageMenu(id, title, name, datastore)
                                         else
                                             showNotification('~r~Nepodarilo~w~ se ti to tam narvat!')
                                         end
-                                    end,getClientKey(),datastore,data.current.value,count)
+                                    end,getClientKey(GetCurrentResourceName()),datastore,data.current.value,count)
                                 else
                                     showNotification('Neplatna castka')
                                 end
@@ -176,7 +196,7 @@ function openStorageMenu(id, title, name, datastore)
                                         else
                                             showNotification('~w~Tolik toho opravdu ~r~neuneses!')
                                         end
-                                    end,getClientKey(), datastore, data.current.value,count)
+                                    end,getClientKey(GetCurrentResourceName()), datastore, data.current.value,count)
                                 else
                                     showNotification('~r~Neplatny~w~ pocet!')
                                 end
@@ -184,7 +204,7 @@ function openStorageMenu(id, title, name, datastore)
 
                         end
                     })
-                end,getClientKey(), datastore)
+                end,getClientKey(GetCurrentResourceName()), datastore)
             elseif value == "store_money" then
                 createMenu(title,  idName..'store_money', {
                     {label = 'Spinave penize', value = 'black_money'},
@@ -206,7 +226,7 @@ function openStorageMenu(id, title, name, datastore)
                                     else
                                         showNotification('~w~Takto to nepujde, ~r~nemuzete~w~ dat vice nez mate')
                                     end
-                                end,getClientKey(),datastore,data.current.value,count)
+                                end,getClientKey(GetCurrentResourceName()),datastore,data.current.value,count)
                             else
                                 showNotification('~r~Neplatny~w~ pocet!')
                             end
@@ -232,14 +252,14 @@ function openStorageMenu(id, title, name, datastore)
                                         else
                                             showNotification('~w~Takto to nepujde, ~r~nemuzete~w~ vzit vice nez tam je')
                                         end
-                                    end,getClientKey(),datastore,data.current.value,count)
+                                    end,getClientKey(GetCurrentResourceName()),datastore,data.current.value,count)
                                 else
                                     showNotification('~r~Neplatny~w~ pocet!')
                                 end
                             end)
                         end
                     })
-                end,getClientKey(),datastore)
+                end,getClientKey(GetCurrentResourceName()),datastore)
             end
         end
     })

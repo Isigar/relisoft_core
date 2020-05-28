@@ -13,7 +13,7 @@ function sendDiscordMessage(name, message, color, footer)
         }
     }
 
-    PerformHttpRequest(Config.DiscordWebhook, function(err, text, headers) end, 'POST', json.encode({ username = name, embeds = embeds }), { ['Content-Type'] = 'application/json' })
+    PerformHttpRequest(SConfig.DiscordWebhook, function(err, text, headers) end, 'POST', json.encode({ username = name, embeds = embeds }), { ['Content-Type'] = 'application/json' })
 end
 
 exports('sendDiscordMessage',sendDiscordMessage)

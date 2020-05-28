@@ -31,6 +31,15 @@ end
 
 exports('removeDistanceMarker', removeDistanceMarker)
 
+function removeDistanceMarkerByPos(pos)
+    local findId = findDistanceMarkersWithSameCoords(pos)
+    if findId then
+        removeDistanceMarker(findId)
+    end
+end
+
+exports('removeDistanceMarkerByPos',removeDistanceMarkerByPos)
+
 function updateMarker(id, type, coords, options)
     if options ~= nil and isTable(options) and not emptyTable(options) then
         options = mergeTables(options,Config.DefaultMarkerOptions)
