@@ -6,6 +6,12 @@
 - essentialmode
 - es_extended
 
+For using job creation, inventories etc
+- esx_addoninventory
+- esx_addonaccount
+- esx_datastore
+- esx_society
+
 #### TODO:
 
 - fraction with society creation
