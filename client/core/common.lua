@@ -19,6 +19,21 @@ end
 
 exports('getPlayerPos', getPlayerPos)
 
+function getDriver(vehicle)
+    return GetPedInVehicleSeat(vehicle,-1)
+end
+
+exports('getDriver',getDriver)
+
+function isDriver(ped,vehicle)
+    if ped == getDriver(vehicle) then
+        return true
+    end
+    return false
+end
+
+exports('isDriver',isDriver)
+
 --- @param x number
 --- @param y number
 --- @param z number
