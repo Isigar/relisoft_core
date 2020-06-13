@@ -6,7 +6,34 @@ description: Some of functions that will help you and i want them to be easy to 
 
 #### Draw 3D texts
 
+{% code title="Options" %}
+```lua
+{
+    color = {
+        r = 255,
+        g = 255,
+        b = 255,
+        a = 255
+    },
+    size = 0.8
+}
+```
+{% endcode %}
+
+```lua
+draw3DText(pos, text, options)
+```
+
 #### Vehicle driver
+
+```lua
+--Is ped in vehicle? return vehicle/false
+rcore:isInVehicle(ped)
+--Is ped driver of vehicle return true/fals
+rcore:isDriver(ped,vehicle)
+-- Get driver of vehicle return ped, false
+rcore:getDriver(vehicle)
+```
 
 #### Closest ped
 
