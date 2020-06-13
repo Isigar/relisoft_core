@@ -4,7 +4,7 @@ description: Creating and maganing blips was never so easy
 
 # Blips
 
-{% hint style="info" %}
+{% hint style="success" %}
 You can find blips sprite and colors ids here [https://docs.fivem.net/docs/game-references/blips/](https://docs.fivem.net/docs/game-references/blips/)
 {% endhint %}
 
@@ -59,7 +59,8 @@ For more look at link above
 
 ### Classic blips
 
-```text
+{% code title="your\_clientside.lua" %}
+```lua
 rcore = exports.rcore
 
 local blip
@@ -71,12 +72,61 @@ Citizen.CreateThread(function()
     })
 end)
 ```
+{% endcode %}
 
 ### Area blip
 
+{% code title="your\_clientside.lua" %}
+```lua
+rcore = exports.rcore
+
+local blip
+
+Citizen.CreateThread(function() 
+    blip = rcore:createAreaBlip(vector3(area.x,area.y,area.z),area.rotation,area.width,area.height)
+end)
+```
+{% endcode %}
+
+{% hint style="warning" %}
+rcore area blip is using native [https://runtime.fivem.net/doc/natives/?\_0xCE5D0E5E315DB238](https://runtime.fivem.net/doc/natives/?_0xCE5D0E5E315DB238)
+{% endhint %}
+
+![Area blip, image from native documentation link above](.gitbook/assets/pdcjig.png)
+
 ### Removing blip
 
+{% code title="your\_clientside.lua" %}
+```lua
+rcore = exports.rcore
+
+rcore:removeBlip(blip)
+```
+{% endcode %}
+
 ### Using natives
+
+All create function return real blip id so you can use it with any native function for example
+
+{% code title="your\_clientside.lua" %}
+```lua
+rcore = exports.rcore
+
+local blip
+
+Citizen.CreateThread(function()
+    blip = rcore:createBlip(Config.Blip.name, Config.Blip.blip, vector3(Config.Blip.x, Config.Blip.y, Config.Blip.z), {
+        type = Config.Blip.type,
+        color = Config.Blip.color
+    })
+    
+    SetBlipFlashes(blip,true)
+    SetBlipAlpha(blip, 50)
+    --Or change color
+    SetBlipColour(blip, 5)
+end)
+```
+{% endcode %}
 
 
 
