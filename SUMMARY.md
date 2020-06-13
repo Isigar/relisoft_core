@@ -2,6 +2,7 @@
 
 * [rcore.cz](README.md)
 * [ESX](esx.md)
+* [Common functions](common.md)
 * [Blips](blips.md)
 * [Jobs](jobs.md)
 * [relisoft\_core github wiki](undefined.md)

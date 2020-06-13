@@ -4,6 +4,8 @@ description: Creating and maganing blips was never so easy
 
 # Blips
 
+
+
 {% hint style="success" %}
 You can find blips sprite and colors ids here [https://docs.fivem.net/docs/game-references/blips/](https://docs.fivem.net/docs/game-references/blips/)
 {% endhint %}
