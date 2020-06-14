@@ -7,6 +7,11 @@ AddEventHandler('rcore:changePlayer',function(xPlayer)
 end)
 
 function isAtGroup(name)
+    if currentPlayer == nil then
+        if ESX.IsPlayerLoaded() then
+            currentPlayer = ESX.GetPlayerData()
+        end
+    end
     local group = currentPlayer.getGroup()
     if group == name then
         return true
@@ -15,6 +20,11 @@ function isAtGroup(name)
 end
 
 function isAtJob(name)
+    if currentPlayer == nil then
+        if ESX.IsPlayerLoaded() then
+            currentPlayer = ESX.GetPlayerData()
+        end
+    end
     local job = currentPlayer.getJob()
     if job == nil then
         return false
