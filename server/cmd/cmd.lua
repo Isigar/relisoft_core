@@ -1,6 +1,7 @@
 local cmds = {}
 local currentPlayer
 
+RegisterNetEvent('rcore:changePlayer')
 AddEventHandler('rcore:changePlayer',function(xPlayer)
     currentPlayer = xPlayer
 end)
