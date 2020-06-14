@@ -40,8 +40,6 @@ end
 
 exports('showHelpNotification',showHelpNotification)
 
-exports('addCmd',addCmd)
-
 function getPlayerFromId(source,cb)
     local xPlayer = ESX.GetPlayerFromId(source)
     return xPlayer

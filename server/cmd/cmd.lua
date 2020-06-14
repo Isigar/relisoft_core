@@ -89,8 +89,8 @@ exports('addCmd',addCmd)
 
 ---@param cmd string Name of command without slash
 ---@param cb function Callback with source,args,user
-function adRconCmd(cmd, cb)
+function addRconCmd(cmd, cb)
     registerRconCommand(cmd,cb)
 end
 
-exports('adRconCmd',adRconCmd)
+exports('addRconCmd',addRconCmd)
