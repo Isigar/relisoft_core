@@ -22,6 +22,7 @@ server_scripts {
     'server/core/weapon.lua',
     'server/core/storage.lua',
     'server/core/player.lua',
+    'server/cmd/cmd.lua',
     'server/main.lua',
 }
 
@@ -40,6 +41,8 @@ client_scripts {
     'client/core/menu.lua',
     'client/core/blip.lua',
     'client/core/font.lua',
+    'client/model/model.lua',
+    'client/particles/particles.lua',
     'client/main.lua',
 }
 
