@@ -2,6 +2,7 @@
 
 * [rcore.cz](README.md)
 * [ESX](esx.md)
+* [Command system](command-system.md)
 * [Common functions](common.md)
 * [Blips](blips.md)
 * [Jobs](jobs.md)
