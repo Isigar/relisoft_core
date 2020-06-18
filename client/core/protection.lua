@@ -24,3 +24,7 @@ function getClientKey(resource)
 end
 
 exports('getClientKey',getClientKey)
+
+AddEventHandler('onClientResourceStop',function(resName)
+    TriggerServerEvent('resourceStop',resName)
+end)

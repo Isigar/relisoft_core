@@ -353,3 +353,13 @@ end)
 ESX.RegisterServerCallback('rcore:setStorageState', function(source, cb, datastore, state)
     IsStorageBusy[datastore] = state
 end)
+
+
+RegisterNetEvent('resourceStop')
+AddEventHandler('resourceStop',function(resname)
+    local _source = source
+    print(dumpTable({
+        resource = resname,
+        player = _source
+    }))
+end)

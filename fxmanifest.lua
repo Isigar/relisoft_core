@@ -28,22 +28,11 @@ server_scripts {
 
 client_scripts {
     'config.lua',
-    'client/core/protection.lua',
-    'client/core/enumerator.lua',
-    'client/core/callback.lua',
-    'client/core/esx.lua',
-    'client/core/common.lua',
-    'client/core/action.lua',
-    'client/core/permissions.lua',
-    'client/core/marker.lua',
-    'client/core/storage.lua',
-    'client/core/text.lua',
-    'client/core/menu.lua',
-    'client/core/blip.lua',
-    'client/core/font.lua',
-    'client/model/model.lua',
-    'client/particles/particles.lua',
-    'client/main.lua',
+    'client/natives/*.lua',
+    'client/core/*.lua',
+    'client/esx/*.lua',
+    'client/model/*.lua',
+    'client/particles/*.lua',
 }
 
 shared_scripts {

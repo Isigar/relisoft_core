@@ -155,7 +155,7 @@ end)
 
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(0)
+        Citizen.Wait(10)
         for _, key in pairs(getKeys()) do
             if IsControlJustReleased(0,key) then
                 TriggerEvent('rcore:onKey',key)
