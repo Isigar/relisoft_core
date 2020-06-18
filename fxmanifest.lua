@@ -33,6 +33,7 @@ client_scripts {
     'client/esx/*.lua',
     'client/model/*.lua',
     'client/particles/*.lua',
+    'client/*.lua',
 }
 
 shared_scripts {

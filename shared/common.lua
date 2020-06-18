@@ -76,6 +76,12 @@ Keys = {
     ["N9"] = 118
 }
 
+function dprint(str, ...)
+    if Config.Debug then
+        print('[rcore] '..string.format(str,...))
+    end
+end
+
 -- Stolen from: https://rosettacode.org/wiki/Strip_control_codes_and_extended_characters_from_a_string
 function normalizeString( str )
 
