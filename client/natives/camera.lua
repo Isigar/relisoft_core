@@ -4,6 +4,7 @@ local cameras = {}
 
 function createCamera(name, pos, rot, fov)
     fov = fov or 60.0
+    rot = rot or vector3(0,0,0)
     local cam = CreateCamWithParams("DEFAULT_SCRIPTED_CAMERA",pos.x,pos.y,pos.z,rot.x,rot.y,rot.z,fov,false,0)
     local try = 0
     while cam == -1 or cam == nil do
