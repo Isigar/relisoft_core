@@ -9,6 +9,13 @@ end
 
 exports('sendChatMessageFromServer',sendChatMessageFromServer)
 
+function sendChatMessage(source,title,message,color)
+    color = color or Config.DefaultChatColor
+    TriggerClientEvent('chat:addMessage', source, { args = { title, message }, color = color })
+end
+
+exports('sendChatMessage',sendChatMessage)
+
 ---@param message string
 function rdebug(message)
     if message ~= nil and Config.Debug == true then

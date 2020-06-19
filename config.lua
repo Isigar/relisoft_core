@@ -1,6 +1,7 @@
 Config = {}
 Config.Debug = true
 Config.ESXCallback = "esx:getSharedObject"
+Config.WeightSystem = true
 Config.DefaultChatColor = { 255, 255, 255 }
 Config.CheckPlayerPosition = 500 --in ms
 Config.NearObjectDistance = 100.0

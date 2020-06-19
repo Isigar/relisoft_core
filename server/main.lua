@@ -3,8 +3,9 @@ ESX = getEsxServerInstance()
 
 local IsStorageBusy = {}
 
-RegisterNetEvent('rcore:sendChatMessage', function(target, title, message)
-    sendChatMessageFromServer(target, title, message)
+RegisterNetEvent('rcore:sendChatMessage')
+AddEventHandler('rcore:sendChatMessage', function(target, title, message)
+    sendChatMessage(target, title, message)
 end)
 
 ESX.RegisterServerCallback('rcore:giveWeapon', function(source, cb,key, weapon, components)
@@ -352,14 +353,4 @@ end)
 
 ESX.RegisterServerCallback('rcore:setStorageState', function(source, cb, datastore, state)
     IsStorageBusy[datastore] = state
-end)
-
-
-RegisterNetEvent('resourceStop')
-AddEventHandler('resourceStop',function(resname)
-    local _source = source
-    print(dumpTable({
-        resource = resname,
-        player = _source
-    }))
 end)

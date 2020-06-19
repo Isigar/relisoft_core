@@ -17,7 +17,9 @@ end)
 
 function getClientKey(resource)
     if resource == nil then
+        dprint('Found not resource getClientKey export')
         TriggerServerEvent('rcore:logCheater',nil,'rcore:getClientKey')
+        return
     end
     print(string.format('[rcore] getting key from export %s',protectionKey))
     return protectionKey
