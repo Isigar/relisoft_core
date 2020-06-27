@@ -10,7 +10,7 @@ end
 exports('registerCallback',registerCallback)
 
 RegisterNetEvent('rcore:callCallback')
-AddEventHandler('rcore:callCallback',function(name,source,...)
+AddEventHandler('rcore:callCallback',function(name, requestId,source,...)
     if Config.Debug then
         print(string.format('[rcore] trying to call %s callback',name))
     end
@@ -22,6 +22,6 @@ AddEventHandler('rcore:callCallback',function(name,source,...)
 
     local call = serverCallbacks[name]
     call(source,function(...)
-        TriggerClientEvent('rcore:callback',source,name,...)
+        TriggerClientEvent('rcore:callback',source,requestId,...)
     end,...)
 end)

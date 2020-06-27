@@ -266,3 +266,7 @@ function dumpTable(table, nb)
 end
 
 exports('dumpTable',dumpTable)
+
+function triggerName(event)
+    return string.format('rcore:%s',event)
+end

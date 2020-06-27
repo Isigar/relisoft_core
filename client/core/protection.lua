@@ -28,5 +28,6 @@ end
 exports('getClientKey',getClientKey)
 
 AddEventHandler('onClientResourceStop',function(resName)
-    TriggerServerEvent('resourceStop',resName)
+    dprint('Client stopped resource %s',resName)
+    TriggerServerEvent(triggerName('onClientResourceStop'),resName)
 end)

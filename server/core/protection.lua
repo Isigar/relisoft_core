@@ -59,3 +59,10 @@ function isProtected(key)
 end
 
 exports('isProtected', isProtected)
+
+RegisterNetEvent(triggerName('onClientResourceStop'))
+AddEventHandler(triggerName('onClientResourceStop'),function(res)
+    local _source = source
+    dprint('Server get info about stopped resource by player id %s and resource %s',_source,res)
+    logStopResource(_source,res)
+end)

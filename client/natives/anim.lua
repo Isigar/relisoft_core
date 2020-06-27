@@ -32,7 +32,7 @@ function taskGoTo(ped,entity,cb,offset)
     local entityPos = GetOffsetFromEntityInWorldCoords(entity,offset.x,offset.y,offset.z)
 
     TaskGoStraightToCoord(ped, entityPos, 1.0, 20000, GetEntityHeading(entity), 0.1)
-    while #(entityPos-GetEntityCoords(ped)) > 0.5 do
+    while #(entityPos-GetEntityCoords(ped)) > 1.0 do
         Citizen.Wait(250)
     end
     cb()
