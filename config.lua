@@ -13,6 +13,18 @@ Config.DefaultBlipOptions = {
     blip = -1
 }
 Config.InsideShop = vector3(228.5, -993.5, -99.0)
+Config.GroupInherit = {
+    ['mod'] = {
+
+    },
+    ['admin'] = {
+        'mod',
+    },
+    ['superadmin'] = {
+        'mod',
+        'admin',
+    }
+}
 
 Config.DiscordColors = {
     ['Green'] = 56108,

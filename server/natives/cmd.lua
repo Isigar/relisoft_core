@@ -6,12 +6,38 @@ AddEventHandler('rcore:changePlayer',function(source)
     currentPlayer = ESX.GetPlayerFromId(source)
 end)
 
-function isAtGroup(name)
+function isAtGroup(name,inherit)
     local group = currentPlayer.getGroup()
     if group == name then
         return true
     end
-    return false
+
+    if inherit then
+        if tableLength(Config.GroupInherit) > 0 then
+            local tryFound = Config.GroupInherit[name]
+            if tableLength(tryFound) > 0 then
+                local foundGroup = false
+                for _, inheritGroup in pairs(tryFound) do
+                    if group == inheritGroup then
+                        return true
+                    end
+                end
+                return foundGroup
+            else
+                if group == name then
+                    return true
+                end
+                return false
+            end
+        else
+            print('[rcore] Group inherit not setup! WARNING')
+        end
+    else
+        if group == name then
+            return true
+        end
+        return false
+    end
 end
 
 function isAtJob(name)
@@ -27,10 +53,10 @@ function isAtJob(name)
     return false
 end
 
-function registerGroupCommand(name,group,cb)
+function registerGroupCommand(name,group,cb,inherit)
     RegisterCommand(name, function(source,args,rawCmd)
         if source > 0 then
-            if isAtGroup(group) then
+            if isAtGroup(group,inherit) then
                 cb(source,args,rawCmd)
             else
                 sendChatMessageFromServer(source,'Commands','You dont have permission to do this command', {255,0,0})
@@ -74,8 +100,9 @@ end
 ---@param cmd string Name of command without slash
 ---@param level number Needed admin level
 ---@param cb function Callback with source,args,user
-function addGroupCmd(cmd, group, cb)
-    registerGroupCommand(cmd,group,cb)
+function addGroupCmd(cmd, group, cb, inherit)
+    inherit = inherit or false
+    registerGroupCommand(cmd,group,cb,inherit)
 end
 
 exports('addGroupCmd',addGroupCmd)

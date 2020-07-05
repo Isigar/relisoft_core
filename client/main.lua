@@ -210,7 +210,7 @@ end)
 
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(50)
+        Citizen.Wait(150)
         for id, v in pairs(distanceMarkers) do
             if isAtJobFunc(id,v) then
                 local dist = #(playerPos-vector3(v.coords.x, v.coords.y, v.coords.z))
@@ -220,6 +220,9 @@ Citizen.CreateThread(function()
                     callActionOnce(string.format('marker-%s-onEnter',id))
                     resetCall(string.format('marker-%s-onLeave',id))
                 else
+                    if isAtMarker == id then
+                        isAtMarker = false
+                    end
                     if isCalled(string.format('marker-%s-onEnter',id)) then
                         isAtMarker = false
                         callActionOnce(string.format('marker-%s-onLeave',id))

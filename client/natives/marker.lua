@@ -19,6 +19,7 @@ end
 
 function removeMarker(id)
     markers[id] = nil
+    removeMarkerAction(id)
     TriggerEvent('rcore:updateMarkers')
 end
 
@@ -26,6 +27,7 @@ exports('removeMarker', removeMarker)
 
 function removeDistanceMarker(id)
     distanceMarkers[id] = nil
+    removeMarkerAction(id)
     TriggerEvent('rcore:updateDistanceMarkers')
 end
 
@@ -55,6 +57,12 @@ function updateMarker(id, type, coords, options)
 end
 
 exports('updateMarker', updateMarker)
+
+function removeMarkerAction(id)
+    removeAction(string.format('marker-%s-onEnter',id))
+    removeAction(string.format('marker-%s-onEnterKey',id))
+    removeAction(string.format('marker-%s-onLeave',id))
+end
 
 --- @param type number
 --- @param coords vector3

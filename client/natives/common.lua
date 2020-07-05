@@ -31,13 +31,33 @@ end
 exports('draw3DText', draw3DText)
 
 --Taken and edited from https://forum.cfx.re/t/lua-finding-closest-ped-to-player/166950
-function getClosestPed()
-    local closestPed = 0
-
+function getClosestPed(targetPed, distance)
     for ped in EnumeratePeds() do
-        local distanceCheck = #(GetEntityCoords(PlayerPedId())-GetEntityCoords(ped))
-        if distanceCheck <= 15.0 then
-            closestPed = ped
+        if DoesPedExists(ped) and ped ~= 0 then
+            local distanceCheck = #(GetEntityCoords(targetPed)-GetEntityCoords(ped))
+            if distanceCheck <= distance then
+                return ped
+            end
+        end
+    end
+
+    return nil
+end
+
+exports('getClosestPed',getClosestPed)
+
+function getClosestPeds(targetPed, distance, count)
+    count = count or 250
+
+    local closestPed = {}
+    local count = 0
+    for ped in EnumeratePeds() do
+        local distanceCheck = #(GetEntityCoords(targetPed)-GetEntityCoords(ped))
+        if distanceCheck <= distance then
+            table.insert(closestPed,ped)
+        end
+        count = count + 1
+        if count >= count then
             break
         end
     end

@@ -2,9 +2,7 @@ local actions = {}
 local callRegister = {}
 
 function addAction(actionName, call)
-    if Config.Debug then
-        print(string.format('[rcore] register action %s',actionName))
-    end
+    dprint(string.format('[rcore] register action %s',actionName))
     actions[actionName] = call
 end
 
@@ -12,11 +10,14 @@ function getAction(actionName)
     return actions[actionName]
 end
 
+function removeAction(actionName)
+    actions[actionName] = nil
+    callRegister[actionName] = nil
+end
+
 function callAction(actionName,params)
     if actions[actionName] ~= nil then
-        if Config.Debug then
-            print(string.format('[rcore] call action %s',actionName))
-        end
+        dprint(string.format('[rcore] call action %s',actionName))
         actions[actionName](params)
     end
 end
@@ -32,9 +33,7 @@ end
 function callActionOnce(actionName,params)
     if callRegister[actionName] == nil then
         if actions[actionName] ~= nil then
-            if Config.Debug then
-                print(string.format('[rcore] call action once %s',actionName))
-            end
+            dprint(string.format('[rcore] call action once %s',actionName))
             actions[actionName](params)
         end
         callRegister[actionName] = true
