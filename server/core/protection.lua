@@ -29,7 +29,8 @@ local function dropTimer()
                 dprint('Resource %s last diff %s',data.resource,(GetGameTimer()-data.time))
                 if (GetGameTimer()-data.time) > 5000 then
                     dprint('Dropping a player for 5 seconds not keep alive from %s',data.resource)
-                    DropPlayer(source,'fivemock stop resource detection')
+                    TriggerEvent('rcore:cheaterDetect',source,data.resource)
+                    DropPlayer(source,'[rcore.cz] fivemock stop resource detection')
                 end
             end
         end
