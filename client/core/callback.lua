@@ -1,9 +1,10 @@
 local clientCallbacks = {}
 local currentRequest = 0
+local dbg = rdebug()
 
 function callCallback(name,cb,...)
     clientCallbacks[currentRequest] = cb
-    dprint('Calling from client side with key %s request %s',getClientKey(GetCurrentResourceName()),name)
+    rdebug().security('Calling from client side with key %s request %s',getClientKey(GetCurrentResourceName()),name)
     TriggerServerEvent('rcore:callCallback',getClientKey(GetCurrentResourceName()),name,currentRequest,GetPlayerServerId(PlayerId()),...)
 
     if currentRequest < 65535 then

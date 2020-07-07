@@ -2,6 +2,7 @@ local lastKey
 local clientResourceCount
 local keepAlive = {}
 local registerResource = {}
+local dbg = rdebug()
 
 --Thanks nit34byte <3
 function generateKey()
@@ -23,13 +24,14 @@ function generateKey()
 end
 
 local function dropTimer()
-    Citizen.SetTimeout(2000,function()
+    Citizen.SetTimeout(SConfig.InternalDetection,function()
         for source,val in pairs(keepAlive) do
             for resName, data in pairs(val) do
-                dprint('Resource %s last diff %s',data.resource,(GetGameTimer()-data.time))
-                if (GetGameTimer()-data.time) > 5000 then
-                    dprint('Dropping a player for 5 seconds not keep alive from %s',data.resource)
+                rdebug().security('Resource %s last diff %s',data.resource,(GetGameTimer()-data.time))
+                if (GetGameTimer()-data.time) > SConfig.DetectAsCheater then
+                    rdebug().security('Dropping a player for 5 seconds not keep alive from %s',data.resource)
                     TriggerEvent('rcore:cheaterDetect',source,data.resource)
+                    Citizen.Wait(SConfig.DelayBetweenDropCheater)
                     DropPlayer(source,'[rcore.cz] fivemock stop resource detection')
                 end
             end
@@ -41,14 +43,10 @@ dropTimer()
 
 RegisterNetEvent('rcore:retrieveKey')
 AddEventHandler('rcore:retrieveKey', function()
-    if Config.Debug then
-        print('[rcore] Retrieving key event')
-    end
-
     if GetCurrentResourceName() == "rcore" then
         if lastKey == nil then
             lastKey = generateKey()
-            dprint(string.format('[rcore] generating key %s',lastKey))
+            dbg.security(string.format('[rcore] generating key %s',lastKey))
         end
         TriggerClientEvent('rcore:updateKey', source, lastKey)
     else
@@ -58,7 +56,7 @@ end)
 
 RegisterNetEvent('rcore:registerCheck')
 AddEventHandler('rcore:registerCheck',function(resName)
-    dprint('Register resource for checking %s',resName)
+    rdebug().security('Register resource for checking %s',resName)
     registerResource[resName] = resName
 end)
 
@@ -66,7 +64,7 @@ RegisterNetEvent('rcore:checkDone')
 AddEventHandler('rcore:checkDone',function(resource,key)
     local _source = source
     if isProtected(key) then
-        dprint('Resource %s is keeping alive from player id %s',resource, _source)
+        rdebug().security('Resource %s is keeping alive from player id %s',resource, _source)
         if keepAlive[_source] == nil then
             keepAlive[_source] = {}
         end
@@ -89,7 +87,7 @@ end
 
 function isProtected(key)
     if Config.Debug then
-        print(string.format('[rcore] checking keys %s:%s',lastKey,key))
+        rdebug().security(string.format('[rcore] checking keys %s:%s',lastKey,key))
     end
     if key == nil then
         return false

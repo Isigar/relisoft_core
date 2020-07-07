@@ -1,5 +1,6 @@
 Config = {}
 Config.Debug = true
+Config.DebugLevel = 'INFO'
 Config.ESXCallback = "esx:getSharedObject"
 Config.WeightSystem = true
 Config.DefaultChatColor = { 255, 255, 255 }

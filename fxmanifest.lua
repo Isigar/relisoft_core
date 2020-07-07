@@ -25,7 +25,8 @@ client_scripts {
 
 shared_scripts {
     'config.lua',
-    'shared/common.lua'
+    'shared/common.lua',
+    'shared/debug.lua'
 }
 
 dependencies {
