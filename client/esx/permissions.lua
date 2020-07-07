@@ -1,3 +1,4 @@
+local dbg = rdebug()
 local PlayerData
 
 ---@param job string
@@ -164,7 +165,7 @@ AddEventHandler('esx:playerLoaded',function(xPlayer)
         TriggerEvent('rcore:changePlayer',PlayerData)
         TriggerServerEvent('rcore:changePlayer',GetPlayerServerId(PlayerId()))
     else
-        print('[rcore] playerLoaded event empty job return!')
+        dbg.critical('[rcore] playerLoaded event empty job return!')
     end
 end)
 
@@ -179,6 +180,6 @@ AddEventHandler('esx:setJob',function(job)
         TriggerEvent('rcore:changePlayer',PlayerData)
         TriggerServerEvent('rcore:changePlayer',GetPlayerServerId(PlayerId()))
     else
-        print('[rcore] setJob event empty job return!')
+        dbg.critical('[rcore] setJob event empty job return!')
     end
 end)

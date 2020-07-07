@@ -18,7 +18,7 @@ exports('removeStorage',removeStorage)
 
 function setStorageBusy(id,state)
     if Config.Debug then
-        print(string.format('[rcore] Setting storage with id %s to busy state %s',id,state))
+        dbg.debug(string.format('[rcore] Setting storage with id %s to busy state %s',id,state))
     end
     TriggerServerEvent('rcore:setStorageBusy',id,state)
 end
@@ -43,7 +43,7 @@ function updateStorage(id,title,name,datastore,coords,options)
         updated = true
     }
     if Config.Debug then
-        print(string.format('[rcore] Updating storage with id %s',id))
+        dbg.debug(string.format('[rcore] Updating storage with id %s',id))
     end
 
     return id
@@ -69,7 +69,7 @@ function addStorage(title, name, datastore, coords, options)
             distance = options.distance or 100
         })
         if Config.Debug then
-            print(string.format('[rcore] Creating storage with id %s',id))
+            dbg.debug(string.format('[rcore] Creating storage with id %s',id))
         end
 
         TriggerEvent('rcore:updateStorages')

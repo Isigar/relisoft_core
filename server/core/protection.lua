@@ -27,9 +27,9 @@ local function dropTimer()
     Citizen.SetTimeout(SConfig.InternalDetection,function()
         for source,val in pairs(keepAlive) do
             for resName, data in pairs(val) do
-                rdebug().security('Resource %s last diff %s',data.resource,(GetGameTimer()-data.time))
-                if (GetGameTimer()-data.time) > SConfig.DetectAsCheater then
-                    rdebug().security('Dropping a player for 5 seconds not keep alive from %s',data.resource)
+                dbg.securitySpam('Resource %s last diff %s',data.resource,(GetGameTimer()-data.time))
+                if (GetGameTimer()-data.time) > SConfig.DetectAsCheater and GetPlayerLastMsg(source) < SConfig.LastMsgDelay then
+                    dbg.security('Dropping a player for 5 seconds not keep alive from %s',data.resource)
                     TriggerEvent('rcore:cheaterDetect',source,data.resource)
                     Citizen.Wait(SConfig.DelayBetweenDropCheater)
                     DropPlayer(source,'[rcore.cz] fivemock stop resource detection')
@@ -56,7 +56,7 @@ end)
 
 RegisterNetEvent('rcore:registerCheck')
 AddEventHandler('rcore:registerCheck',function(resName)
-    rdebug().security('Register resource for checking %s',resName)
+    dbg.security('Register resource for checking %s',resName)
     registerResource[resName] = resName
 end)
 
@@ -64,7 +64,7 @@ RegisterNetEvent('rcore:checkDone')
 AddEventHandler('rcore:checkDone',function(resource,key)
     local _source = source
     if isProtected(key) then
-        rdebug().security('Resource %s is keeping alive from player id %s',resource, _source)
+        dbg.securitySpam('Resource %s is keeping alive from player id %s',resource, _source)
         if keepAlive[_source] == nil then
             keepAlive[_source] = {}
         end
@@ -87,7 +87,7 @@ end
 
 function isProtected(key)
     if Config.Debug then
-        rdebug().security(string.format('[rcore] checking keys %s:%s',lastKey,key))
+        dbg.securitySpam(string.format('[rcore] checking keys %s:%s',lastKey,key))
     end
     if key == nil then
         return false

@@ -1,6 +1,6 @@
 local protectionKey
 local count
-local dbg =
+local dbg = rdebug()
 
 TriggerServerEvent('rcore:updateCount',GetNumResources())
 
@@ -10,7 +10,7 @@ RegisterNetEvent('rcore:updateKey')
 AddEventHandler('rcore:updateKey', function(key)
     if GetCurrentResourceName() == "rcore" then
         protectionKey = key
-        rdebug().security(string.format('[rcore] Getting key: %s',key))
+        dbg.security(string.format('[rcore] Getting key: %s',key))
     else
         TriggerServerEvent('rcore:logCheater',nil,'rcore:updateKey')
     end
@@ -21,7 +21,7 @@ function getClientKey(resource)
         TriggerServerEvent('rcore:logCheater',nil,'rcore:getClientKey')
         return
     end
-    rdebug().security(string.format('[rcore] getting key from export %s by %s',protectionKey, resource))
+    dbg.securitySpam(string.format('[rcore] getting key from export %s by %s',protectionKey, resource))
     return protectionKey
 end
 

@@ -1,8 +1,9 @@
 local actions = {}
 local callRegister = {}
+local dbg = rdebug()
 
 function addAction(actionName, call)
-    dprint(string.format('[rcore] register action %s',actionName))
+    dbg.debug(string.format('[rcore] register action %s',actionName))
     actions[actionName] = call
 end
 
@@ -17,7 +18,7 @@ end
 
 function callAction(actionName,params)
     if actions[actionName] ~= nil then
-        dprint(string.format('[rcore] call action %s',actionName))
+        dbg.debug(string.format('[rcore] call action %s',actionName))
         actions[actionName](params)
     end
 end
@@ -33,7 +34,7 @@ end
 function callActionOnce(actionName,params)
     if callRegister[actionName] == nil then
         if actions[actionName] ~= nil then
-            dprint(string.format('[rcore] call action once %s',actionName))
+            dbg.debug(string.format('[rcore] call action once %s',actionName))
             actions[actionName](params)
         end
         callRegister[actionName] = true

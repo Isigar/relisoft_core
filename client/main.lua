@@ -319,9 +319,7 @@ AddEventHandler('onClientResourceStart',function(name)
     if GetCurrentResourceName() == name then
         Citizen.CreateThread(function()
             Citizen.Wait(1500)
-            if Config.Debug then
-                print(string.format('[rcore] restarting rcore - getting player data'))
-            end
+            dbg.info(string.format('[rcore] restarting rcore - getting player data'))
             loadPlayer()
         end)
     end

@@ -1,3 +1,4 @@
+local dbg = rdebug()
 local distanceMarkers = {}
 local markers = {}
 
@@ -79,7 +80,7 @@ function createMarker(type, coords, cb, options)
     local findId = findMarkersWithSameCoords(coords)
     if findId then
         if Config.Debug then
-            print(string.format('[rcore] Find marker with same coords - updating, marker id: %s',findId))
+            dbg.debug(string.format('[rcore] Find marker with same coords - updating, marker id: %s',findId))
         end
         updateMarker(findId, type, coords, options)
 
@@ -157,7 +158,7 @@ function createDistanceMarker(type, coords, distance, cb, options)
     local findId = findDistanceMarkersWithSameCoords(coords)
     if findId then
         if Config.Debug then
-            print(string.format('[rcore] Find marker with same coords - updating, marker id: %s',findId))
+            dbg.debug(string.format('[rcore] Find marker with same coords - updating, marker id: %s',findId))
         end
         updateDistanceMarker(findId, type, coords, distance, options)
 

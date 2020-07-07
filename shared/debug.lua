@@ -37,12 +37,22 @@ function rdebug()
             print('^3[rcore|security] ^7'..sprint(msg,...))
         end
     end
+    self.securitySpam = function(msg,...)
+        if isAllowed('SECURITY_SPAM') then
+            print('^3[rcore|security] ^7'..sprint(msg,...))
+        end
+    end
+    self.debug = function(msg,...)
+        if isAllowed('DEBUG') then
+            print('^2[rcore|debug] ^7'..sprint(msg,...))
+        end
+    end
     return self
 end
 
 exports('rdebug',rdebug)
 
 function dprint(str, ...)
-    local dbg = debug()
+    local dbg = rdebug()
     dbg.info(str,...)
 end
