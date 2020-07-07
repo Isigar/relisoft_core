@@ -1,10 +1,9 @@
 local serverCallbacks = {}
 local callbacksRequestsHistory = {}
+local dbg = rdebug()
 
 function registerCallback(cbName, callback)
-    if Config.Debug then
-        print(string.format('[rcore] register callback %s',cbName))
-    end
+    dbg.debug(string.format('[rcore] register callback %s',cbName))
     serverCallbacks[cbName] = callback
 end
 
@@ -13,7 +12,7 @@ exports('registerCallback',registerCallback)
 RegisterNetEvent('rcore:callCallback')
 AddEventHandler('rcore:callCallback',function(key, name, requestId,source,...)
     if Config.Debug then
-        print(string.format('[rcore] trying to call %s callback',name))
+        dbg.debug(string.format('[rcore] trying to call %s callback',name))
     end
 
     if key == nil or not isProtected(key) then
@@ -22,7 +21,7 @@ AddEventHandler('rcore:callCallback',function(key, name, requestId,source,...)
     end
 
     if serverCallbacks[name] == nil then
-        print(string.format('[rcore] trying to call %s callback but its doesnt exists!',name))
+        dbg.critical(string.format('[rcore] trying to call %s callback but its doesnt exists!',name))
         return
     end
     callbacksRequestsHistory[requestId] = {
@@ -42,6 +41,6 @@ AddEventHandler('rcore:callbackSended',function(requestId)
     if callbacksRequestsHistory[requestId] then
         callbacksRequestsHistory[requestId].done = true
     else
-        dprint('[rcore] not looking good request?')
+        dbg.debug('[rcore] not looking good request?')
     end
 end)

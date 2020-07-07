@@ -43,12 +43,13 @@ dropTimer()
 
 RegisterNetEvent('rcore:retrieveKey')
 AddEventHandler('rcore:retrieveKey', function()
+    local _source = source
     if GetCurrentResourceName() == "rcore" then
         if lastKey == nil then
             lastKey = generateKey()
             dbg.security(string.format('[rcore] generating key %s',lastKey))
         end
-        TriggerClientEvent('rcore:updateKey', source, lastKey)
+        TriggerClientEvent('rcore:updateKey', _source, lastKey)
     else
         TriggerEvent('rcore:logCheater',nil,'rcore:updateKey')
     end

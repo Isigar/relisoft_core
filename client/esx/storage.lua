@@ -1,5 +1,6 @@
 local storages = {}
 local storageBusy = {}
+local dbg = rdebug()
 
 function findStorageWithSameName(name)
     for k, v in pairs(storages) do
