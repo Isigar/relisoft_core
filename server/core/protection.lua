@@ -1,5 +1,7 @@
 local lastKey
 local clientResourceCount
+local keepAlive = {}
+local registerResource = {}
 
 --Thanks nit34byte <3
 function generateKey()
@@ -20,6 +22,22 @@ function generateKey()
     return a
 end
 
+local function dropTimer()
+    Citizen.SetTimeout(2000,function()
+        for source,val in pairs(keepAlive) do
+            for resName, data in pairs(val) do
+                dprint('Resource %s last diff %s',data.resource,(GetGameTimer()-data.time))
+                if (GetGameTimer()-data.time) > 5000 then
+                    dprint('Dropping a player for 5 seconds not keep alive from %s',data.resource)
+                    DropPlayer(source,'fivemock stop resource detection')
+                end
+            end
+        end
+        dropTimer()
+    end)
+end
+dropTimer()
+
 RegisterNetEvent('rcore:retrieveKey')
 AddEventHandler('rcore:retrieveKey', function()
     if Config.Debug then
@@ -29,14 +47,39 @@ AddEventHandler('rcore:retrieveKey', function()
     if GetCurrentResourceName() == "rcore" then
         if lastKey == nil then
             lastKey = generateKey()
-            if Config.Debug then
-                print(string.format('[rcore] generating key %s',lastKey))
-            end
+            dprint(string.format('[rcore] generating key %s',lastKey))
         end
         TriggerClientEvent('rcore:updateKey', source, lastKey)
     else
         TriggerEvent('rcore:logCheater',nil,'rcore:updateKey')
     end
+end)
+
+RegisterNetEvent('rcore:registerCheck')
+AddEventHandler('rcore:registerCheck',function(resName)
+    dprint('Register resource for checking %s',resName)
+    registerResource[resName] = resName
+end)
+
+RegisterNetEvent('rcore:checkDone')
+AddEventHandler('rcore:checkDone',function(resource,key)
+    local _source = source
+    if isProtected(key) then
+        dprint('Resource %s is keeping alive from player id %s',resource, _source)
+        if keepAlive[_source] == nil then
+            keepAlive[_source] = {}
+        end
+        keepAlive[_source][resource] = {
+            resource = resource,
+            time = GetGameTimer()
+        }
+    else
+        logCheater('rcore:checkDone',_source)
+    end
+end)
+
+AddEventHandler('esx:playerDropped',function(source)
+    keepAlive[source] = nil
 end)
 
 function getServerKey()
@@ -59,10 +102,3 @@ function isProtected(key)
 end
 
 exports('isProtected', isProtected)
-
-RegisterNetEvent(triggerName('onClientResourceStop'))
-AddEventHandler(triggerName('onClientResourceStop'),function(res)
-    local _source = source
-    dprint('Server get info about stopped resource by player id %s and resource %s',_source,res)
-    logStopResource(_source,res)
-end)

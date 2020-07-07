@@ -9,7 +9,7 @@ RegisterNetEvent('rcore:updateKey')
 AddEventHandler('rcore:updateKey', function(key)
     if GetCurrentResourceName() == "rcore" then
         protectionKey = key
-        print(string.format('[rcore] Getting key: %s',key))
+--        dprint(string.format('[rcore] Getting key: %s',key))
     else
         TriggerServerEvent('rcore:logCheater',nil,'rcore:updateKey')
     end
@@ -21,13 +21,8 @@ function getClientKey(resource)
         TriggerServerEvent('rcore:logCheater',nil,'rcore:getClientKey')
         return
     end
-    print(string.format('[rcore] getting key from export %s',protectionKey))
+--    dprint(string.format('[rcore] getting key from export %s by %s',protectionKey, resource))
     return protectionKey
 end
 
 exports('getClientKey',getClientKey)
-
-AddEventHandler('onClientResourceStop',function(resName)
-    dprint('Client stopped resource %s',resName)
-    TriggerServerEvent(triggerName('onClientResourceStop'),resName)
-end)

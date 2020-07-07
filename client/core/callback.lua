@@ -3,7 +3,8 @@ local currentRequest = 0
 
 function callCallback(name,cb,...)
     clientCallbacks[currentRequest] = cb
-    TriggerServerEvent('rcore:callCallback',name,currentRequest,GetPlayerServerId(PlayerId()),...)
+    dprint('Calling from client side with key %s request %s',getClientKey(GetCurrentResourceName()),name)
+    TriggerServerEvent('rcore:callCallback',getClientKey(GetCurrentResourceName()),name,currentRequest,GetPlayerServerId(PlayerId()),...)
 
     if currentRequest < 65535 then
         currentRequest = currentRequest + 1
@@ -20,4 +21,5 @@ AddEventHandler('rcore:callback',function(requestId,...)
         return
     end
     clientCallbacks[requestId](...)
+    TriggerServerEvent('rcore:callbackSended',requestId)
 end)

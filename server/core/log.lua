@@ -1,7 +1,15 @@
 function logCheater(reason,source)
     local xPlayer = ESX.GetPlayerFromId(source)
     reason = reason or "neznámý"
-    sendCustomDiscordMessage(SConfig.DiscordLogWebhook,'Cheater!',string.format('Heleď máme tu cheatera! Menu detected!\nHráč: %s\nIdentifier: %s\nDůvod: %s',xPlayer.name,xPlayer.identifier,reason),Config.DiscordColors.Red)
+    local message = 'Heleď máme tu cheatera! Menu detected!\n'
+    message = message..string.format('Hráč: %s\n',xPlayer.getName())
+    if identifiers then
+        for i,v in pairs(identifiers) do
+            message = message..string.format('\n%s: %s',i,v)
+        end
+    end
+    message = message..string.format('\nDůvod: %s',reason)
+    sendCustomDiscordMessage(SConfig.DiscordLogWebhook,'Cheater!',message,Config.DiscordColors.Red)
 end
 
 function logStopResource(source,resource)

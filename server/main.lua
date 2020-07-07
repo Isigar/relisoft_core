@@ -351,6 +351,14 @@ ESX.RegisterServerCallback('rcore:takeStoredMoney', function(source, cb, key, da
     end
 end)
 
+registerCallback('rcore:getWeight',function(source,cb)
+    local xPlayer = ESX.GetPlayerFromId(source)
+    cb({
+        weight = xPlayer.getWeight(),
+        maxWeight = xPlayer.maxWeight
+    })
+end)
+
 ESX.RegisterServerCallback('rcore:setStorageState', function(source, cb, datastore, state)
     IsStorageBusy[datastore] = state
 end)

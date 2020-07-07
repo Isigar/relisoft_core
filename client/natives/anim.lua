@@ -23,6 +23,19 @@ end
 
 exports('playAnim',playAnim)
 
+function playAnimProp(ped, animDict, anim, prop, bone, propOffset,cb, flags)
+    local objectCoords = GetPedBoneCoords(ped,bone,0,0,0)
+    local boneIndex = GetPedBoneIndex(ped,bone)
+    createObject(prop,objectCoords,function(obj)
+        local x,y,z,rotx,roty,rotz = table.unpack(propOffset)
+        AttachEntityToEntity(obj,ped,boneIndex, x,y,z,rotx,roty,rotz, true, true, false, true, 1, true)
+        playAnim(ped,animDict,anim,flags)
+        cb(obj)
+    end)
+end
+
+exports('playAnimProp',playAnimProp)
+
 function taskGoTo(ped,entity,cb,offset)
     offset = offset or {
         x = 0.0,
@@ -39,3 +52,13 @@ function taskGoTo(ped,entity,cb,offset)
 end
 
 exports('taskGoTo',taskGoTo)
+
+function taskGoToCoords(ped,entityPos,heading,cb)
+    TaskGoStraightToCoord(ped, entityPos, 1.0, 20000, heading, 0.1)
+    while #(entityPos-GetEntityCoords(ped)) > 1.0 do
+        Citizen.Wait(250)
+    end
+    cb()
+end
+
+exports('taskGoToCoords',taskGoToCoords)
