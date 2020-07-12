@@ -21,7 +21,7 @@ function setStorageBusy(id,state)
     if Config.Debug then
         dbg.debug(string.format('[rcore] Setting storage with id %s to busy state %s',id,state))
     end
-    TriggerServerEvent('rcore:setStorageBusy',id,state)
+    TSE('rcore:setStorageBusy',id,state)
 end
 
 exports('setStorageBusy',setStorageBusy)

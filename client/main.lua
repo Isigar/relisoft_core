@@ -3,6 +3,7 @@ getEsxInstance(function(obj)
     ESX = obj
 end)
 
+local dbg = rdebug()
 local distanceMarkers = getDistanceMarkers()
 local markers = getMarkers()
 local distanceTexts = getDistanceTexts()
@@ -23,8 +24,8 @@ AddEventHandler('rcore:getWeaponAmmoClient', function(weapon, cb)
 end)
 
 RegisterNetEvent('rcore:showNotification')
-AddEventHandler('rcore:showNotification',function(message)
-    showNotification(message)
+AddEventHandler('rcore:showNotification',function(message,color,flashing,brief)
+    showNotification(message,color,flashing,brief)
 end)
 
 RegisterNetEvent('rcore:setWeaponAmmo')
@@ -43,6 +44,7 @@ end)
 
 Citizen.CreateThread(function()
     while true do
+        Citizen.Wait(Config.CheckPlayerPosition)
         local ped = PlayerPedId()
         playerPos = GetEntityCoords(ped)
         nearDistanceMarkers = {}
@@ -52,8 +54,6 @@ Citizen.CreateThread(function()
                 nearDistanceMarkers[k] = v
             end
         end
-
-        Citizen.Wait(Config.CheckPlayerPosition)
     end
 end)
 
@@ -213,20 +213,27 @@ Citizen.CreateThread(function()
         Citizen.Wait(150)
         for id, v in pairs(distanceMarkers) do
             if isAtJobFunc(id,v) then
-                local dist = #(playerPos-vector3(v.coords.x, v.coords.y, v.coords.z))
-
-                if dist <= (v.options.scale.x+(v.options.scale.x/4)) then
-                    isAtMarker = id
-                    callActionOnce(string.format('marker-%s-onEnter',id))
-                    resetCall(string.format('marker-%s-onLeave',id))
+                if not playerPos then
+                    playerPos = GetEntityCoords(PlayerPedId())
+                end
+                if v.coords == nil or v.coords.x == nil then
+                    dbg.critical('Marker id %s has invalid coordinates, skipping for now!',id)
                 else
-                    if isAtMarker == id then
-                        isAtMarker = false
-                    end
-                    if isCalled(string.format('marker-%s-onEnter',id)) then
-                        isAtMarker = false
-                        callActionOnce(string.format('marker-%s-onLeave',id))
-                        resetCall(string.format('marker-%s-onEnter',id))
+                    local dist = #(playerPos-vector3(v.coords.x, v.coords.y, v.coords.z))
+
+                    if dist <= (v.options.scale.x+(v.options.scale.x/4)) then
+                        isAtMarker = id
+                        callActionOnce(string.format('marker-%s-onEnter',id))
+                        resetCall(string.format('marker-%s-onLeave',id))
+                    else
+                        if isAtMarker == id then
+                            isAtMarker = false
+                        end
+                        if isCalled(string.format('marker-%s-onEnter',id)) then
+                            isAtMarker = false
+                            callActionOnce(string.format('marker-%s-onLeave',id))
+                            resetCall(string.format('marker-%s-onEnter',id))
+                        end
                     end
                 end
             end

@@ -1,6 +1,10 @@
 Config = {}
 Config.Debug = true
 Config.DebugLevel = {
+    'INFO',
+    'SECURITY',
+    'CRITICAL',
+    'DEBUG'
 }
 Config.ESXCallback = "esx:getSharedObject"
 Config.WeightSystem = true

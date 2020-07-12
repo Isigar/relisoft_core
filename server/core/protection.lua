@@ -64,7 +64,7 @@ end)
 RegisterNetEvent('rcore:checkDone')
 AddEventHandler('rcore:checkDone',function(resource,key)
     local _source = source
-    if isProtected(key) then
+    if key == -1 or isProtected(key) then
         dbg.securitySpam('Resource %s is keeping alive from player id %s',resource, _source)
         if keepAlive[_source] == nil then
             keepAlive[_source] = {}

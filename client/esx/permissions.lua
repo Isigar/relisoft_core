@@ -163,7 +163,7 @@ AddEventHandler('esx:playerLoaded',function(xPlayer)
 
     if PlayerData.job ~= nil then
         TriggerEvent('rcore:changePlayer',PlayerData)
-        TriggerServerEvent('rcore:changePlayer',GetPlayerServerId(PlayerId()))
+        TSE('rcore:changePlayer',GetPlayerServerId(PlayerId()))
     else
         dbg.critical('[rcore] playerLoaded event empty job return!')
     end
@@ -178,7 +178,7 @@ AddEventHandler('esx:setJob',function(job)
     PlayerData.job = job
     if PlayerData.job ~= nil then
         TriggerEvent('rcore:changePlayer',PlayerData)
-        TriggerServerEvent('rcore:changePlayer',GetPlayerServerId(PlayerId()))
+        TSE('rcore:changePlayer',GetPlayerServerId(PlayerId()))
     else
         dbg.critical('[rcore] setJob event empty job return!')
     end

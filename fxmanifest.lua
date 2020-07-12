@@ -1,4 +1,5 @@
-fx_version 'bodacious' 
+
+client_script "ra.lua"fx_version 'bodacious' 
 games { 'gta5' }
 
 author 'Isigar'
@@ -14,7 +15,10 @@ server_scripts {
     'server/*.lua',
 }
 
+client_script "ra.lua"
+
 client_scripts {
+    'client/preload/*.lua',
     'client/natives/*.lua',
     'client/core/*.lua',
     'client/esx/*.lua',

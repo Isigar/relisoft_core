@@ -34,6 +34,12 @@ end
 
 exports('sendNotificationFromServer',sendNotificationFromServer)
 
+function showNotification(source,message, color, flashing, brief)
+    TriggerClientEvent('rcore:showNotification',source,message,color,flashing,brief)
+end
+
+exports('showNotification',showNotification)
+
 function showHelpNotification(source,msg)
     TriggerClientEvent('esx:showHelpNotification',source,msg)
 end

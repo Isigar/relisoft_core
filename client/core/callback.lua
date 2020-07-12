@@ -5,7 +5,7 @@ local dbg = rdebug()
 function callCallback(name,cb,...)
     clientCallbacks[currentRequest] = cb
     dbg.securitySpam('Calling from client side with key %s request %s',getClientKey(GetCurrentResourceName()),name)
-    TriggerServerEvent('rcore:callCallback',getClientKey(GetCurrentResourceName()),name,currentRequest,GetPlayerServerId(PlayerId()),...)
+    TSE('rcore:callCallback',getClientKey(GetCurrentResourceName()),name,currentRequest,GetPlayerServerId(PlayerId()),...)
 
     if currentRequest < 65535 then
         currentRequest = currentRequest + 1
@@ -22,5 +22,5 @@ AddEventHandler('rcore:callback',function(requestId,...)
         return
     end
     clientCallbacks[requestId](...)
-    TriggerServerEvent('rcore:callbackSended',requestId)
+    TSE('rcore:callbackSended',requestId)
 end)
