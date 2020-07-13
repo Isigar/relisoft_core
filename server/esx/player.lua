@@ -19,7 +19,7 @@ AddEventHandler('rcore:changePlayer',function(source)
     activePlayers[source] = ESX.GetPlayerFromId(source)
 end)
 
-AddEventHandler('esx:playerDropped',function(source)
+AddEventHandler(EventConfig.Common.playerDropped,function(source)
     activePlayers[source] = nil
 end)
 

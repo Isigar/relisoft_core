@@ -1,5 +1,5 @@
 function getSharedAccount(account,cb)
-    TriggerEvent('esx_addonaccount:getSharedAccount', account, function(account)
+    TriggerEvent(EventConfig.Account.getSharedAccount, account, function(account)
         cb(account)
     end)
 end
@@ -7,7 +7,7 @@ end
 exports('getSharedAccount',getSharedAccount)
 
 function getAccount(owner,account,cb)
-    TriggerEvent('esx_addonaccount:getAccount', account, owner, function(account)
+    TriggerEvent(EventConfig.Account.getAccount, account, owner, function(account)
         cb(account)
     end)
 end

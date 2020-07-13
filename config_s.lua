@@ -1,4 +1,5 @@
 SConfig = {}
+SConfig.EnableProtection = false
 SConfig.InternalDetection = 2000
 SConfig.DetectAsCheater = 5000
 SConfig.DelayBetweenDropCheater = 1000

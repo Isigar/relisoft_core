@@ -41,7 +41,7 @@ end
 exports('showNotification',showNotification)
 
 function showHelpNotification(source,msg)
-    TriggerClientEvent('esx:showHelpNotification',source,msg)
+    TriggerClientEvent(EventConfig.Common.showHelpNotif,source,msg)
 end
 
 exports('showHelpNotification',showHelpNotification)

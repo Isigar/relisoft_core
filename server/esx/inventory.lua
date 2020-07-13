@@ -1,5 +1,7 @@
+
+
 function getSharedInventory(inventory, cb)
-    TriggerEvent('esx_addoninventory:getSharedInventory', inventory, function(inventory)
+    TriggerEvent(EventConfig.Inventory.getSharedInventory, inventory, function(inventory)
         cb(inventory)
     end)
 end
@@ -7,7 +9,7 @@ end
 exports('getSharedInventory',getSharedInventory)
 
 function getInventory(owner,inventory,cb)
-    TriggerEvent('esx_addoninventory:getInventory', inventory, owner, function(inventory)
+    TriggerEvent(EventConfig.Inventory.getInventory, inventory, owner, function(inventory)
         cb(inventory)
     end)
 end

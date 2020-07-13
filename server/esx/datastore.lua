@@ -1,7 +1,7 @@
 --- @param name string
 --- @param cb function
 function getDatastore(name, cb)
-    TriggerEvent('esx_datastore:getSharedDataStore', name, function(store)
+    TriggerEvent(EventConfig.Datastore.getSharedDatastore, name, function(store)
         cb(store)
     end)
 end
@@ -12,7 +12,7 @@ exports('getDatastore',getDatastore)
 --- @param name string
 --- @param cb function return with store instance
 function getPlayerDatastore(identifier, name, cb)
-    TriggerEvent('esx_datastore:getDataStore', name, identifier, function(store)
+    TriggerEvent(EventConfig.Datastore.getDatastore, name, identifier, function(store)
         cb(store)
     end)
 end

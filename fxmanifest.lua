@@ -1,5 +1,4 @@
-
-client_script "ra.lua"fx_version 'bodacious' 
+fx_version 'bodacious'
 games { 'gta5' }
 
 author 'Isigar'
@@ -9,6 +8,7 @@ server_scripts {
     '@async/async.lua',
     '@mysql-async/lib/MySQL.lua',
     'config_s.lua',
+    'eventConfig.lua',
     'server/natives/*.lua',
     'server/core/*.lua',
     'server/esx/*.lua',
