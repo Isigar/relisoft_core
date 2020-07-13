@@ -1,4 +1,5 @@
 local societyList = {}
+local dbg = rdebug()
 
 --- @param number string
 --- @param text string
@@ -24,7 +25,7 @@ function registerSociety(society, name, type)
 
     type = type or "public"
     TriggerEvent(EventConfig.Society.registerSociety, society, name, 'society_' .. society, 'society_' .. society, 'society_' .. society, { type = type })
-    rdebug(string.format('Society %s is registered!','society_' ..society))
+    dbg.info(string.format('Society %s is registered!','society_' ..society))
 end
 
 exports('registerSociety',registerSociety)

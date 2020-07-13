@@ -1,3 +1,5 @@
+local dbg = rdebug()
+
 --- @param name string
 --- @param cb function
 function getDatastore(name, cb)
@@ -27,16 +29,16 @@ function createDatastore(name, shared, cb)
     --Firstly check if datastore exists!
     isDatastoreExists(name,function(res)
         if res then
-            rdebug(string.format('Datastore %s already exists! Skipping creation.', name))
+            dbg.info(string.format('Datastore %s already exists! Skipping creation.', name))
             cb(true)
         else
-            rdebug(string.format('Datastore %s not found! Starting creation.', name))
+            dbg.info(string.format('Datastore %s not found! Starting creation.', name))
             MySQL.ready(function()
                 MySQL.Async.execute('INSERT INTO datastore (name, label, shared) VALUES (@name, @name, @shared)', {
                     ['@name'] = name,
                     ['@shared'] = shared
                 }, function(rowsChanges)
-                    rdebug(string.format('Datastore %s created.', name))
+                    dbg.info(string.format('Datastore %s created.', name))
                     cb(rowsChanges)
                 end)
             end)
@@ -49,7 +51,7 @@ exports('createDatastore',createDatastore)
 --- @param name string
 --- @return boolean
 function isDatastoreExists(name,cb)
-    rdebug(string.format('Checking %s datastore if exists.', name))
+    dbg.info(string.format('Checking %s datastore if exists.', name))
     MySQL.ready(function()
         local data = MySQL.Sync.fetchAll('SELECT name FROM datastore WHERE name = @name', {
             ['@name'] = name

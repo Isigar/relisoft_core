@@ -1,3 +1,5 @@
+local dbg = rdebug()
+
 function getSharedAccount(account,cb)
     TriggerEvent(EventConfig.Account.getSharedAccount, account, function(account)
         cb(account)
@@ -15,7 +17,7 @@ end
 exports('getAccount',getAccount)
 
 function isAccountExists(account,cb)
-    rdebug(string.format('Checking %s shared account if exists.', account))
+    dbg.info(string.format('Checking %s shared account if exists.', account))
     MySQL.ready(function()
         local data = MySQL.Sync.fetchScalar('SELECT COUNT(name) FROM addon_account WHERE name = @name', {
             ['@name'] = account
@@ -37,15 +39,15 @@ exports('isAccountExists',isAccountExists)
 function createAccount(account,shared,cb)
     isAccountExists(account,function(is)
         if is then
-            rdebug(string.format('Account %s already exists! Skipping creation!',account))
+            dbg.info(string.format('Account %s already exists! Skipping creation!',account))
         else
-            rdebug(string.format('Account %s not found! Starting creation.', account))
+            dbg.info(string.format('Account %s not found! Starting creation.', account))
             MySQL.ready(function()
                 MySQL.Async.execute('INSERT INTO addon_account (name, label, shared) VALUES (@name, @name, @shared)', {
                     ['@name'] = account,
                     ['@shared'] = shared
                 }, function(rowsChanges)
-                    rdebug(string.format('Account %s created.', account))
+                    dbg.info(string.format('Account %s created.', account))
                     if cb then
                         cb(rowsChanges)
                     end

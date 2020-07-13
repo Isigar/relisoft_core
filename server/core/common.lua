@@ -15,12 +15,3 @@ function sendChatMessage(source,title,message,color)
 end
 
 exports('sendChatMessage',sendChatMessage)
-
----@param message string
-function rdebug(message)
-    if message ~= nil and Config.Debug == true then
-        print('[relisoft_core] '..message)
-    end
-end
-
-exports('rdebug',rdebug)
