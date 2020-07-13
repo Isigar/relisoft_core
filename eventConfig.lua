@@ -17,12 +17,12 @@ EventConfig.Common = {
     ['addMessage'] = 'chat:addMessage',
 }
 
-Config.Inventory = {
+EventConfig.Inventory = {
     ['getInventory'] = 'esx_addoninventory:getInventory',
     ['getSharedInventory'] = 'esx_addoninventory:getSharedInventory',
 }
 
-Config.Society = {
+EventConfig.Society = {
     ['registerSociety'] = 'esx_society:registerSociety',
     ['getSociety'] = 'esx_society:getSociety',
 }
