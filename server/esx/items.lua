@@ -13,6 +13,8 @@ function existItem(itemName,cb)
     end)
 end
 
+exports('existItem',existItem)
+
 function createItem(itemName, label, weight, cb, options)
     options = options or {}
     options.can_remove = options.can_remove or false
@@ -23,16 +25,20 @@ function createItem(itemName, label, weight, cb, options)
             dbg.info('Item %s was found, skipping creation',itemName)
         else
             MySQL.Async.execute('INSERT INTO `items` (`name`, `label`, `weight`, `rare`, `can_remove`) VALUES (@itemName, @label, @weight, @rare, @canRemove)', {
-                ['@name'] = itemName,
+                ['@itemName'] = itemName,
                 ['@label'] = label,
-                ['@weight'] = weight,
+                ['@weight'] = round(weight,1),
                 ['@rare'] = options.rare,
                 ['@canRemove'] = options.can_remove
             },function(changes)
                 if changes > 0 then
-                    cb(true)
+                    if cb ~= nil then
+                        cb(true)
+                    end
                 else
-                    cb(false)
+                    if cb ~= nil then
+                        cb(false)
+                    end
                 end
             end)
         end

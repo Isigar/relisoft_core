@@ -104,6 +104,12 @@ end
 
 exports('urlencode',urlencode)
 
+function round(num, numDecimalPlaces)
+    local mult = 10^(numDecimalPlaces or 0)
+    return math.floor(num * mult + 0.5) / mult
+end
+
+exports('round',round)
 
 --- @param object object
 --- stolen: https://forums.coronalabs.com/topic/27482-copy-not-direct-reference-of-table/
