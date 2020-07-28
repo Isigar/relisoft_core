@@ -21,14 +21,13 @@ Config.DefaultBlipOptions = {
 Config.InsideShop = vector3(228.5, -993.5, -99.0)
 Config.GroupInherit = {
     ['mod'] = {
-
+        'admin',
+        'superadmin'
     },
     ['admin'] = {
-        'mod',
+        'superadmin',
     },
     ['superadmin'] = {
-        'mod',
-        'admin',
     }
 }
 

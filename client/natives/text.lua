@@ -17,6 +17,10 @@ function findTextWithSameCoords(coords)
     end
 end
 
+function removeDistanceTextByPos(pos)
+
+end
+
 function removeText(id)
     texts[id] = nil
     TriggerEvent('rcore:updateText')

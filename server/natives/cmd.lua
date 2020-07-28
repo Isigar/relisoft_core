@@ -1,12 +1,13 @@
 local cmds = {}
 local currentPlayer
+local dbg = rdebug()
 
 RegisterNetEvent('rcore:changePlayer')
-AddEventHandler('rcore:changePlayer',function(source)
+AddEventHandler('rcore:changePlayer', function(source)
     currentPlayer = ESX.GetPlayerFromId(source)
 end)
 
-function isAtGroup(name,inherit)
+function isAtGroup(name, inherit)
     local group = currentPlayer.getGroup()
     if group == name then
         return true
@@ -53,73 +54,73 @@ function isAtJob(name)
     return false
 end
 
-function registerGroupCommand(name,group,cb,inherit)
-    RegisterCommand(name, function(source,args,rawCmd)
+function registerGroupCommand(name, group, cb, inherit)
+    RegisterCommand(name, function(source, args, rawCmd)
         if source > 0 then
-            if isAtGroup(group,inherit) then
-                cb(source,args,rawCmd)
+            if isAtGroup(group, inherit) then
+                cb(source, args, rawCmd)
             else
-                sendChatMessageFromServer(source,'Commands','You dont have permission to do this command', {255,0,0})
+                sendChatMessageFromServer(source, 'Commands', 'You dont have permission to do this command', { 255, 0, 0 })
             end
         end
     end)
 end
 
-function registerJobCommand(name,job, cb)
-    RegisterCommand(name, function(source,args,rawCmd)
+function registerJobCommand(name, job, cb)
+    RegisterCommand(name, function(source, args, rawCmd)
         if source > 0 then
             if isAtJob(job) then
-                cb(source,args,rawCmd)
+                cb(source, args, rawCmd)
             else
-                sendChatMessageFromServer(source,'Commands','You dont have permission to do this command', {255,0,0})
+                sendChatMessageFromServer(source, 'Commands', 'You dont have permission to do this command', { 255, 0, 0 })
             end
         end
     end)
 end
 
 function registerAdvancedCommand(name, permissions, cb)
-
 end
 
 function registerCommand(name, cb)
-    RegisterCommand(name, function(source,args, rawCmd)
+    RegisterCommand(name, function(source, args, rawCmd)
         if source > 0 then
-            cb(source,args,rawCmd)
+            cb(source, args, rawCmd)
         end
     end)
 end
 
-function registerRconCommand(name,cb)
-    RegisterCommand(name,function(source,args,rawCmd)
+function registerRconCommand(name, cb)
+    RegisterCommand(name, function(source, args, rawCmd)
         if source == 0 then
-            cb(source,args,rawCmd)
+            cb(source, args, rawCmd)
         end
     end)
 end
 
----@param cmd string Name of command without slash
----@param level number Needed admin level
----@param cb function Callback with source,args,user
+--- @param cmd string Name of command without slash
+--- @param group string name of group
+--- @param inherit bool use inherit groups setup in config
+--- @param cb function Callback with source,args,user
 function addGroupCmd(cmd, group, cb, inherit)
-    inherit = inherit or false
-    registerGroupCommand(cmd,group,cb,inherit)
+    inherit = inherit or true
+    registerGroupCommand(cmd, group, cb, inherit)
 end
 
-exports('addGroupCmd',addGroupCmd)
+exports('addGroupCmd', addGroupCmd)
 
 
----@param cmd string Name of command without slash
----@param cb function Callback with source,args,user
+--- @param cmd string Name of command without slash
+--- @param cb function Callback with source,args,user
 function addCmd(cmd, cb)
-    registerCommand(cmd,cb)
+    registerCommand(cmd, cb)
 end
 
-exports('addCmd',addCmd)
+exports('addCmd', addCmd)
 
----@param cmd string Name of command without slash
----@param cb function Callback with source,args,user
+--- @param cmd string Name of command without slash
+--- @param cb function Callback with source,args,user
 function addRconCmd(cmd, cb)
-    registerRconCommand(cmd,cb)
+    registerRconCommand(cmd, cb)
 end
 
-exports('addRconCmd',addRconCmd)
+exports('addRconCmd', addRconCmd)

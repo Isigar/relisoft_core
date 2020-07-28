@@ -1,6 +1,7 @@
 local dbg = rdebug()
 local distanceMarkers = {}
 local markers = {}
+local onKeys = {}
 
 function findDistanceMarkersWithSameCoords(coords)
     for k, v in pairs(distanceMarkers) do

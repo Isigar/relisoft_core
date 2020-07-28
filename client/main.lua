@@ -16,6 +16,7 @@ local isAtJobCache = {}
 local nearDistanceMarkers = {}
 local nearDistanceMarkerDistance = Config.NearObjectDistance
 local isAtMarker = false
+local onKeys = {}
 
 RegisterNetEvent('rcore:getWeaponAmmoClient')
 AddEventHandler('rcore:getWeaponAmmoClient', function(weapon, cb)
@@ -155,7 +156,7 @@ end)
 
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(10)
+        Citizen.Wait(5)
         for _, key in pairs(getKeys()) do
             if IsControlJustReleased(0,key) then
                 TriggerEvent('rcore:onKey',key)
