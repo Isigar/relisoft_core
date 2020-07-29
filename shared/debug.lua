@@ -30,7 +30,7 @@ function rdebug()
     end
     self.critical = function(msg,...)
         if isAllowed('CRITICAL') then
-            print('^1['..self.prefix..'|critial] ^7'..sprint(msg,...))
+            print('^1['..self.prefix..'|critical] ^7'..sprint(msg,...))
         end
     end
     self.security = function(msg,...)
