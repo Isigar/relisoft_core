@@ -15,8 +15,6 @@ server_scripts {
     'server/*.lua',
 }
 
-client_script "ra.lua"
-
 client_scripts {
     'client/preload/*.lua',
     'client/natives/*.lua',
