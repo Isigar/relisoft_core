@@ -43,7 +43,7 @@ function createCamera(name, pos, rot, fov)
         DestroyCam(self.cam)
         cameras[name] = nil
     end
-    self.changePosition = function(newPos, newPoint, newRot, duration)
+    self.changePosition = function(newPos, newPoint, newRot, duration,cb)
         newRot = newRot or vector3(0,0,0)
         duration = duration or 4000
         if IsCamRendering(self.cam) then
@@ -53,12 +53,14 @@ function createCamera(name, pos, rot, fov)
                 tempCam.pointTo(newPoint)
             end
             self.changeCam(tempCam.cam)
-            Citizen.Wait(duration)
             self.destroy()
-            local newMain = deepCopy(tempCam)
-            newMain.name = self.name
-            self = newMain
-            tempCam.destroy()
+            Citizen.Wait(duration)
+            local originalName = self.name
+            self = tempCam
+            self.name = originalName
+            if cb ~= nil then
+                cb()
+            end
         else
             createCamera(self.name, newPos, newRot, self.fov)
         end
