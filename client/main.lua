@@ -16,7 +16,7 @@ local isAtJobCache = {}
 local nearDistanceMarkers = {}
 local nearDistanceMarkerDistance = Config.NearObjectDistance
 local isAtMarker = false
-local onKeys = {}
+local isAtText = false
 
 RegisterNetEvent('rcore:getWeaponAmmoClient')
 AddEventHandler('rcore:getWeaponAmmoClient', function(weapon, cb)
@@ -154,11 +154,26 @@ AddEventHandler('rcore:updateDistanceMarkers', function()
     distanceMarkers = getDistanceMarkers()
 end)
 
+--Internal key handler
+function onKey(key)
+    if isAtMarker ~= false then
+        callActionOnce(string.format('marker-%s-onEnterKey',isAtMarker),key)
+    end
+    resetCall(string.format('marker-%s-onEnterKey',isAtMarker))
+
+    if isAtText ~= false then
+        callActionOnce(string.format('text-%s-onEnterKey',isAtText),key)
+    end
+    resetCall(string.format('text-%s-onEnterKey',isAtText))
+end
+
+--Check if press key
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(5)
+        Citizen.Wait(0)
         for _, key in pairs(getKeys()) do
             if IsControlJustReleased(0,key) then
+                onKey(key)
                 TriggerEvent('rcore:onKey',key)
             end
         end
@@ -202,13 +217,6 @@ Citizen.CreateThread(function()
     end
 end)
 
-AddEventHandler('rcore:onKey',function(key)
-    if isAtMarker ~= false then
-        callActionOnce(string.format('marker-%s-onEnterKey',isAtMarker),key)
-    end
-    resetCall(string.format('marker-%s-onEnterKey',isAtMarker))
-end)
-
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(150)
@@ -250,10 +258,25 @@ end)
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
-        for _, v in pairs(distanceTexts) do
+        for id, v in pairs(distanceTexts) do
             local dist = #(playerPos-vector3(v.coords.x, v.coords.y, v.coords.z))
             if dist < v.distance then
                 draw3DText(v.coords, v.text, v.options)
+
+                if dist <= (v.options.actionDistance+(v.options.actionDistance/4)) then
+                    isAtText = id
+                    callActionOnce(string.format('text-%s-onEnter',id))
+                    resetCall(string.format('text-%s-onLeave',id))
+                else
+                    if isAtText == id then
+                        isAtText = false
+                    end
+                    if isCalled(string.format('text-%s-onEnter',id)) then
+                        isAtText = false
+                        callActionOnce(string.format('text-%s-onLeave',id))
+                        resetCall(string.format('text-%s-onEnter',id))
+                    end
+                end
             end
         end
     end

@@ -3,7 +3,7 @@ local count
 local dbg = rdebug()
 
 TriggerServerEvent('rcore:updateCount',GetNumResources())
-
+TriggerServerEvent('rcore:registerCheck',GetCurrentResourceName())
 TriggerServerEvent('rcore:retrieveKey')
 
 RegisterNetEvent('rcore:updateKey')
@@ -26,3 +26,15 @@ function getClientKey(resource)
 end
 
 exports('getClientKey',getClientKey)
+
+AddEventHandler('rcore:changePlayer', function()
+    TriggerServerEvent('rcore:checkDone', GetCurrentResourceName(), getClientKey(GetCurrentResourceName()))
+end)
+
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(2000)
+        TriggerServerEvent('rcore:checkDone', GetCurrentResourceName(), getClientKey(GetCurrentResourceName()))
+    end
+end)
+

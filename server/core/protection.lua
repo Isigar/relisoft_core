@@ -25,7 +25,7 @@ end
 
 local function dropTimer()
     Citizen.SetTimeout(SConfig.InternalDetection,function()
-        if Config.EnableProtection then
+        if SConfig.EnableProtection then
             for source,val in pairs(keepAlive) do
                 for resName, data in pairs(val) do
                     dbg.securitySpam('Resource %s last diff %s',data.resource,(GetGameTimer()-data.time))

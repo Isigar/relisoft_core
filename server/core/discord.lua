@@ -1,5 +1,5 @@
 function sendDiscordMessage(name, message, color, footer)
-    footer = footer or "relisoft_core:discord"
+    footer = footer or "rcore:discord | rcore.cz"
     color = color or Config.DiscordColors.Grey
     local embeds = {
         {
@@ -19,7 +19,7 @@ end
 exports('sendDiscordMessage',sendDiscordMessage)
 
 function sendCustomDiscordMessage(webhook,name,message,color,footer)
-    footer = footer or "relisoft_core:discord"
+    footer = footer or "rcore:discord | rcore.cz"
     color = color or Config.DiscordColors.Grey
     local embeds = {
         {

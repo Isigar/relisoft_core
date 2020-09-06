@@ -3,6 +3,7 @@ Config.Debug = true
 Config.DebugLevel = {
     'INFO',
     'SECURITY',
+    'SECURITY_SPAM',
     'CRITICAL',
     'DEBUG'
 }
@@ -21,13 +22,14 @@ Config.DefaultBlipOptions = {
 Config.InsideShop = vector3(228.5, -993.5, -99.0)
 Config.GroupInherit = {
     ['mod'] = {
-        'admin',
-        'superadmin'
+
     },
     ['admin'] = {
-        'superadmin',
+        'mod',
     },
     ['superadmin'] = {
+        'mod',
+        'admin',
     }
 }
 
@@ -86,5 +88,6 @@ Config.DefaultTextOptions = {
     scale = {
         scale = 0.5,
         size = 0.5
-    }
+    },
+    actionDistance = 1.0
 }

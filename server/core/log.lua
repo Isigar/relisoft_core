@@ -2,7 +2,7 @@ function logCheater(reason,source)
     local xPlayer = ESX.GetPlayerFromId(source)
     reason = reason or "neznámý"
     local message = 'Heleď máme tu cheatera! Menu detected!\n'
-    message = message..string.format('Hráč: %s\n',xPlayer.getName())
+    message = message..string.format('Hráč: %s\n',GetPlayerName(source))
     if identifiers then
         for i,v in pairs(identifiers) do
             message = message..string.format('\n%s: %s',i,v)

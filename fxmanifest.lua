@@ -15,9 +15,12 @@ server_scripts {
     'server/*.lua',
 }
 
+
+
 client_scripts {
     'client/preload/*.lua',
     'client/natives/*.lua',
+--    'client/natives/*.js',
     'client/core/*.lua',
     'client/esx/*.lua',
     'client/model/*.lua',
@@ -32,9 +35,13 @@ shared_scripts {
 }
 
 dependencies {
+    'async',
+    'mysql-async',
     'es_extended',
     'esx_society',
     'esx_addoninventory',
     'esx_addonaccount',
     'esx_datastore',
 }
+
+

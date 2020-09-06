@@ -17,10 +17,6 @@ function findTextWithSameCoords(coords)
     end
 end
 
-function removeDistanceTextByPos(pos)
-
-end
-
 function removeText(id)
     texts[id] = nil
     TriggerEvent('rcore:updateText')
@@ -50,17 +46,24 @@ end
 
 exports('updateText', updateText)
 
+function removeTextAction(id)
+    removeAction(string.format('text-%s-onEnter',id))
+    removeAction(string.format('text-%s-onEnterKey',id))
+    removeAction(string.format('text-%s-onLeave',id))
+end
+
 --- @param text string
 --- @param coords vector3
 --- @param options table
 --- @param onEnter function|nil
 --- @param onLeave function|nil
-function createText(text, coords, options)
+function createText(text, coords, options, cb)
     if options ~= nil and isTable(options) and not emptyTable(options) then
         options = mergeTables(options,Config.DefaultTextOptions)
     else
         options = Config.DefaultTextOptions
     end
+    cb = cb or {}
 
     local findId = findTextWithSameCoords(coords)
     if findId then
@@ -69,19 +72,45 @@ function createText(text, coords, options)
         end
         updateText(findId, text, coords, options)
 
-        TriggerEvent('rcore:rcore:updateText')
+        if cb.onEnter ~= nil then
+            addAction(string.format('text-%s-onEnter',findId),cb.onEnter)
+        end
 
-        return findId
-    else
-        table.insert(texts,{
-            text = text,
-            coords = coords,
-            options = options
-        })
+        if cb.onEnterKey ~= nil then
+            addAction(string.format('text-%s-onEnterKey',findId),cb.onEnterKey)
+        end
+
+        if cb.onLeave ~= nil then
+            addAction(string.format('text-%s-onLeave',findId),cb.onLeave)
+        end
 
         TriggerEvent('rcore:updateText')
 
-        return tableLastIterator(texts)
+        return findId
+    else
+        local findId = tableLastIterator(texts)
+
+        table.insert(texts,{
+            text = text,
+            coords = coords,
+            options = options,
+        })
+
+        if cb.onEnter ~= nil then
+            addAction(string.format('text-%s-onEnter',findId),cb.onEnter)
+        end
+
+        if cb.onEnterKey ~= nil then
+            addAction(string.format('text-%s-onEnterKey',findId),cb.onEnterKey)
+        end
+
+        if cb.onLeave ~= nil then
+            addAction(string.format('text-%s-onLeave',findId),cb.onLeave)
+        end
+
+        TriggerEvent('rcore:updateText')
+
+        return findId
     end
 end
 
@@ -107,12 +136,13 @@ exports('updateDistanceText', updateDistanceText)
 --- @param coords vector3
 --- @param distance number
 --- @param options table
-function createDistanceText(text, coords, distance, options)
+function createDistanceText(text, coords, distance, options, cb)
     if options ~= nil and isTable(options) and not emptyTable(options) then
         options = mergeTables(options,Config.DefaultTextOptions)
     else
         options = Config.DefaultTextOptions
     end
+    cb = cb or {}
 
     local findId = findDistanceTextWithSameCoords(coords)
     if findId then
@@ -121,10 +151,24 @@ function createDistanceText(text, coords, distance, options)
         end
         updateDistanceText(findId, text, coords, distance, options)
 
+        if cb.onEnter ~= nil then
+            addAction(string.format('text-%s-onEnter',findId),cb.onEnter)
+        end
+
+        if cb.onEnterKey ~= nil then
+            addAction(string.format('text-%s-onEnterKey',findId),cb.onEnterKey)
+        end
+
+        if cb.onLeave ~= nil then
+            addAction(string.format('text-%s-onLeave',findId),cb.onLeave)
+        end
+
         TriggerEvent('updateDistanceTexts')
 
         return findId
     else
+        local findId = tableLastIterator(distanceTexts)
+
         table.insert(distanceTexts,{
             text = text,
             coords = coords,
@@ -132,9 +176,21 @@ function createDistanceText(text, coords, distance, options)
             options = options
         })
 
+        if cb.onEnter ~= nil then
+            addAction(string.format('text-%s-onEnter',findId),cb.onEnter)
+        end
+
+        if cb.onEnterKey ~= nil then
+            addAction(string.format('text-%s-onEnterKey',findId),cb.onEnterKey)
+        end
+
+        if cb.onLeave ~= nil then
+            addAction(string.format('text-%s-onLeave',findId),cb.onLeave)
+        end
+
         TriggerEvent('updateDistanceTexts')
 
-        return tableLastIterator(distanceTexts)
+        return findId
     end
 end
 

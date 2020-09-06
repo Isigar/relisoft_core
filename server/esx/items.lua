@@ -17,7 +17,7 @@ exports('existItem',existItem)
 
 function createItem(itemName, label, weight, cb, options)
     options = options or {}
-    options.can_remove = options.can_remove or false
+    options.can_remove = options.can_remove or true
     options.rare = options.rare or false
 
     existItem(itemName,function(exists)

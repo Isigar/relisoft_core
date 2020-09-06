@@ -6,7 +6,6 @@
 * [Command system](command-system.md)
 * [Blips](blips.md)
 * [Jobs](jobs.md)
-* [Objects](objects.md)
 * [Camera API](camera-api.md)
 * [Common functions](common.md)
 * [relisoft\_core github wiki](undefined.md)
