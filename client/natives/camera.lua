@@ -1,5 +1,6 @@
 local cinemaLook = false
 local blockInput = false
+local blockInputLast = false
 local cameras = {}
 
 function createCamera(name, pos, rot, fov)
@@ -139,7 +140,43 @@ Citizen.CreateThread(function()
             DisableAllControlActions(29)
             DisableAllControlActions(30)
             DisableAllControlActions(31)
+            blockInputLast = true
         else
+            if blockInputLast then
+                blockInputLast = false
+                EnableAllControlActions(0)
+                EnableAllControlActions(1)
+                EnableAllControlActions(2)
+                EnableAllControlActions(3)
+                EnableAllControlActions(4)
+                EnableAllControlActions(5)
+                EnableAllControlActions(6)
+                EnableAllControlActions(7)
+                EnableAllControlActions(8)
+                EnableAllControlActions(9)
+                EnableAllControlActions(10)
+                EnableAllControlActions(11)
+                EnableAllControlActions(12)
+                EnableAllControlActions(13)
+                EnableAllControlActions(14)
+                EnableAllControlActions(15)
+                EnableAllControlActions(16)
+                EnableAllControlActions(17)
+                EnableAllControlActions(18)
+                EnableAllControlActions(19)
+                EnableAllControlActions(20)
+                EnableAllControlActions(21)
+                EnableAllControlActions(22)
+                EnableAllControlActions(23)
+                EnableAllControlActions(24)
+                EnableAllControlActions(25)
+                EnableAllControlActions(26)
+                EnableAllControlActions(27)
+                EnableAllControlActions(28)
+                EnableAllControlActions(29)
+                EnableAllControlActions(30)
+                EnableAllControlActions(31)
+            end
             Citizen.Wait(500)
         end
     end

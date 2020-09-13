@@ -15,12 +15,10 @@ server_scripts {
     'server/*.lua',
 }
 
-
-
 client_scripts {
     'client/preload/*.lua',
     'client/natives/*.lua',
---    'client/natives/*.js',
+    'client/v2/native/*.lua',
     'client/core/*.lua',
     'client/esx/*.lua',
     'client/model/*.lua',
