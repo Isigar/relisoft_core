@@ -14,11 +14,11 @@ function isAtGroup(name,inherit)
 
     if inherit then
         if tableLength(Config.GroupInherit) > 0 then
-            local tryFound = Config.GroupInherit[name]
+            local tryFound = Config.GroupInherit[group]
             if tableLength(tryFound) > 0 then
                 local foundGroup = false
                 for _, inheritGroup in pairs(tryFound) do
-                    if group == inheritGroup then
+                    if name == inheritGroup then
                         return true
                     end
                 end
@@ -54,6 +54,7 @@ function isAtJob(name)
 end
 
 function registerGroupCommand(name,group,cb,inherit)
+    inherit = inherit or true
     RegisterCommand(name, function(source,args,rawCmd)
         if source > 0 then
             if isAtGroup(group,inherit) then
