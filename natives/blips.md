@@ -94,7 +94,7 @@ end)
 rcore area blip is using native [https://runtime.fivem.net/doc/natives/?\_0xCE5D0E5E315DB238](https://runtime.fivem.net/doc/natives/?_0xCE5D0E5E315DB238)
 {% endhint %}
 
-![Area blip, image from native documentation link above](.gitbook/assets/pdcjig.png)
+![Area blip, image from native documentation link above](../.gitbook/assets/pdcjig.png)
 
 ### Removing blip
 

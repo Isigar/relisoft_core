@@ -2,7 +2,7 @@
 description: How to use ESX instance with rcore
 ---
 
-# ESX
+# ESX Instance
 
 {% hint style="info" %}
 If you are using some sort of anticheat that will change your callbacks for ESX don't forget to change it in config or rcore cannot load ESX instance, it can cause it that players will not be able to connect to a server
