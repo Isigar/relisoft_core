@@ -8,6 +8,7 @@
 
 * [ESX Instance](esx-1/esx.md)
 * [Jobs](esx-1/jobs.md)
+* [esx\_datastore](esx-1/esx_datastore.md)
 
 ## Natives
 
@@ -21,8 +22,4 @@
 * [Discord](https://discord.gg/F28PfsY)
 * [Github](https://github.com/Isigar/relisoft_core)
 * [Our service](https://rcore.cz)
-
----
-
-* [esx\_datastore](esx_datastore.md)
 
