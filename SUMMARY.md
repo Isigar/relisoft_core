@@ -2,8 +2,7 @@
 
 * [rcore.cz](README.md)
 * [Installation](installation.md)
-* [Common functions](common.md)
-* [relisoft\_core github wiki](undefined.md)
+* [github wiki](undefined.md)
 
 ## ESX <a id="esx-1"></a>
 
@@ -12,6 +11,7 @@
 
 ## Natives
 
+* [Common functions](natives/common.md)
 * [Command system](natives/command-system.md)
 * [Camera API](natives/camera-api.md)
 * [Blips](natives/blips.md)
@@ -21,4 +21,8 @@
 * [Discord](https://discord.gg/F28PfsY)
 * [Github](https://github.com/Isigar/relisoft_core)
 * [Our service](https://rcore.cz)
+
+---
+
+* [esx\_datastore](esx_datastore.md)
 

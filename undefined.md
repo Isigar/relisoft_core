@@ -2,7 +2,7 @@
 description: 'Lot of functions without any description, i will fixed that, i promise :)'
 ---
 
-# relisoft\_core github wiki
+# github wiki
 
 #### implemention of most common function in better way \(using ESX\)
 
