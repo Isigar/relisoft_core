@@ -32,15 +32,17 @@ exports('draw3DText', draw3DText)
 
 --Taken and edited from https://forum.cfx.re/t/lua-finding-closest-ped-to-player/166950
 function getClosestPed(targetPed, distance)
+    local count = 0
     for ped in EnumeratePeds() do
-        if DoesPedExists(ped) and ped ~= 0 then
+        if DoesEntityExist(ped) and ped ~= 0 then
             local distanceCheck = #(GetEntityCoords(targetPed)-GetEntityCoords(ped))
             if distanceCheck <= distance then
                 return ped
             end
+            count = count + 1
         end
     end
-
+    print('Find count',count)
     return nil
 end
 

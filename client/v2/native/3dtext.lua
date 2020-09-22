@@ -94,11 +94,17 @@ function create3DText(text)
     self.getFont = function()
         return self.font
     end
+    self.setInRadius = function(param)
+        self.inRadius = param
+    end
+    self.getInRadius = function()
+        return self.inRadius
+    end
     self.render = function()
         self.stopRendering = false
 
         --Position thread
-        Citizen.CreateThread(function()
+        local renderThread = Citizen.CreateThread(function()
             while true do
                 if self.stopRendering == true then
                     break
@@ -190,6 +196,7 @@ function create3DText(text)
     self.stopRender = function()
         self.stopRendering = true
         self.rendering = false
+        collectgarbage()
     end
     self.isRendering = function()
         return self.rendering

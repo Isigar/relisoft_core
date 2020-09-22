@@ -101,6 +101,12 @@ function createMarker(res)
     self.getRotation = function()
         return self.rotation
     end
+    self.setInRadius = function(param)
+        self.inRadius = param
+    end
+    self.getInRadius = function()
+        return self.inRadius
+    end
     self.render = function()
         self.stopRendering = false
 

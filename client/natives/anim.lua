@@ -14,23 +14,29 @@ end
 
 exports('requestAnimDict',requestAnimDict)
 
-function playAnim(ped,animDict, anim, flags)
+function playAnim(ped,animDict, anim, flags, cb)
     flags = flags or 0
     requestAnimDict(animDict,function()
         TaskPlayAnim(ped, animDict, anim, 8.0, 8.0, -1, flags, 0, false, false, false)
+        if cb ~= nil then
+            cb()
+        end
     end)
 end
 
 exports('playAnim',playAnim)
 
-function playAnimProp(ped, animDict, anim, prop, bone, propOffset,cb, flags)
+function playAnimProp(ped, animDict, anim, prop, bone, propOffset, cb, flags)
+    flags = flags or 0
     local objectCoords = GetPedBoneCoords(ped,bone,0,0,0)
     local boneIndex = GetPedBoneIndex(ped,bone)
     createObject(prop,objectCoords,function(obj)
         local x,y,z,rotx,roty,rotz = table.unpack(propOffset)
         AttachEntityToEntity(obj,ped,boneIndex, x,y,z,rotx,roty,rotz, true, true, false, true, 1, true)
         playAnim(ped,animDict,anim,flags)
-        cb(obj)
+        if cb ~= nil then
+            cb(obj)
+        end
     end)
 end
 
