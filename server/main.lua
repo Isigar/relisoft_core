@@ -355,7 +355,7 @@ registerCallback('rcore:getWeight',function(source,cb)
     local xPlayer = ESX.GetPlayerFromId(source)
     cb({
         weight = xPlayer.getWeight(),
-        maxWeight = xPlayer.maxWeight
+        maxWeight = xPlayer.getMaxWeight()
     })
 end)
 

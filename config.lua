@@ -3,7 +3,6 @@ Config.Debug = false
 Config.DebugLevel = {
     'INFO',
     'SECURITY',
-    'SECURITY_SPAM',
     'CRITICAL',
     'DEBUG'
 }

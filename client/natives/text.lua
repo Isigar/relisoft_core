@@ -33,7 +33,7 @@ exports('removeDistanceText', removeDistanceText)
 
 function updateText(id, text, coords, options)
     if options ~= nil and isTable(options) and not emptyTable(options) then
-        options = mergeTables(options,Config.DefaultTextOptions)
+        options = mergeParams(options,Config.DefaultTextOptions)
     else
         options = Config.DefaultTextOptions
     end
@@ -59,7 +59,7 @@ end
 --- @param onLeave function|nil
 function createText(text, coords, options, cb)
     if options ~= nil and isTable(options) and not emptyTable(options) then
-        options = mergeTables(options,Config.DefaultTextOptions)
+        options = mergeParams(options,Config.DefaultTextOptions)
     else
         options = Config.DefaultTextOptions
     end
@@ -118,7 +118,7 @@ exports('createText', createText)
 
 function updateDistanceText(id, text, coords, distance, options)
     if options ~= nil and isTable(options) and not emptyTable(options) then
-        options = mergeTables(options,Config.DefaultTextOptions)
+        options = mergeParams(options,Config.DefaultTextOptions)
     else
         options = Config.DefaultTextOptions
     end
@@ -138,7 +138,7 @@ exports('updateDistanceText', updateDistanceText)
 --- @param options table
 function createDistanceText(text, coords, distance, options, cb)
     if options ~= nil and isTable(options) and not emptyTable(options) then
-        options = mergeTables(options,Config.DefaultTextOptions)
+        options = mergeParams(options,Config.DefaultTextOptions)
     else
         options = Config.DefaultTextOptions
     end

@@ -8,8 +8,8 @@ Blips = {}
 function createBlip(name, blip, coords, options)
     local x, y, z = table.unpack(coords)
 
-    if isTable(options) then
-        options = mergeTables(options, Config.DefaultBlipOptions)
+    if options ~= nil and isTable(options) and not emptyTable(options) then
+        options = mergeParams(options, Config.DefaultBlipOptions)
     else
         options = Config.DefaultBlipOptions
     end
@@ -49,7 +49,7 @@ function createAreaBlip(coords,rotation,width,height,options)
     local x, y, z = table.unpack(coords)
 
     if isTable(options) then
-        options = mergeTables(options, Config.DefaultBlipOptions)
+        options = mergeParams(options, Config.DefaultBlipOptions)
     else
         options = Config.DefaultBlipOptions
     end

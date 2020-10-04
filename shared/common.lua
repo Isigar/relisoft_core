@@ -152,6 +152,15 @@ end
 
 exports('mergeTables', mergeTables)
 
+function mergeParams(options, defaults)
+    local target = deepCopy(defaults)
+    local source = deepCopy(options)
+    for k, v in pairs(source) do
+        target[k] = v
+    end
+    return target
+end
+
 --- @param table table
 --- @return boolean
 function emptyTable(table)

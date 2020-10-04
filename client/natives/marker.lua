@@ -45,7 +45,7 @@ exports('removeDistanceMarkerByPos',removeDistanceMarkerByPos)
 
 function updateMarker(id, type, coords, options)
     if options ~= nil and isTable(options) and not emptyTable(options) then
-        options = mergeTables(options,Config.DefaultMarkerOptions)
+        options = mergeParams(options,Config.DefaultMarkerOptions)
     else
         options = Config.DefaultMarkerOptions
     end
@@ -72,7 +72,7 @@ end
 --- @param onLeave function|nil
 --function createMarker(type, coords, cb, options)
 --    if options ~= nil and isTable(options) and not emptyTable(options) then
---        options = mergeTables(options,Config.DefaultMarkerOptions)
+--        options = mergeParams(options,Config.DefaultMarkerOptions)
 --    else
 --        options = Config.DefaultMarkerOptions
 --    end
@@ -130,7 +130,7 @@ end
 
 function updateDistanceMarker(id, type, coords, distance, options)
     if options ~= nil and isTable(options) and not emptyTable(options) then
-        options = mergeTables(options,Config.DefaultMarkerOptions)
+        options = mergeParams(options,Config.DefaultMarkerOptions)
     else
         options = Config.DefaultMarkerOptions
     end
@@ -150,10 +150,13 @@ exports('updateDistanceMarker', updateDistanceMarker)
 --- @param options table
 function createDistanceMarker(type, coords, distance, cb, options)
     if options ~= nil and isTable(options) and not emptyTable(options) then
-        options = mergeTables(options,Config.DefaultMarkerOptions)
+        options = mergeParams(options,Config.DefaultMarkerOptions)
     else
         options = Config.DefaultMarkerOptions
     end
+
+    dprint('Creating marker with options')
+    dprint(dumpTable(options))
 
     local findId = findDistanceMarkersWithSameCoords(coords)
     if findId then
