@@ -1,5 +1,5 @@
 function requestModel(modelName,cb)
-    if modelName ~= 'string' then
+    if type(modelName) ~= 'string' then
         cb(false)
         return
     end
