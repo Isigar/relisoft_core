@@ -13,6 +13,7 @@ local storages = getStorages()
 local storageMarkers = {}
 local playerPos = vector3(0,0,0)
 local isAtJobCache = {}
+local nearDistanceTexts = {}
 local nearDistanceMarkers = {}
 local nearDistanceMarkerDistance = Config.NearObjectDistance
 local isAtMarker = false
@@ -53,6 +54,21 @@ Citizen.CreateThread(function()
             local dist = #(playerPos - vector3(v.coords.x, v.coords.y, v.coords.z))
             if dist <= nearDistanceMarkerDistance then
                 nearDistanceMarkers[k] = v
+            end
+        end
+    end
+end)
+
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(Config.CheckPlayerPosition)
+        local ped = PlayerPedId()
+        playerPos = GetEntityCoords(ped)
+        nearDistanceTexts = {}
+        for k, v in pairs(distanceTexts) do
+            local dist = #(playerPos - vector3(v.coords.x, v.coords.y, v.coords.z))
+            if dist <= Config.NearObjectDistance then
+                nearDistanceTexts[k] = v
             end
         end
     end
@@ -169,17 +185,20 @@ end
 
 --Check if press key
 Citizen.CreateThread(function()
+    local keys = getKeys()
     while true do
         Citizen.Wait(0)
-        for _, key in pairs(getKeys()) do
-            if IsControlJustReleased(0,key) then
-                onKey(key)
-                TriggerEvent('rcore:onKey',key)
+
+        for i=1,#keys do
+            if IsControlJustReleased(0, keys[i]) then
+                onKey(keys[i])
+                TriggerEvent('rcore:onKey', keys[i])
             end
         end
     end
 end)
 
+--Render marker
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(1)
@@ -217,10 +236,11 @@ Citizen.CreateThread(function()
     end
 end)
 
+--Check distance marker on enter, on leave
 Citizen.CreateThread(function()
     while true do
         Citizen.Wait(150)
-        for id, v in pairs(distanceMarkers) do
+        for id, v in pairs(nearDistanceMarkers) do
             if isAtJobFunc(id,v) then
                 if not playerPos then
                     playerPos = GetEntityCoords(PlayerPedId())
@@ -250,19 +270,33 @@ Citizen.CreateThread(function()
     end
 end)
 
--- Distance text
+--Update distance text
 AddEventHandler('rcore:updateDistanceTexts', function()
     distanceTexts = getDistanceTexts()
 end)
 
+--Render distance text
 Citizen.CreateThread(function()
     while true do
-        Citizen.Wait(0)
-        for id, v in pairs(distanceTexts) do
+        Citizen.Wait(1)
+        for id, v in pairs(nearDistanceMarkers) do
+            if isAtJobFunc(id,v) then
+                local dist = #(playerPos-vector3(v.coords.x, v.coords.y, v.coords.z))
+                if dist < v.distance then
+                    draw3DText(v.coords, v.text, v.options)
+                end
+            end
+        end
+    end
+end)
+
+--Call distance text on enter, on leave
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(150)
+        for id, v in pairs(nearDistanceTexts) do
             local dist = #(playerPos-vector3(v.coords.x, v.coords.y, v.coords.z))
             if dist < v.distance then
-                draw3DText(v.coords, v.text, v.options)
-
                 if dist <= (v.options.actionDistance+(v.options.actionDistance/4)) then
                     isAtText = id
                     callActionOnce(string.format('text-%s-onEnter',id))
@@ -278,20 +312,6 @@ Citizen.CreateThread(function()
                     end
                 end
             end
-        end
-    end
-end)
-
--- Text
-AddEventHandler('rcore:updateTexts', function()
-    texts = getTexts()
-end)
-
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(0)
-        for _, v in pairs(texts) do
-            draw3DText(v.coords, v.text, v.options)
         end
     end
 end)

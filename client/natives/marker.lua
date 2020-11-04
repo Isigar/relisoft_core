@@ -155,9 +155,6 @@ function createDistanceMarker(type, coords, distance, cb, options)
         options = Config.DefaultMarkerOptions
     end
 
-    dprint('Creating marker with options')
-    dprint(dumpTable(options))
-
     local findId = findDistanceMarkersWithSameCoords(coords)
     if findId then
         if Config.Debug then

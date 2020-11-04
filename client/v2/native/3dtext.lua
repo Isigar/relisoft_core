@@ -1,7 +1,102 @@
 local dbg = rdebug()
 
+local textsV2 = {}
+local nearTextsV2 = {}
+
+local getPed = PlayerPedId
+local getCoords = GetEntityCoords
+
+--Only near
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(Config.CheckPlayerPosition)
+        local ped = getPed()
+        local coords = getCoords(ped)
+        for i,self in pairs(textsV2) do
+            local distance = #(coords-self.position)
+            if distance < Config.NearObjectDistance then
+                nearTextsV2[self.id] = self
+            else
+                self.rendering = false
+                textsV2[i] = self
+                nearTextsV2[self.id] = nil
+            end
+        end
+    end
+end)
+
+----Position thread
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(100)
+        local ped = getPed()
+        local coords = getCoords(ped)
+        for i,self in pairs(nearTextsV2) do
+            local distance = #(coords-self.position)
+            if distance <= self.renderDistance then
+                self.rendering = true
+                if distance <= self.inRadius then
+                    if self.isIn == false then
+                        if self.onEnter ~= nil then
+                            self.onEnter()
+                        end
+                    end
+                    self.isIn = true
+                else
+                    if self.isIn then
+                        if self.onLeave ~= nil then
+                            self.onLeave()
+                        end
+                        self.isIn = false
+                    end
+                end
+            else
+                self.rendering = false
+            end
+            nearTextsV2[i] = self
+        end
+    end
+end)
+
+--Render thread
+Citizen.CreateThread(function()
+    while true do
+        Citizen.Wait(0)
+        for i,self in pairs(nearTextsV2) do
+            if self.rendering then
+                if self.isIn then
+                    for _,key in pairs(self.keys) do
+                        if IsControlJustReleased(0,key) then
+                            if self.onKey ~= nil then
+                                self.onKey(key)
+                            end
+                        end
+                    end
+                end
+
+                SetDrawOrigin(self.position.x, self.position.y, self.position.z, 0);
+                if self.font ~= nil then
+                    SetTextFont(self.font)
+                end
+                SetTextScale(self.scale, self.size)
+                SetTextColour(self.color.r,self.color.g,self.color.b,self.color.a)
+                SetTextDropshadow(0, 0, 0, 0, 255)
+                SetTextEdge(2, 0, 0, 0, 150)
+                SetTextDropShadow()
+                SetTextOutline()
+                SetTextEntry("STRING")
+                SetTextCentre(1)
+                AddTextComponentString(self.text)
+                DrawText(0.0, 0.0)
+                ClearDrawOrigin()
+            end
+        end
+    end
+end)
+
 function create3DText(text)
     local self = {}
+    self.id = #textsV2+1
     self.text = text or ''
     self.renderDistance = 20
     self.position = vector3(0,0,0)
@@ -15,6 +110,7 @@ function create3DText(text)
     self.onKey = nil
     self.isIn = false
     self.inRadius = 1.5
+    self.firstUpdate = true
     self.color = {
         r = 255,
         g = 255,
@@ -23,8 +119,12 @@ function create3DText(text)
     }
     self.scale = 0.1
     self.size = 0.8
+    self.getId = function()
+        return self.id
+    end
     self.setScale = function(scale)
         self.scale = scale
+        self.update()
         return self
     end
     self.getScale = function()
@@ -32,6 +132,7 @@ function create3DText(text)
     end
     self.setSize = function(size)
         self.size = size
+        self.update()
         return self
     end
     self.getSize = function()
@@ -39,6 +140,7 @@ function create3DText(text)
     end
     self.setPosition = function(pos)
         self.position = pos
+        self.update()
         return self
     end
     self.getPosition = function()
@@ -46,42 +148,49 @@ function create3DText(text)
     end
     self.setScale = function(param)
         self.scale = param
+        self.update()
     end
     self.getScale = function()
         return self.scale
     end
     self.setColor = function(param)
         self.color = param
+        self.update()
     end
     self.getColor = function()
         return self.color
     end
     self.setAlpha = function(param)
         self.color.a = param
+        self.update()
     end
     self.getAlpha = function()
         return self.color.a
     end
     self.setRed = function(param)
         self.color.r = param
+        self.update()
     end
     self.getRed = function()
         return self.color.r
     end
     self.setGreen = function(param)
         self.color.g = param
+        self.update()
     end
     self.getGreen = function()
         return self.color.g
     end
     self.setBlue = function(param)
         self.color.b = param
+        self.update()
     end
     self.getBlue = function()
         return self.color.b
     end
     self.setRenderDistance = function(distance)
         self.renderDistance = distance
+        self.update()
         return self
     end
     self.getRenderDistance = function()
@@ -89,6 +198,7 @@ function create3DText(text)
     end
     self.setFont = function(font)
         self.font = font
+        self.update()
         return self
     end
     self.getFont = function()
@@ -96,117 +206,33 @@ function create3DText(text)
     end
     self.setInRadius = function(param)
         self.inRadius = param
+        self.update()
     end
     self.getInRadius = function()
         return self.inRadius
     end
     self.render = function()
+        self.firstUpdate = false
         self.stopRendering = false
-
-        --Position thread
-        local renderThread = Citizen.CreateThread(function()
-            while true do
-                if self.stopRendering == true then
-                    break
-                end
-                Citizen.Wait(100)
-                local ped = PlayerPedId()
-                local coords = GetEntityCoords(ped)
-                local distance = #(coords-self.position)
-                if distance <= self.renderDistance then
-                    self.rendering = true
-                    if distance <= self.inRadius then
-                        if self.isIn == false then
-                            if self.onEnter ~= nil then
-                                self.onEnter()
-                            end
-                        end
-                        self.isIn = true
-                    else
-                        if self.isIn then
-                            if self.onLeave ~= nil then
-                                self.onLeave()
-                            end
-                            self.isIn = false
-                        end
-                    end
-                elseif distance <= self.renderDistance*2 then
-                    self.rendering = false
-                    Citizen.Wait(500)
-                elseif distance <= self.renderDistance*5 then
-                    self.rendering = false
-                    Citizen.Wait(2500)
-                elseif distance > self.renderDistance*10 then
-                    self.rendering = false
-                    Citizen.Wait(5000)
-                end
-            end
-        end)
-        --Key press thread
-        Citizen.CreateThread(function()
-            while true do
-                if self.stopRendering == true then
-                    break
-                end
-                if self.isIn then
-                    Citizen.Wait(0)
-                    for _,key in pairs(self.keys) do
-                        if IsControlJustReleased(0,key) then
-                            if self.onKey ~= nil then
-                                self.onKey(key)
-                            end
-                        end
-                    end
-                else
-                    Citizen.Wait(250)
-                end
-            end
-        end)
-        --Render thread
-        Citizen.CreateThread(function()
-            while true do
-                if self.stopRendering == true then
-                    break
-                end
-                if self.rendering then
-                    Citizen.Wait(0)
-                    SetDrawOrigin(self.position.x, self.position.y, self.position.z, 0);
-                    if self.font ~= nil then
-                        SetTextFont(self.font)
-                    end
-                    SetTextProportional(0)
-                    SetTextScale(self.scale, self.size)
-                    SetTextColour(self.color.r,self.color.g,self.color.b,self.color.a)
-                    SetTextDropshadow(0, 0, 0, 0, 255)
-                    SetTextEdge(2, 0, 0, 0, 150)
-                    SetTextDropShadow()
-                    SetTextOutline()
-                    SetTextEntry("STRING")
-                    SetTextCentre(1)
-                    AddTextComponentString(self.text)
-                    DrawText(0.0, 0.0)
-                    ClearDrawOrigin()
-                else
-                    Citizen.Wait(250)
-                end
-            end
-        end)
+        self.update()
         return self
     end
     self.stopRender = function()
         self.stopRendering = true
         self.rendering = false
-        collectgarbage()
+        self.update()
     end
     self.isRendering = function()
         return self.rendering
     end
     self.setKeys = function(keys)
         self.keys = keys
+        self.update()
         return self
     end
     self.setText = function(text)
         self.text = text
+        self.update()
         return self
     end
     self.getText = function()
@@ -225,7 +251,21 @@ function create3DText(text)
         else
             rdebug.critical('Cannot create on state at 3D text because invalid state %s', self.state)
         end
+        self.update()
     end
+    self.update = function()
+        if self.firstUpdate then
+            return
+        end
+
+        for ind,v in pairs(textsV2) do
+            if v.getId() == self.getId() then
+                textsV2[ind] = v
+            end
+        end
+    end
+
+    table.insert(textsV2, self)
     return self
 end
 
