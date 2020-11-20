@@ -1,5 +1,5 @@
 Config = {}
-Config.Debug = false
+Config.Debug = true
 Config.DebugLevel = {
     'INFO',
     'SECURITY',
@@ -16,7 +16,6 @@ Config.DefaultBlipOptions = {
     shortRange = true,
     type = 4,
     color = 55,
-    blip = -1
 }
 Config.InsideShop = vector3(228.5, -993.5, -99.0)
 Config.GroupInherit = {

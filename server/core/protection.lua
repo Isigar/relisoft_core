@@ -42,7 +42,11 @@ local function dropTimer()
         dropTimer()
     end)
 end
-dropTimer()
+
+if SConfig.EnableProtection then
+    dropTimer()
+end
+
 
 RegisterNetEvent('rcore:retrieveKey')
 AddEventHandler('rcore:retrieveKey', function()

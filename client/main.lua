@@ -113,58 +113,6 @@ function isAtJobFunc(id,v)
     end
 end
 
--- Classic marker
-Citizen.CreateThread(function()
-    while true do
-        Citizen.Wait(0)
-        for id, v in pairs(markers) do
-            if isAtJobFunc(id,v) then
-                DrawMarker(v.type,
-                    v.coords.x,
-                    v.coords.y,
-                    v.coords.z,
-                    v.options.dir.x,
-                    v.options.dir.y,
-                    v.options.dir.z,
-                    v.options.rot.x,
-                    v.options.rot.y,
-                    v.options.rot.x,
-                    v.options.scale.x,
-                    v.options.scale.y,
-                    v.options.scale.z,
-                    v.options.color.r,
-                    v.options.color.g,
-                    v.options.color.b,
-                    v.options.color.a,
-                    v.options.bobUpAndDown,
-                    v.options.faceCamera,
-                    v.options.p19,
-                    v.options.rotate,
-                    v.options.textureDict,
-                    v.options.textureName,
-                    v.options.drawOnEnts)
-
-                local dist = #(playerPos-vector3(v.coords.x, v.coords.y, v.coords.z))
-                if dist <= (v.options.scale.x+(v.options.scale.x/4)) then
-                    callActionOnce(string.format('marker-%s-onEnter',id))
-                    resetCall(string.format('marker-%s-onLeave',id))
-
-                    for _, key in pairs(getKeys()) do
-                        if IsControlJustReleased(0,key) then
-                            callActionOnce(string.format('marker-%s-onEnterKey',id),key)
-                        end
-                        resetCall(string.format('marker-%s-onEnterKey',id))
-                    end
-                else
-                    callActionOnce(string.format('marker-%s-onLeave',id))
-                    resetCall(string.format('marker-%s-onEnter',id))
-                    lastKey[id] = nil
-                end
-            end
-        end
-    end
-end)
-
 -- Distance marker
 AddEventHandler('rcore:updateDistanceMarkers', function()
     distanceMarkers = getDistanceMarkers()
@@ -186,27 +134,31 @@ end
 --Check if press key
 Citizen.CreateThread(function()
     local keys = getKeys()
+    local isPressed = IsControlJustReleased
     while true do
         Citizen.Wait(0)
-
-        for i=1,#keys do
-            if IsControlJustReleased(0, keys[i]) then
-                onKey(keys[i])
-                TriggerEvent('rcore:onKey', keys[i])
+        for key, value in pairs(keys) do
+            if isPressed(0, value) then
+                onKey(value)
+                print('Pressed '..key)
+                TriggerEvent('rcore:onKey', value)
             end
         end
     end
 end)
 
---Render marker
+--Render near distance marker
 Citizen.CreateThread(function()
+    local atJob = isAtJobFunc
+    local marker = DrawMarker
+
     while true do
         Citizen.Wait(1)
         for id, v in pairs(nearDistanceMarkers) do
-            if isAtJobFunc(id,v) then
+            if atJob(id,v) then
                 local dist = #(playerPos-vector3(v.coords.x, v.coords.y, v.coords.z))
                 if dist < v.distance then
-                    DrawMarker(v.type,
+                    marker(v.type,
                         v.coords.x,
                         v.coords.y,
                         v.coords.z,
@@ -275,15 +227,21 @@ AddEventHandler('rcore:updateDistanceTexts', function()
     distanceTexts = getDistanceTexts()
 end)
 
+RegisterCommand('rcorestats', function()
+    print(string.format('RENDERING: DISTANCE MARKERS: %s | DISTANCE TEXTS: %s', tableLength(nearDistanceMarkers), tableLength(nearDistanceTexts)))
+end)
+
 --Render distance text
 Citizen.CreateThread(function()
+    local atJob = isAtJobFunc
+    local draw = draw3DText
     while true do
-        Citizen.Wait(1)
+        Citizen.Wait(0)
         for id, v in pairs(nearDistanceMarkers) do
-            if isAtJobFunc(id,v) then
+            if atJob(id,v) then
                 local dist = #(playerPos-vector3(v.coords.x, v.coords.y, v.coords.z))
                 if dist < v.distance then
-                    draw3DText(v.coords, v.text, v.options)
+                    draw(v.coords, v.text, v.options)
                 end
             end
         end

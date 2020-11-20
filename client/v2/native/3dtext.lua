@@ -33,7 +33,7 @@ Citizen.CreateThread(function()
         local coords = getCoords(ped)
         for i,self in pairs(nearTextsV2) do
             local distance = #(coords-self.position)
-            if distance <= self.renderDistance then
+            if distance <= self.renderDistance and not self.destroyed then
                 self.rendering = true
                 if distance <= self.inRadius then
                     if self.isIn == false then
@@ -63,7 +63,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
         for i,self in pairs(nearTextsV2) do
-            if self.rendering then
+            if self.rendering and not self.destroyed then
                 if self.isIn then
                     for _,key in pairs(self.keys) do
                         if IsControlJustReleased(0,key) then
@@ -94,9 +94,10 @@ Citizen.CreateThread(function()
     end
 end)
 
-function create3DText(text)
+function create3DText(text, resName)
     local self = {}
     self.id = #textsV2+1
+    self.resource = resName
     self.text = text or ''
     self.renderDistance = 20
     self.position = vector3(0,0,0)
@@ -111,6 +112,7 @@ function create3DText(text)
     self.isIn = false
     self.inRadius = 1.5
     self.firstUpdate = true
+    self.destroyed = false
     self.color = {
         r = 255,
         g = 255,
@@ -222,6 +224,13 @@ function create3DText(text)
         self.rendering = false
         self.update()
     end
+    self.destroy = function()
+        self.stopRendering = true
+        self.rendering = false
+        self.destroyed = true
+        self.update(true)
+        dbg.debug('Deleted text V2 %s', self.getId())
+    end
     self.isRendering = function()
         return self.rendering
     end
@@ -253,20 +262,44 @@ function create3DText(text)
         end
         self.update()
     end
-    self.update = function()
+    self.update = function(destroy)
         if self.firstUpdate then
             return
         end
 
-        for ind,v in pairs(textsV2) do
-            if v.getId() == self.getId() then
-                textsV2[ind] = v
+        if destroy then
+            for ind,v in pairs(nearTextsV2) do
+                if v.getId() == self.getId() then
+                    nearTextsV2[ind] = nil
+                    dbg.debug('Deleted %s text from near table', self.getId())
+                end
+            end
+
+            for ind,v in pairs(textsV2) do
+                if v.getId() == self.getId() then
+                    textsV2[ind] = nil
+                    dbg.debug('Deleted %s text from master table', self.getId())
+                end
+            end
+        else
+            for ind,v in pairs(textsV2) do
+                if v.getId() == self.getId() then
+                    textsV2[ind] = v
+                end
             end
         end
     end
-
+    dbg.debug('Create new 3D text V2 %s', self.getId())
     table.insert(textsV2, self)
     return self
 end
 
 exports('create3DText',create3DText)
+
+AddEventHandler('onResourceStop', function(res)
+    for i,v in pairs(textsV2) do
+        if v.resource == res then
+            v.destroy()
+        end
+    end
+end)
