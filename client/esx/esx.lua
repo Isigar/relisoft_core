@@ -1,6 +1,5 @@
 function getEsxInstance(cb)
     if ESX ~= nil then
-        print('[rcore] getting cached ESX')
         if cb ~= nil then
             cb(ESX)
         else
@@ -9,7 +8,6 @@ function getEsxInstance(cb)
     else
         while ESX == nil do
             TriggerEvent(Config.ESXCallback, function(obj)
-                print('[rcore] getting ESX instance and saving to cache')
                 ESX = obj
             end)
         end

@@ -140,7 +140,6 @@ Citizen.CreateThread(function()
         for key, value in pairs(keys) do
             if isPressed(0, value) then
                 onKey(value)
-                print('Pressed '..key)
                 TriggerEvent('rcore:onKey', value)
             end
         end
