@@ -12,6 +12,8 @@
 
 ## Natives
 
+* [Markers](natives/markers.md)
+* [3D Text](natives/3d-text.md)
 * [Common functions](natives/common.md)
 * [Command system](natives/command-system.md)
 * [Camera API](natives/camera-api.md)
