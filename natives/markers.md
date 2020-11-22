@@ -99,5 +99,44 @@ end)
 {% endtab %}
 {% endtabs %}
 
+#### marker.setType\(type id\)
 
+Change type of marker, you can find all types in official documentation [https://docs.fivem.net/docs/game-references/markers/](https://docs.fivem.net/docs/game-references/markers/)
+
+#### makrer.setRenderDistance\(value\)
+
+Default value for render distance is 20 if you need to be smaller or bigger just set it here
+
+#### marker.setDir\(vector3\) / marker.getDir\(\)
+
+Set/Get direction of marker
+
+#### marker.setRot\(vector3\) / marker.getRot\(\)
+
+Set/Get rotation of marker
+
+#### marker.setScale\(vector3\) / marker.getScale
+
+Set/Get scale of marker
+
+#### marker.setColor\(table\) / marker.getColor\(\)
+
+you can set color with RGBA table {r = 0, g= 0, b=255,a=255} or you can set every color by self
+
+* setAlpha\(alpha\)
+* getAlpha\(\)
+* setRed\(red\)
+* getRed\(\)
+* setGreen\(green\)
+* getGreen\(\)
+* setBlue\(blue\)
+* getBlue\(\)
+
+#### marker.setRotation\(bool\) / marker.getRotation\(\)
+
+Its not rotation of marker but if marker should rotate!
+
+#### marker.setInRadius\(radius\) / marker.getInRadius\(\)
+
+Set/Get radius for calling enter/leave function
 
