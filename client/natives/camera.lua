@@ -53,7 +53,7 @@ function createCamera(name, pos, rot, fov)
             if self.lastPointTo ~= nil then
                 tempCam.pointTo(newPoint)
             end
-            self.changeCam(tempCam.cam)
+            self.changeCam(tempCam.cam, duration)
             Citizen.Wait(duration)
             self.destroy()
             local newMain = deepCopy(tempCam)

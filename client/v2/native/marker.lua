@@ -130,19 +130,22 @@ function createMarker(res)
         a = 255
     }
     self.setId = function(param)
-        self.id = id
+        self.id = param
+        self.update()
     end
     self.getId = function()
         return self.id
     end
     self.setType = function(param)
         self.type = param
+        self.update()
     end
     self.getType = function()
         return self.type
     end
     self.setPosition = function(pos)
         self.position = pos
+        self.update()
         return self
     end
     self.getPosition = function()
@@ -150,48 +153,56 @@ function createMarker(res)
     end
     self.setDir = function(param)
         self.dir = param
+        self.update()
     end
     self.getDir = function()
         return self.dir
     end
     self.setScale = function(param)
         self.scale = param
+        self.update()
     end
     self.getScale = function()
         return self.scale
     end
     self.setColor = function(param)
         self.color = param
+        self.update()
     end
     self.getColor = function()
         return self.color
     end
     self.setAlpha = function(param)
         self.color.a = param
+        self.update()
     end
     self.getAlpha = function()
         return self.color.a
     end
     self.setRed = function(param)
         self.color.r = param
+        self.update()
     end
     self.getRed = function()
         return self.color.r
     end
     self.setGreen = function(param)
         self.color.g = param
+        self.update()
     end
     self.getGreen = function()
         return self.color.g
     end
     self.setBlue = function(param)
         self.color.b = param
+        self.update()
     end
     self.getBlue = function()
         return self.color.b
     end
     self.setRenderDistance = function(distance)
         self.renderDistance = distance
+        self.update()
         return self
     end
     self.getRenderDistance = function()
@@ -199,12 +210,14 @@ function createMarker(res)
     end
     self.setRotation = function(param)
         self.rotation = param
+        self.update()
     end
     self.getRotation = function()
         return self.rotation
     end
     self.setInRadius = function(param)
         self.inRadius = param
+        self.update()
     end
     self.getInRadius = function()
         return self.inRadius
@@ -219,6 +232,7 @@ function createMarker(res)
     self.stopRender = function()
         self.stopRendering = true
         self.rendering = false
+        self.update()
     end
     self.destroy = function()
         self.stopRendering = true
@@ -232,6 +246,7 @@ function createMarker(res)
     end
     self.setKeys = function(keys)
         self.keys = keys
+        self.update()
         return self
     end
     self.getKeys = function()
@@ -247,6 +262,7 @@ function createMarker(res)
         else
             rdebug.critical('Cannot create on state at 3D text because invalid state %s', self.state)
         end
+        self.update()
     end
     self.update = function(destroy)
         if self.firstUpdate then
@@ -254,7 +270,7 @@ function createMarker(res)
         end
 
         if destroy then
-            for ind,v in pairs(nearTextsV2) do
+            for ind,v in pairs(nearMarkersV2) do
                 if v.getId() == self.getId() then
                     nearMarkersV2[ind] = nil
                     dbg.debug('Deleted %s text from near table', self.getId())
