@@ -1,3 +1,5 @@
+local dbg = rdebug()
+
 ---@param player number
 ---@param job string
 ---@param grade number
@@ -11,7 +13,7 @@ end
 exports('setPlayerJob',setPlayerJob)
 
 function isJobExists(job,cb)
-    rdebug(string.format('Checking job %s if exists.', job))
+    dbg.info(string.format('Checking job %s if exists.', job))
     MySQL.ready(function()
         local data = MySQL.Sync.fetchScalar('SELECT COUNT(name) FROM jobs WHERE name = @name', {
             ['@name'] = job
@@ -29,7 +31,7 @@ exports('isJobExists',isJobExists)
 function createJob(name,label,whitelisted)
     isJobExists(name,function(is)
         if is then
-            rdebug(string.format('Job %s already created, skipping creation',name))
+            dbg.info(string.format('Job %s already created, skipping creation',name))
         else
             MySQL.Async.execute('INSERT INTO `jobs` (`name`, `label`, `whitelisted`) VALUES (@name, @label, @whitelisted)',{
                 ['@name'] = name,
@@ -37,9 +39,9 @@ function createJob(name,label,whitelisted)
                 ['@whitelisted'] = whitelisted
             },function(changes)
                 if changes then
-                    rdebug(string.format('Job %s successfully created!',name))
+                    dbg.info(string.format('Job %s successfully created!',name))
                 else
-                    rdebug(string.format('Error occured! Job %s cannot be created!',name))
+                    dbg.info(string.format('Error occured! Job %s cannot be created!',name))
                 end
             end)
         end
@@ -49,7 +51,7 @@ end
 exports('createJob',createJob)
 
 function isJobGradeExists(name,job_name,cb)
-    rdebug(string.format('Checking job grade %s for job %s if exists.', name,job_name))
+    dbg.info(string.format('Checking job grade %s for job %s if exists.', name,job_name))
     MySQL.ready(function()
         local data = MySQL.Sync.fetchAll('SELECT id,job_name,grade,name,label,salary FROM job_grades WHERE name=@name AND job_name=@job', {
             ['@name'] = name,
@@ -76,14 +78,14 @@ function createJobGrade(job_name,grade,name,label,salary)
                     ['@salary'] = salary,
                 },function(changes)
                     if changes then
-                        rdebug(string.format('Job grade %s successfully updated!',name))
+                        dbg.info(string.format('Job grade %s successfully updated!',name))
                     else
-                        rdebug(string.format('Error occured! Job grade %s cannot be updated!',name))
+                        dbg.info(string.format('Error occured! Job grade %s cannot be updated!',name))
                     end
                 end)
-                rdebug(string.format('Updating job grade %s - changes found!',name))
+                dbg.info(string.format('Updating job grade %s - changes found!',name))
             else
-                rdebug(string.format('Job grade %s already created, skipping creation',name))
+                dbg.info(string.format('Job grade %s already created, skipping creation',name))
             end
         else
             MySQL.Async.execute('INSERT INTO `job_grades` (`job_name`, `grade`, `name`, `label`, `salary`, `skin_male`, `skin_female`) VALUES (@job_name, @grade, @name, @label, @salary, @skin, @skin)',{
@@ -95,9 +97,9 @@ function createJobGrade(job_name,grade,name,label,salary)
                 ['@skin'] = json.encode({})
             },function(changes)
                 if changes then
-                    rdebug(string.format('Job grade %s successfully created!',name))
+                    dbg.info(string.format('Job grade %s successfully created!',name))
                 else
-                    rdebug(string.format('Error occured! Job grade %s cannot be created!',name))
+                    dbg.info(string.format('Error occured! Job grade %s cannot be created!',name))
                 end
             end)
         end

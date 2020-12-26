@@ -77,39 +77,41 @@ Keys = {
 }
 
 -- Stolen from: https://rosettacode.org/wiki/Strip_control_codes_and_extended_characters_from_a_string
-function normalizeString( str )
+function normalizeString(str)
 
     local s = ""
     for i = 1, str:len() do
         if str:byte(i) >= 32 and str:byte(i) <= 126 then
-            s = s .. str:sub(i,i)
+            s = s .. str:sub(i, i)
         end
     end
     return s
 
 end
 
-exports('normalizeString',normalizeString)
+exports('normalizeString', normalizeString)
 
 -- Stolen from: https://forums.coronalabs.com/topic/43048-remove-special-characters-from-string/
 function urlencode(str)
     if (str) then
-        str = string.gsub (str, "\n", "\r\n")
-        str = string.gsub (str, "([^%w ])",
-            function() return string.format ("%%%02X", string.byte) end)
-        str = string.gsub (str, " ", "+")
+        str = string.gsub(str, "\n", "\r\n")
+        str = string.gsub(str, "([^%w ])",
+                function()
+                    return string.format("%%%02X", string.byte)
+                end)
+        str = string.gsub(str, " ", "+")
     end
     return str
 end
 
-exports('urlencode',urlencode)
+exports('urlencode', urlencode)
 
 function round(num, numDecimalPlaces)
-    local mult = 10^(numDecimalPlaces or 0)
+    local mult = 10 ^ (numDecimalPlaces or 0)
     return math.floor(num * mult + 0.5) / mult
 end
 
-exports('round',round)
+exports('round', round)
 
 --- @param object object
 --- stolen: https://forums.coronalabs.com/topic/27482-copy-not-direct-reference-of-table/
@@ -131,7 +133,7 @@ function deepCopy(object)
     return _copy(object)
 end
 
-exports('deepCopy',deepCopy)
+exports('deepCopy', deepCopy)
 
 --- @param sourceTable table
 --- @param targetTable table
@@ -241,7 +243,7 @@ function getConfig()
     return Config
 end
 
-exports('getConfig',getConfig)
+exports('getConfig', getConfig)
 
 --Taken from ESX
 function dumpTable(table, nb)
@@ -256,12 +258,14 @@ function dumpTable(table, nb)
         end
 
         s = '{\n'
-        for k,v in pairs(table) do
-            if type(k) ~= 'number' then k = '"'..k..'"' end
+        for k, v in pairs(table) do
+            if type(k) ~= 'number' then
+                k = '"' .. k .. '"'
+            end
             for i = 1, nb, 1 do
                 s = s .. "    "
             end
-            s = s .. '['..k..'] = ' .. dumpTable(v, nb + 1) .. ',\n'
+            s = s .. '[' .. k .. '] = ' .. dumpTable(v, nb + 1) .. ',\n'
         end
 
         for i = 1, nb, 1 do
@@ -274,8 +278,8 @@ function dumpTable(table, nb)
     end
 end
 
-exports('dumpTable',dumpTable)
+exports('dumpTable', dumpTable)
 
 function triggerName(event)
-    return string.format('rcore:%s',event)
+    return string.format('rcore:%s', event)
 end
