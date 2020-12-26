@@ -18,6 +18,7 @@
 * [Command system](natives/command-system.md)
 * [Camera API](natives/camera-api.md)
 * [Blips](natives/blips.md)
+* [Discord sender](natives/discord-sender.md)
 
 ## Our links
 
