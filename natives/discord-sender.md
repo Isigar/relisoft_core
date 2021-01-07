@@ -47,7 +47,7 @@ AddEventHandler('esx:playerLoaded', function(source)
         local rcoreConfig = rcore:getConfig()
         local footer = 'cool script'
         
-        rcore:sendCustomDiscordNotification(webhook, title, message, rcoreConfig.DiscordColors.Green, footer)
+        rcore:sendCustomDiscordMessage(webhook, title, message, rcoreConfig.DiscordColors.Green, footer)
     end
     
 end)
