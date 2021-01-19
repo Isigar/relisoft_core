@@ -1,8 +1,8 @@
-function createObject(name,pos,isNet,cb)
+function createObject(name,pos,cb)
     local model = (type(name) == 'number' and name or GetHashKey(name))
 
     requestModel(model,function()
-        local obj = CreateObject(model,pos.x,pos.y,pos.z,isNet,false,false)
+        local obj = CreateObject(model,pos.x,pos.y,pos.z,true,false,false)
         SetModelAsNoLongerNeeded(model)
         cb(obj)
     end)
