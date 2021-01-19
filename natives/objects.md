@@ -1,5 +1,5 @@
 ---
-description: Create object and manage it
+description: Work with objects
 ---
 
 # Objects

@@ -6,7 +6,7 @@ description: Distance 3D text
 
 ## Create 3D Text
 
-Rcore provides two methods for creating 3D texts, one easier to use, but not that advanced and one harder to use, but with many advanced functions. The older one can be found in common functions. 
+Rcore provides two methods for creating 3D texts, one easier to use, but not that advanced and one harder to use, but with many advanced functions. The older one can be found in common functions.
 
 ### 3D Text V2
 
@@ -162,8 +162,4 @@ Destroys the 3D text.
 #### text.isRendering\(\)
 
 Returns true/false whether is text being rendered.
-
-#### 
-
-
 

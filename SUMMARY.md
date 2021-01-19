@@ -17,6 +17,7 @@
 * [Common functions](natives/common.md)
 * [Command system](natives/command-system.md)
 * [Camera API](natives/camera-api.md)
+* [Objects](natives/objects.md)
 * [Blips](natives/blips.md)
 * [Discord sender](natives/discord-sender.md)
 
