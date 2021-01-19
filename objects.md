@@ -6,7 +6,7 @@ description: Create object and manage it
 
 ### Create object
 
-With rcore you can simply create a model without the need of requesting model or anything else, rcore will request model and will set model as no longed needed when its work is done. You can create networked object which will see all players.
+With rcore you can simply create a model without the need of requesting model or anything else, rcore will request model and will set model as no longed needed when its work is done. You can create networked object which all players will see.
 
 You can use for name as well string name of object like 'prop\_car\_door\_01' or hash.
 
