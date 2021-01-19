@@ -67,7 +67,7 @@ on key is calling only if you setup which keys it should monitoring, look at exa
 Syntax
 
 {% tabs %}
-{% tab title="Lua" %}
+{% tab title="Enter" %}
 ```lua
 marker.on('enter',function()
     print('On enter')
@@ -75,7 +75,7 @@ end)
 ```
 {% endtab %}
 
-{% tab title="" %}
+{% tab title="Leave" %}
 ```lua
 marker.on('leave', function()
     print('on leave')
@@ -84,7 +84,7 @@ end)
 ```
 {% endtab %}
 
-{% tab title="" %}
+{% tab title="Key" %}
 ```lua
 rcore = exports.rcore
 keys = rcore:getKeys()
