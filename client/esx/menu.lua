@@ -4,7 +4,7 @@ function createMenu(title, name, elements, options)
     options = options or {}
 
     ESX.UI.Menu.Open('default', GetCurrentResourceName(), name, {
-        align = "right",
+        align = options.align or "right",
         elements = elements,
         title = title
     }, function(data, menu)

@@ -283,3 +283,15 @@ exports('dumpTable', dumpTable)
 function triggerName(event)
     return string.format('rcore:%s', event)
 end
+
+function escapeHtml(str)
+    str = string.gsub( str, '&', '&amp;' )
+    str = string.gsub( str, '<', '&lt;' )
+    str = string.gsub( str, '>', '&gt;' )
+    str = string.gsub( str, '"', '&quot;' )
+    str = string.gsub( str, "'", '&apos;' )
+    str = string.gsub( str, "/", '&#47;' )
+    return str
+end
+
+exports('escapeHtml', escapeHtml)

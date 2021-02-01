@@ -28,9 +28,19 @@ function rdebug()
             print('^5['..self.prefix..'|info] ^7'..sprint(msg,...))
         end
     end
+    self.success = function(msg,...)
+        if isAllowed('SUCCESS') then
+            print('^5['..self.prefix..'|success] ^7'..sprint(msg,...))
+        end
+    end
     self.critical = function(msg,...)
         if isAllowed('CRITICAL') then
             print('^1['..self.prefix..'|critical] ^7'..sprint(msg,...))
+        end
+    end
+    self.error = function(msg,...)
+        if isAllowed('ERROR') then
+            print('^1['..self.prefix..'|error] ^7'..sprint(msg,...))
         end
     end
     self.security = function(msg,...)

@@ -38,14 +38,20 @@ Citizen.CreateThread(function()
                 if distance <= self.inRadius then
                     if self.isIn == false then
                         if self.onEnter ~= nil then
-                            self.onEnter()
+                            local status, err = pcall(self.onEnter)
+                            if err then
+                                dbg.critical('Cannot call onEnter because %s %s', status, err)
+                            end
                         end
                     end
                     self.isIn = true
                 else
                     if self.isIn then
                         if self.onLeave ~= nil then
-                            self.onLeave()
+                            local status, err = pcall(self.onLeave)
+                            if err then
+                                dbg.critical('Cannot call onLeave because %s %s', status, err)
+                            end
                         end
                         self.isIn = false
                     end
@@ -68,13 +74,15 @@ Citizen.CreateThread(function()
                     for _,key in pairs(self.keys) do
                         if IsControlJustReleased(0,key) then
                             if self.onKey ~= nil then
-                                self.onKey(key)
+                                local status, err = pcall(self.onKey, key)
+                                if err then
+                                    dbg.critical('Cannot call onKey because %s %s', status, err)
+                                end
                             end
                         end
                     end
                 end
 
-                --TODO: DRAW
                 DrawMarker(
                         self.type,
                         self.position.x,
@@ -105,7 +113,7 @@ end)
 
 function createMarker(res)
     local self = {}
-    self.id = #markersV2+1
+    self.id = tableLength(markersV2)+1
     self.type = 1
     self.firstUpdate = false
     self.resource = res
@@ -223,6 +231,7 @@ function createMarker(res)
         return self.inRadius
     end
     self.render = function()
+        dbg.debug('Start render marker id %s', self.getId())
         self.stopRendering = false
         self.rendering = true;
         self.firstUpdate = false
@@ -266,6 +275,7 @@ function createMarker(res)
     end
     self.update = function(destroy)
         if self.firstUpdate then
+            dbg.debug('First update ending')
             return
         end
 
@@ -296,12 +306,12 @@ function createMarker(res)
     return self
 end
 
-exports('createMarker',createMarker)
+exports('createMarker', createMarker)
 
 AddEventHandler('onResourceStop', function(res)
     for i,v in pairs(markersV2) do
         if v.resource == res then
-            v.stopRender()
+            v.destroy()
         end
     end
 end)
