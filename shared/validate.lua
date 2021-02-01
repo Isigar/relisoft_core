@@ -40,6 +40,8 @@ RULE_MAX = 'max'
 RULE_INTMIN = 'intMin'
 --Max value of integer
 RULE_INTMAX = 'intMax'
+--Number
+RULE_NUMBER = 'number'
 
 local ruleTable = {
     [RULE_REQUIRED] = true,
