@@ -1,16 +1,39 @@
 local dbg = rdebug()
+local allItemsData = {}
 
-function existItem(itemName,cb)
+function allItems()
     MySQL.ready(function()
-        local data = MySQL.Sync.fetchAll('SELECT name FROM items WHERE name = @name', {
-            ['@name'] = itemName
+        local data = MySQL.Sync.fetchAll('SELECT name FROM items', {
         })
         if data[1] ~= nil then
-            cb(true)
+            for i,v in pairs(data) do
+                allItemsData[v.name] = v
+            end
         else
-            cb(false)
+            dbg.critical('Cannot find items! SQL error.')
         end
     end)
+end
+
+allItems()
+
+function existItem(itemName,cb)
+    -- if we have already cached items use cache
+    if allItemsData[itemName] ~= nil then
+        cb(true)
+    else
+        -- we dont know if item is existing, try to check it
+        MySQL.ready(function()
+            local data = MySQL.Sync.fetchAll('SELECT name FROM items WHERE name = @name', {
+                ['@name'] = itemName
+            })
+            if data[1] ~= nil then
+                cb(true)
+            else
+                cb(false)
+            end
+        end)
+    end
 end
 
 exports('existItem',existItem)
