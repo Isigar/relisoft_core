@@ -217,12 +217,15 @@ exports('getKeys', getKeys)
 
 --- @param table table
 --- @return number
-function tableLength(table)
+function tableLength(tb)
     local count = 0
-    for _ in pairs(table) do
-        count = count + 1
+    if isTable(tb) then
+        for _ in pairs(tb) do
+            count = count + 1
+        end
+        return count
     end
-    return count
+    return nil
 end
 
 exports('tableLength', tableLength)

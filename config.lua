@@ -1,5 +1,5 @@
 Config = {}
-Config.Debug = true
+Config.Debug = false
 Config.DebugLevel = {
     'INFO',
     'SECURITY',
@@ -22,7 +22,6 @@ Config.DefaultBlipOptions = {
 Config.InsideShop = vector3(228.5, -993.5, -99.0)
 Config.GroupInherit = {
     ['mod'] = {
-
     },
     ['admin'] = {
         'mod',
