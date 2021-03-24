@@ -7,7 +7,7 @@ function isAtGroup(player, name, inherit)
     if inherit then
         if tableLength(Config.GroupInherit) > 0 then
             local tryFound = Config.GroupInherit[group]
-            if tableLength(tryFound) > 0 then
+            if tryFound and tableLength(tryFound) > 0 then
                 local foundGroup = false
                 for _, inheritGroup in pairs(tryFound) do
                     if name == inheritGroup then

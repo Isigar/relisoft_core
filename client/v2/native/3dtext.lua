@@ -63,7 +63,7 @@ Citizen.CreateThread(function()
     while true do
         Citizen.Wait(0)
         for i,self in pairs(nearTextsV2) do
-            if self.rendering and not self.destroyed then
+            if self.rendering and not self.destroyed and not self.stopRendering then
                 if self.isIn then
                     for _,key in pairs(self.keys) do
                         if IsControlJustReleased(0,key) then
@@ -106,6 +106,7 @@ function create3DText(text, resName)
     self.rendering = false
     self.stopRendering = false
     self.keys = {}
+    self.savedData = {}
     self.onEnter = nil
     self.onLeave = nil
     self.onKey = nil
@@ -124,6 +125,23 @@ function create3DText(text, resName)
     self.getId = function()
         return self.id
     end
+
+    self.createData = function(name, value)
+        self.savedData[name] = value
+    end
+
+    self.getData = function(name)
+        return self.savedData[name]
+    end
+
+    self.doesDataExists = function(name)
+        return self.savedData[name] ~= nil
+    end
+
+    self.deleteData = function(name)
+        self.savedData[name] = nil
+    end
+
     self.setScale = function(scale)
         self.scale = scale
         self.update()

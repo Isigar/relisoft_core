@@ -236,7 +236,7 @@ Citizen.CreateThread(function()
     local draw = draw3DText
     while true do
         Citizen.Wait(0)
-        for id, v in pairs(nearDistanceMarkers) do
+        for id, v in pairs(nearDistanceTexts) do
             if atJob(id,v) then
                 local dist = #(playerPos-vector3(v.coords.x, v.coords.y, v.coords.z))
                 if dist < v.distance then
@@ -289,7 +289,7 @@ AddEventHandler('rcore:updateStorages',function()
                     removeDistanceMarker(m)
                 end
             end
-            local marker = createDistanceMarker(1, storage.coords, storage.distance, {
+            local marker = createDistanceMarker(storage.options.marker or 1, storage.coords, storage.distance, {
                 onEnter = function()
                     if not isInVehicle() then
                         if isStorageBusy(storage.id) then

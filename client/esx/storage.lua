@@ -208,8 +208,8 @@ function openStorageMenu(id, title, name, datastore, menuContext)
                 end,getClientKey(GetCurrentResourceName()), datastore)
             elseif value == "store_money" then
                 createMenu(title,  idName..'store_money', {
-                    {label = 'Spinave penize', value = 'black_money'},
-                    {label = 'Ciste penize', value = 'cash'}
+                    --{label = 'Spinave penize', value = 'black_money'},
+                    {label = 'Ciste penize', value = 'cash'},
                 }, {
                     submit = function(data, menu2)
                         createDialog('Pocet k ulozeni?', idName..'store_money_count',function(data2,menu3)
