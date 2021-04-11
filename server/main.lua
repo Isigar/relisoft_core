@@ -204,7 +204,7 @@ ESX.RegisterServerCallback('rcore:getStoredInventoryItem', function(source, cb, 
             if found then
                 local foundItem = items[found]
                 if foundItem.count > count then
-                    if playerItem.limit >= (playerItem.count + count) then
+                    if xPlayer.canCarryItem(item, count) then
                         if foundItem.count == count then
                             items[found] = nil
                             store.set('items', items)
