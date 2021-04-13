@@ -70,7 +70,7 @@ exports('isJobGradeExists',isJobGradeExists)
 function createJobGrade(job_name,grade,name,label,salary)
     isJobGradeExists(name,job_name,function(is)
         if is ~= false then
-            if is.label ~= label or is.salary ~= salary or is.grade ~= grade then
+            if is.label ~= label or is.grade ~= grade then
                 MySQL.Async.execute('UPDATE `job_grades` SET salary=@salary, label=@label, grade=@grade, salary=@salary WHERE id=@id',{
                     ['@id'] = is.id,
                     ['@label'] = label,
