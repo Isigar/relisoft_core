@@ -26,12 +26,15 @@ end
 
 exports('createMenu',createMenu)
 
-function createDialog(title, name, onSubmit)
+function createDialog(title, name, onSubmit, onClose)
     ESX.UI.Menu.Open('dialog', GetCurrentResourceName(), name, {
         title = title
     }, function(data, menu)
-        onSubmit(data,menu)
+        pcall(onSubmit, data,menu)
     end, function(data, menu)
+        if onClose ~= nil then
+            pcall(onClose, data, menu)
+        end
         menu.close()
     end)
 end
