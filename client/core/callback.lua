@@ -22,5 +22,4 @@ AddEventHandler('rcore:callback',function(requestId,...)
         return
     end
     clientCallbacks[requestId](...)
-    TriggerServerEvent('rcore:callbackSended',requestId)
 end)
