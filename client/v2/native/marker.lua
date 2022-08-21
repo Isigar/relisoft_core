@@ -166,6 +166,13 @@ function createMarker(res)
     self.getDir = function()
         return self.dir
     end
+    self.setRot = function(param)
+        self.rot = param
+        self.update()
+    end  
+    self.getRot = function()
+        return self.rot
+    end  
     self.setScale = function(param)
         self.scale = param
         self.update()
