@@ -33,7 +33,7 @@ Citizen.CreateThread(function()
         local coords = getCoords(ped)
         for i,self in pairs(nearMarkersV2) do
             local distance = #(coords-self.position)
-            if distance <= self.renderDistance and not self.destroyed then
+            if distance <= self.renderDistance and not self.destroyed and not self.stopRendering then
                 self.rendering = true
                 if distance <= self.inRadius then
                     if self.isIn == false then
