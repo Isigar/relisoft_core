@@ -322,3 +322,11 @@ AddEventHandler('onResourceStop', function(res)
         end
     end
 end)
+
+RegisterNetEvent("esx:onPlayerLogout")
+AddEventHandler("esx:onPlayerLogout", function()
+    for i,v in pairs(markersV2) do
+    	v.destroy()
+    end
+end)
+
