@@ -5,7 +5,6 @@ author 'Isigar'
 version '1.2.1'
 
 server_scripts {
-    '@async/async.lua',
     '@mysql-async/lib/MySQL.lua',
     'config_s.lua',
     'eventConfig.lua',
