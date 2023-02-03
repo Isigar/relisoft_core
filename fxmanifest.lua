@@ -32,7 +32,6 @@ shared_scripts {
 }
 
 dependencies {
-    'async',
     'mysql-async',
     'es_extended',
     'esx_society',
