@@ -1,3 +1,8 @@
+## Archived repository
+
+Currently working with our rcore team on complete new framework that will contain lot of these libraries but better. Do not use this code any more if you want you can always get one file from it like blips, 3dtext, marker and use it.
+This repository is only working for old ESX version.
+
 # rcore.cz
 
 Our discord with more scripts: [https://discord.gg/F28PfsY](https://discord.gg/F28PfsY)
